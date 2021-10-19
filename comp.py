@@ -20,7 +20,7 @@ def main(folder, filename):
     head += "</head>"
     
     body = x.body.c(x.mx.inadmissible, x.mx.dynamic)
-    fhtml = open(path+filename+".html", 'w+')
+    fhtml = open(path+"index.html", 'w+')
     fhtml.write("<!DOCTYPE html><html>"+head+"\n"+body+"</html>")
     fhtml.close()
     sys.modules.pop(filename)

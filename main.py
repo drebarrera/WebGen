@@ -32,6 +32,8 @@ def main():
                 exec(cmd)
             elif cmd == "restart":
                 os.execv(sys.executable, ['python'] + sys.argv)
+            else:
+                print('Unrecognized command. Type "help" for list of commands.')
         except Exception as exc:
             print('[!!!] {err}'.format(err=exc))
 
@@ -67,7 +69,7 @@ def f(folder, filename):
     else:
         ftxt = open(path+filename+".py", 'a')
     if g == False:
-        fhtml = open(path+filename+".html", 'a')
+        fhtml = open(path+"index.html", 'a')
         fhtml.close()
     ftxt.close()
     
@@ -139,6 +141,8 @@ def fedit(folder,filename):
                 sure = input('>> ')
                 if sure == 'y':
                     shutil.rmtree(path)
+                    if len(os.listdir("files/"+folder+"/")) == 1 and os.listdir("files/"+folder+"/")[0] == '.DS_Store':
+                        shutil.rmtree("files/"+folder+"/")
                     print('Files terminated.')
                     cmd = "exit"
                 elif sure == 'n':
@@ -147,6 +151,8 @@ def fedit(folder,filename):
                     print('Informal response. Files saved.')
             elif cmd == "restart":
                 os.execv(sys.executable, ['python'] + sys.argv)
+            else:
+                print('Unrecognized command. Type "help" for list of commands.')
         except Exception as exc:
             print('[!!!] {err}'.format(err=exc))
 
@@ -202,7 +208,7 @@ def getModules():
 def c(folder, filename):
     path = "files/"+folder+"/"+filename+"/"
     comp.main(folder,filename)
-    url = "file:///"+str(os.getcwd())+"/"+path+filename+".html"
+    url = "file:///"+str(os.getcwd())+"/"+path+"index.html"
     webbrowser.get().open(url, new=0)
     return
 main()
