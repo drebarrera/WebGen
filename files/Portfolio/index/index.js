@@ -2,7 +2,7 @@ $(document).ready(function(){
 	/// Globals and Initials ///
 	const trackTypes = [[0,0,0],[3,3,3],[1,1,1]]; // List of track types per slide
 	var trackQueue = [0,0,0]; // Determines which tracks have been temporarily selected
-	let track = 1; // Track Color Chosen
+	let track = 0; // Track Color Chosen
 	let go = 1; // Cloud Enable
 	var scrollCoeff = 0; // Scroll Location
 	var slideHoverEN = 1; // Enable Hover Changes for Slide Text
