@@ -157,6 +157,7 @@ class Menu:
         path = ['<rect x="0" y="'+str(y)+'" rx="'+self.radius+'" ry="'+self.radius+'" width="'+self.length+'" height="'+self.width+'" style="fill:'+self.color+';"/>' for y in dy]
         return svg+"".join(path)+'</svg>'
 
+# Icon -> Icon
 class Icon:
     def __init__(self):
         self.name = "icon"
