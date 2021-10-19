@@ -86,7 +86,7 @@ def f(folder, filename):
         sleep(0.02)
     print("\n")
     if sys.platform == "win32":
-        os.system("notepad.exe "+path+filename+".py")
+        subprocess.Popen(["notepad.exe", path+filename+".py"])
     elif sys.platform == "darwin":
         subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
     fedit(folder,filename)
@@ -131,7 +131,7 @@ def fedit(folder,filename):
                 webbrowser.open(url, new=0)
             elif cmd == "e":
                 if sys.platform == "win32":
-                    os.system("notepad.exe "+path+filename+".py")
+                    subprocess.Popen(["notepad.exe", path+filename+".py"])
                 elif sys.platform == "darwin":
                     subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
             elif cmd == "del":
@@ -155,7 +155,7 @@ def css(folder, filename):
     fcss = open(path+filename+".css", 'a')
     fcss.close()
     if sys.platform == "win32":
-        os.system("notepad.exe "+path+filename+".css")
+        subprocess.Popen(["notepad.exe", path+filename+".css"])
     elif sys.platform == "darwin":
         subprocess.call(['open', '-a', 'TextEdit', path+filename+".css"])
 
@@ -166,7 +166,7 @@ def js(folder, filename):
     fjs = open(path+filename+".js", 'a')
     fjs.close()
     if sys.platform == "win32":
-        os.system("notepad.exe "+path+filename+".js")
+        subprocess.Popen(["notepad.exe", path+filename+".js"])
     elif sys.platform == "darwin":
         subprocess.call(['open', '-a', 'TextEdit', path+filename+".js"])
 
