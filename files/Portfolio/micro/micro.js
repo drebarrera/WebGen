@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	var waitForReplace = 0;
+
 	$("#commandC").on("click", ".ctriangle", function() {
 		prevHeight = $(this).parent().height();
 		$(this).parent().css('height', 'auto');
@@ -73,20 +75,66 @@ $(document).ready(function(){
 		}
 	});
 
+	$("#codeC").on("dblclick", ".cT", function(e) {
+		if(e.target == e.currentTarget){
+			if(waitForReplace - 1 == $(this).parent().index()){
+				waitForReplace = 0;
+			}
+			else if(waitForReplace - 1 > $(this).parent().index()){
+				waitForReplace = waitForReplace - 1;
+			}
+			$(this).parent().remove();
+		}
+	});
+
 	$("#codeC").on("click", ".cT", function(e) {
 		if(e.target == e.currentTarget){
-			$(this).parent().remove();
+			if(waitForReplace == 0){
+				waitForReplace = $(this).parent().index() + 1;
+				$(this).css({'border':'1px solid black'});
+			}
+			else{
+				if($(this).parent().index() + 1 == waitForReplace){
+					waitForReplace = 0;
+					$(this).css({'border':'0px solid black'});
+				}
+				else{
+					x = $(this).parent();
+					y = $('#codeC').children().eq(waitForReplace - 1);
+					$('#codeC').children().eq(waitForReplace - 1).children().css({'border':'0px solid black'});
+					z1 = y.replaceWith(x.clone());
+					z2 = x.replaceWith(y.clone());
+
+					//$(this).parent().remove();
+					//$('#codeC').children().eq(waitForReplace - 1).remove();
+					waitForReplace = 0;
+				}
+			}
 		}
 	});
 
 	$('.cT').click(function(e){
 		if(e.target == e.currentTarget){
-			x = $(this).parent().clone().appendTo( "#codeC" );
-			x.children().css('height','1.5vh');
-			x.find('.ctriangle').css({transform:'rotate(0)'});
-			x.find('textarea').bind('input propertychange', function() {
-				update();
-			});
+			if(waitForReplace == 0){
+				x = $(this).parent().clone().appendTo( "#codeC" );
+				x.children().css('height','1.5vh');
+				x.find('.ctriangle').css({transform:'rotate(0)'});
+				x.find('textarea').bind('input propertychange', function() {
+					update();
+				});
+			}
+			else{
+				y = $('#codeC').children().eq(waitForReplace - 1);
+				x = $(this).parent().clone();
+				y.after(x);
+				y.remove();
+				x.children().css('height','1.5vh');
+				x.find('.ctriangle').css({transform:'rotate(0)'});
+				x.find('textarea').bind('input propertychange', function() {
+					update();
+				});
+				waitForReplace = 0;
+			}
 		}
 	});
 

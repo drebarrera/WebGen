@@ -122,6 +122,7 @@ commandC.cl = "ctcContainer"
 commandC.display = "block"
 commandC.position = "relative"
 commandC.background_color = "white"
+commandC.overflow_y = 'scroll'
 
 # Code
 code.id = "code"
@@ -135,6 +136,7 @@ codeC.display = "flex"
 codeC.flex_direction = "column"
 codeC.position = "relative"
 codeC.background_color = "white"
+codeC.overflow_y = 'scroll'
 
 # -- Codes --
 cCustom.cl = "c"
