@@ -14,6 +14,10 @@
 	font-weight: 300;
 }
 
+#selectLangC{
+	font-size: 2vh;
+}
+
 #commandToCode{
 	height: 80vh;
 	width: 100%;
@@ -49,8 +53,13 @@
 
 .c{
 	width: 100%;
-	height: auto;
 	height: 4vh;
+	display: inline-block;
+	position: relative;
+}
+
+.cT:hover{
+	border: 1px solid black;
 }
 
 .cT{
@@ -59,25 +68,44 @@
 	padding-left: 2.5%;
 	padding-right: 2.5%;
 	font-size: 1.5 vh;
-	border-radius: 100px;
+	border-radius: 1vh;
 	display: inline-block;
-	width: 60%;
+	width: 80%;
+	height: 1.5vh;
 	position: relative;
 	cursor: pointer;
 	margin-left: 3%;
+	overflow-y: hidden;
 
 }
 
-.triangle{
+.ctriangle{
 	font-size: 1.25vh;
 	float: right;
 	color: black;
 }
 
-.triangle:hover{
+.ctriangle:hover{
 	color: white;
+}
+
+.cinfo{
+	display: block;
+	margin-top: 1vh;
+	color: #006497;
 }
 
 .misc{
 	background-color: lightBlue;
+}
+
+#compiledC{
+	width: 100%;
+	height: 50vh;
+}
+
+#compiledT{
+	text-align: center;
+	font-size: 3vh;
+	width: 100%;
 }
