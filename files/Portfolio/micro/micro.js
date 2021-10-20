@@ -122,5 +122,9 @@ $(document).ready(function(){
 		update();
 	});
 
+	$('#lang').bind('input propertychange', function() {
+		update();
+	});
+
 	observer.observe($('#codeC').get(0), config);
 });
