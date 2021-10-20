@@ -75,6 +75,7 @@
 	position: relative;
 	cursor: pointer;
 	margin-left: 3%;
+	margin-top: 0.5vh;
 	overflow-y: hidden;
 
 }
@@ -93,10 +94,43 @@
 	display: block;
 	margin-top: 1vh;
 	color: #006497;
+	background-color: #fafafa;
+	padding: 0.5vh;
+	border-radius: 0.5vh;
+}
+
+.ctitle{
+	margin-block-end: 0em;
+	margin-block-start: 0em;
+	margin-top: 1vh;
+	margin-left: 2%;
+	padding-bottom: 0.5vh;
+	font-weight: 300;
+	font-size: 2.5vh;
+	width: 100%;
+}
+
+.ctable{
+	width: 98%;
+	margin-top: 0.5vh;
+	border:2px solid black; 
+	border-collapse: collapse; 
+}
+
+.ctable tr, .ctable td{
+	color: black;
+	border:1px solid black; 
+	border-collapse: collapse; 
+	padding: 0.25vh;
 }
 
 .misc{
 	background-color: lightBlue;
+}
+
+.rcc{
+
+	background-color: coral;
 }
 
 #compiledC{
