@@ -112,7 +112,7 @@ $(document).ready(function(){
 		if(e.target == e.currentTarget){
 			if(waitForReplace == 0){
 				waitForReplace = $(this).parent().index() + 1;
-				$(this).css({'border':'1px solid black'});
+				$(this).css({'border':'2px solid black'});
 			}
 			else{
 				if($(this).parent().index() + 1 == waitForReplace){
