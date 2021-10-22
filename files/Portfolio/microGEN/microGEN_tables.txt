@@ -1,16 +1,16 @@
 # AHBENR
 cAHBENRT.content = '<div class="cT rcc">RCC: AHBENR Configuration <span class="ctriangle">&#9654;</span><br><span class="cinfo">Select EN to Enable or DN to Disable for the bits below. If you wish to leave a bit unchanged, leave the select blank.<!----><span class="cR"><br>This configuration requires two registers. <select><option>r0</option><option>r1</option><option>r2</option><option>r3</option><option>r4</option><option>r5</option><option>r6</option><option>r7</option><option>r8</option><option>r9</option><option>r10</option><option>r11</option><option>r12</option></select><select><option>r0</option><option>r1</option><option>r2</option><option>r3</option><option>r4</option><option>r5</option><option>r6</option><option>r7</option><option>r8</option><option>r9</option><option>r10</option><option>r11</option><option>r12</option></select></span><!----><br><table class="ctable"><tr><td>Bit</td><td>Name</td><td>Selection</td></tr>
-<tr><td title="DMAEN is used to enable the internal clock for the Digital Memory Access">0</td><td>DMAEN</td><td><select></option><option>EN</option><option>DN</option></select></td></tr>
+<tr title="DMAEN is used to enable the internal clock for the Digital Memory Access"><td>0</td><td>DMAEN</td><td><select></option><option>EN</option><option>DN</option></select></td></tr>
 <tr><td>1</td><td>DAM2EN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
-<tr><td>2</td><td>SRAMEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
+<tr title="SRAMEN is used to keep SRAM enabled in sleep mode."><td>2</td><td>SRAMEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
 <tr><td>4</td><td>FLITFEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
 <tr><td>6</td><td>CRCEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
 <tr title="IOPAEN is used to enable the internal clock for Peripheral A"><td>17</td><td>IOPAEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
 <tr title="IOPBEN is used to enable the internal clock for Peripheral B"><td>18</td><td>IOPBEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
-<tr><td title="IOPCEN is used to enable the internal clock for Peripheral C">19</td><td>IOPCEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
-<tr><td title="IOPDEN is used to enable the internal clock for Peripheral D">20</td><td>USART4RST</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
-<tr><td title="IOPEEN is used to enable the internal clock for Peripheral E">21</td><td>IOPEEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
-<tr><td title="IOPFEN is used to enable the internal clock for Peripheral F">22</td><td>IOPFEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
+<tr title="IOPCEN is used to enable the internal clock for Peripheral C"><td>19</td><td>IOPCEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
+<tr title="IOPDEN is used to enable the internal clock for Peripheral D"><td>20</td><td>USART4RST</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
+<tr title="IOPEEN is used to enable the internal clock for Peripheral E"><td>21</td><td>IOPEEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
+<tr title="IOPFEN is used to enable the internal clock for Peripheral F"><td>22</td><td>IOPFEN</td><td><select><option></option><option>EN</option><option>DN</option></select></td></tr>
 <tr><td>24</td><td>TSCEN</td><td><select><option val = "0"></option><option val = "1">EN</option><option></option><option>EN</option><option>DN</option></select></td></tr>
 </table></span></div>'
 
@@ -115,4 +115,19 @@ cODRT.content = '<div class="cT gpio">GPIOx: ODR Configuration <span class="ctri
 <tr title="The Output Data Register designates the I/O output state of each port."><td>13</td><td>ODR13</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
 <tr title="The Output Data Register designates the I/O output state of each port."><td>14</td><td>ODR14</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
 <tr title="The Output Data Register designates the I/O output state of each port."><td>15</td><td>ODR15</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+</table></span></div>'
+
+# TIM1
+cTIM1T.content = '<div class="cT tim">TIM1 Configuration <span class="ctriangle">&#9654;</span><br><span class="cinfo">Select EN to Enable or DIS to Disable for the bits below. If you wish to leave a bit unchanged, leave the select blank.<!----><span class="cSel"><br>Select the peripheral you wish to use. <select><option>GPIOA</option><option>GPIOB</option><option>GPIOC</option><option>GPIOD</option><option>GPIOE</option><option>GPIOF</option></select></span><!----><span class="cR"><br>This configuration requires two registers. <select><option>r0</option><option>r1</option><option>r2</option><option>r3</option><option>r4</option><option>r5</option><option>r6</option><option>r7</option><option>r8</option><option>r9</option><option>r10</option><option>r11</option><option>r12</option></select><select><option>r0</option><option>r1</option><option>r2</option><option>r3</option><option>r4</option><option>r5</option><option>r6</option><option>r7</option><option>r8</option><option>r9</option><option>r10</option><option>r11</option><option>r12</option></select></span><!----><br>
+TIM1 CR1 & CR2 Control Register
+<table class="ctable">
+<tr><td>Bit</td><td>Name</td><td>Selection</td></tr>
+<tr title="The Counter Enable state enables the counter to start counting. This bit should be set after the output configurations have been set."><td>CR1.0</td><td>CEN</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+<tr title="The Update Disable state disables the update event on counter overflow/underflow when enabled."><td>CR1.1</td><td>UDIS</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+<tr><td>CR1.2</td><td>URS</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+<tr><td>CR1.3</td><td>OPM</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+<tr title="The counter counts as an Upcounter when the Direction state is Disabled and a Downcounter when the Direction state is Enabled"><td>CR1.4</td><td>DIR</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+<tr title="The Center-Aligned Mode Selection determines the counting configuration. Select EDG for Edge-Mode, where the counter counts as selected by DIR. Select CM1, CM2, or CM3 for Alternating Up-Down Counting, where output compare interrupt flags are set when counting down, counting up, or both, respectively."><td>CR1.6:5</td><td>CMS</td><td><select><option></option><option>EDG</option><option>CM1</option><option>CM2</option><option>CM3</option></select></td></tr></tr>
+<tr><td>CR1.7</td><td>ARPE</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+<tr><td>CR1.9:8</td><td>CKD</td><td><select><option></option><option>00</option><option>01</option><option>10</option></select></td></tr></tr>
 </table></span></div>'
