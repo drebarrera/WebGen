@@ -130,4 +130,7 @@ TIM1 CR1 & CR2 Control Register
 <tr title="The Center-Aligned Mode Selection determines the counting configuration. Select EDG for Edge-Mode, where the counter counts as selected by DIR. Select CM1, CM2, or CM3 for Alternating Up-Down Counting, where output compare interrupt flags are set when counting down, counting up, or both, respectively."><td>CR1.6:5</td><td>CMS</td><td><select><option></option><option>EDG</option><option>CM1</option><option>CM2</option><option>CM3</option></select></td></tr></tr>
 <tr><td>CR1.7</td><td>ARPE</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
 <tr><td>CR1.9:8</td><td>CKD</td><td><select><option></option><option>00</option><option>01</option><option>10</option></select></td></tr></tr>
+<tr><td>CR2.0</td><td>CCPC</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+<tr><td>CR2.2</td><td>CCUS</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
+<tr><td>CR2.3</td><td>CCDS</td><td><select><option></option><option>EN</option><option>DIS</option></select></td></tr></tr>
 </table></span></div>'
