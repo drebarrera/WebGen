@@ -21,6 +21,12 @@ $(document).ready(function(){
 	}) (jQuery.fn.clone);
 
 	var waitForReplace = 0;
+	if($('#lang').val() == 'C'){
+		$('.cR').hide();
+	}
+	else if($('#lang').val() == 'ASM'){
+		$('.cR').show();
+	}
 
 	$("#commandC").on("click", ".ctriangle", function() {
 		prevHeight = $(this).parent().height();
@@ -120,11 +126,26 @@ $(document).ready(function(){
 					$(this).css({'border':'0px solid black'});
 				}
 				else{
+					$('#codeC').find('.cT').css('height','1.5vh');
+					$('#codeC').find('.ctriangle').css({transform:'rotate(0)'});
+					$('#codeC').find('.c').css('margin-top','0px');
 					x = $(this).parent();
 					y = $('#codeC').children().eq(waitForReplace - 1);
 					$('#codeC').children().eq(waitForReplace - 1).children().css({'border':'0px solid black'});
-					z1 = y.replaceWith(x.clone());
-					z2 = x.replaceWith(y.clone());
+					xc = x.clone();
+					xc.find('textarea, select').bind('input propertychange', function() {
+						update();
+					});
+					yc = y.clone();
+					yc.find('textarea, select').bind('input propertychange', function() {
+						update();
+					});
+					z1 = y.replaceWith(xc);
+					z2 = x.replaceWith(yc);
+					
+					z2.find('textarea').bind('input propertychange', function() {
+						update();
+					});
 					waitForReplace = 0;
 				}
 			}
@@ -180,11 +201,12 @@ $(document).ready(function(){
 	function update(){
 		$('#compiledT > textarea').val('');
 		if($('#lang').val() == 'C'){
+			$('.cR').hide();
 			const codeList = document.getElementById('codeC');
 			for (i = 0; i < codeList.children.length; i++) {
 				x = $('#codeC').children().eq(i);
 
-				function register(rName){
+				function registerC(rName){
 					var bStrClr = 0b0;
 					var bStrSet = 0b0;
 					for (j = 0; j < x.find('tbody').children().length; j++){
@@ -197,8 +219,28 @@ $(document).ready(function(){
 								bStrClr = (bStrClr  | (0b1 << parseInt(bit.text())));
 								bStrSet = (bStrSet  | (0b1 << parseInt(bit.text())));
 							}
-							else if(val == "DN"){
-								bStrClr = (bStrClr  | (0b1 << parseInt(bit.text())));
+							else if(val == "DIS"){
+								if(rName.split("-> ")[1] != "PUPDR"){
+									bStrClr = (bStrClr  | (0b1 << parseInt(bit.text())));
+								}
+								else{
+									bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+								}
+							}
+							else if(val == "IN"){
+								bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+							}
+							else if(val == "OUT" || val == "PU"){
+								bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+								bStrSet = (bStrSet  | (0b1 << parseInt(bit.text().split(':')[1])));
+							}
+							else if(val == "ALT" || val == "PD"){
+								bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+								bStrSet = (bStrSet  | (0b1 << parseInt(bit.text().split(':')[0])));
+							}
+							else if(val == "AM"){
+								bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+								bStrSet = (bStrSet  | (0b11 << parseInt(bit.text().split(':')[1])));
 							}
 						}
 					}
@@ -218,12 +260,92 @@ $(document).ready(function(){
 
 				const cDict = {
 					"custom": x.find('textarea').val(),
-					"rccAHBENR": register("RCC -> AHBENR"),
-					"rccAPB1ENR": register("RCC -> APB1ENR"),
-					"rccAPB2ENR": register("RCC -> APB2ENR")
+					"rccAHBENR": registerC("RCC -> AHBENR"),
+					"rccAPB1ENR": registerC("RCC -> APB1ENR"),
+					"rccAPB2ENR": registerC("RCC -> APB2ENR"),
+					"gpioMODER": registerC(x.find('.cSel').find('select').val()+"-> MODER"),
+					"gpioPUPDR": registerC(x.find('.cSel').find('select').val()+"-> PUPDR"),
+					"gpioODR": registerC(x.find('.cSel').find('select').val()+"-> ODR")
 				};
 
   				$('#compiledT > textarea').val($('#compiledT > textarea').val() + cDict[codeList.children[i].id] + '\n')
+			}
+		}
+		else if($('#lang').val() == 'ASM'){
+			$('.cR').show();
+			const codeList = document.getElementById('codeC');
+			for (i = 0; i < codeList.children.length; i++) {
+				x = $('#codeC').children().eq(i);
+
+				function registerASM(sysName, rName){
+					
+					var r0 = x.find('.cR').find('select').eq(0).val();
+					var r1 = x.find('.cR').find('select').eq(1).val();
+
+					var bStrClr = 0b0;
+					var bStrSet = 0b0;
+					for (j = 0; j < x.find('tbody').children().length; j++){
+						var row = x.find('tbody').children().eq(j);
+						var bit = row.find('td').eq(0);
+						var name = row.find('td').eq(1);
+						var val = row.find('select').val();
+						if(bit.text() != "Bit"){
+							if(val == "EN"){
+								bStrClr = (bStrClr  | (0b1 << parseInt(bit.text())));
+								bStrSet = (bStrSet  | (0b1 << parseInt(bit.text())));
+							}
+							else if(val == "DIS"){
+								if(rName != "PUPDR"){
+									bStrClr = (bStrClr  | (0b1 << parseInt(bit.text())));
+								}
+								else{
+									bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+								}
+							}
+							else if(val == "IN"){
+								bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+							}
+							else if(val == "OUT" || val == "PU"){
+								bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+								bStrSet = (bStrSet  | (0b1 << parseInt(bit.text().split(':')[1])));
+							}
+							else if(val == "ALT" || val == "PD"){
+								bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+								bStrSet = (bStrSet  | (0b1 << parseInt(bit.text().split(':')[0])));
+							}
+							else if(val == "AM"){
+								bStrClr = (bStrClr  | (0b11 << parseInt(bit.text().split(':')[1])));
+								bStrSet = (bStrSet  | (0b11 << parseInt(bit.text().split(':')[1])));
+							}
+						}
+					}
+					//alert(bStrClr.toString(16));
+					//alert(bStrSet.toString(16));
+					
+					if(bStrClr && r0 != r1){
+						var out = "ldr "+r0+" ="+sysName+"\nldr "+r0+", ["+r0+", #"+rName+"]\nldr "+r1+", =0x"+bStrClr.toString(16)+"\nbics "+r0+", "+r1;
+						if(bStrSet){
+							out = out + "\nldr "+r1+", =0x"+bStrSet.toString(16)+"\norrs "+r0+", "+r1;
+						}
+						out = out + "\nldr "+r1+", ="+sysName+"\nstr "+r0+", ["+r1+", #"+rName+"]";
+						return out;
+					}
+					else{
+						return "// No selection made. Make sure you have selected two different registers.";
+					}
+				}
+
+				const asmDict = {
+					"custom": x.find('textarea').val(),
+					"rccAHBENR": registerASM("RCC","AHBENR"),
+					"rccAPB1ENR": registerASM("RCC","APB1ENR"),
+					"rccAPB2ENR": registerASM("RCC","APB2ENR"),
+					"gpioMODER": registerASM(x.find('.cSel').find('select').val(),"MODER"),
+					"gpioPUPDR": registerASM(x.find('.cSel').find('select').val(),"PUPDR"),
+					"gpioODR": registerASM(x.find('.cSel').find('select').val(),"ODR")
+				};
+
+  				$('#compiledT > textarea').val($('#compiledT > textarea').val() + asmDict[codeList.children[i].id] + '\n')
 			}
 		}
 	}
@@ -250,6 +372,9 @@ $(document).ready(function(){
 
 	$('#lang').bind('input propertychange', function() {
 		update();
+		$('#codeC').find('.cT').css('height','1.5vh');
+		$('#codeC').find('.ctriangle').css({transform:'rotate(0)'});
+		$('#codeC').find('.c').css('margin-top','0px');
 	});
 
 	observer.observe($('#codeC').get(0), config);

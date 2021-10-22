@@ -110,6 +110,14 @@
 	width: 100%;
 }
 
+.cR{
+	color: black;
+}
+
+.cSel{
+	color: black;
+}
+
 .ctable{
 	width: 98%;
 	margin-top: 0.5vh;
@@ -131,6 +139,10 @@
 .rcc{
 
 	background-color: coral;
+}
+
+.gpio{
+	background-color: lightseagreen;
 }
 
 #compiledC{
