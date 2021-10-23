@@ -23,10 +23,13 @@ $(document).ready(function(){
 	var waitForReplace = 0;
 	if($('#lang').val() == 'C'){
 		$('.cR').hide();
+		$('.cVar').show();
 	}
 	else if($('#lang').val() == 'ASM'){
 		$('.cR').show();
+		$('.cVar').hide();
 	}
+	$('.cBit').hide();
 
 	$("#commandC").on("click", ".ctriangle", function() {
 		prevHeight = $(this).parent().height();
@@ -202,6 +205,7 @@ $(document).ready(function(){
 		$('#compiledT > textarea').val('');
 		if($('#lang').val() == 'C'){
 			$('.cR').hide();
+			$('.cVar').show();
 			const codeList = document.getElementById('codeC');
 			for (i = 0; i < codeList.children.length; i++) {
 				x = $('#codeC').children().eq(i);
@@ -258,6 +262,26 @@ $(document).ready(function(){
 					}
 				}
 
+				function readC(rName){
+					var out = "";	
+					var vName = x.find('.cVar').find('input').val();	
+					var rType = x.find('.cType').val();
+
+					if(rType == "Register" && vName != ""){
+						x.find('.cBit').hide();
+						out = vName + " = " + rName + ";";
+					}
+					else if(rType == "Bit Value" && vName != ""){
+						x.find('.cBit').show();
+						out = vName + " = (" + rName + " >> "+ x.find('.cBit').val().split(' ')[1] + ") & 0xfffffffe;";
+					}
+					else{
+						out = "// No selection made. Make sure you have provided a variable assignment."
+					}
+					
+					return out;
+				}
+
 				function setC(sysName){
 					var out = "";		
 
@@ -288,6 +312,7 @@ $(document).ready(function(){
 					"gpioMODER": registerC(x.find('.cSel').find('select').val()+"-> MODER"),
 					"gpioPUPDR": registerC(x.find('.cSel').find('select').val()+"-> PUPDR"),
 					"gpioODR": registerC(x.find('.cSel').find('select').val()+"-> ODR"),
+					"gpioIDR": readC(x.find('.cSel').find('select').val()+" -> IDR"),
 					"tim1S": setC("TIM1")
 				};
 
@@ -296,6 +321,7 @@ $(document).ready(function(){
 		}
 		else if($('#lang').val() == 'ASM'){
 			$('.cR').show();
+			$('.cVar').hide();
 			const codeList = document.getElementById('codeC');
 			for (i = 0; i < codeList.children.length; i++) {
 				x = $('#codeC').children().eq(i);
@@ -358,6 +384,28 @@ $(document).ready(function(){
 					}
 				}
 	
+				function readASM(sysName, rName){
+					var r0 = x.find('.cR').find('select').eq(0).val();
+					var r1 = x.find('.cR').find('select').eq(1).val();		
+					var rType = x.find('.cType').val();
+
+					if(rType == "Register"){
+						x.find('.cBit').hide();
+					}
+					else if(rType == "Bit Value"){
+						x.find('.cBit').show();
+					}
+					if(rType == "Register"){
+						return "ldr "+r0+", ="+sysName+"\nldr "+r0+", ["+r0+", #"+rName+"]";
+					}
+					else if(rType == "Bit Value" && r0 != r1){
+						return "ldr "+r1+", ="+rName+"\nadds "+r1+", "+r1+", #"+x.find('.cBit').val().split(' ')[1]+"\nldr "+r0+", ="+sysName+"\nldrb "+r0+", ["+r0+", #"+r1+"]";
+					}
+					else{
+						return "// No selection made. Make sure you have selected two different registers."
+					}
+				}
+
 				function setASM(sysName){
 					var r0 = x.find('.cR').find('select').eq(0).val();
 					var r1 = x.find('.cR').find('select').eq(1).val();
@@ -390,6 +438,7 @@ $(document).ready(function(){
 					"gpioMODER": registerASM(x.find('.cSel').find('select').val(),"MODER"),
 					"gpioPUPDR": registerASM(x.find('.cSel').find('select').val(),"PUPDR"),
 					"gpioODR": registerASM(x.find('.cSel').find('select').val(),"ODR"),
+					"gpioIDR": readASM(x.find('.cSel').find('select').val(),"IDR"),
 					"tim1S": setASM("TIM1")
 				};
 
