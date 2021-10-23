@@ -118,6 +118,18 @@ cODRT.content = '<div class="cT gpio">GPIOx: ODR Configuration <span class="ctri
 </table></span></div>'
 
 # TIM1
+cTIM1ST.content = '<div class="cT tim">TIM1 Configuration <span class="ctriangle">&#9654;</span><br><span class="cinfo">Select EN to Enable or DIS to Disable for the bits below. If you wish to leave a bit unchanged, leave the select blank.<!----><span class="cR"><br>This configuration requires two registers. <select><option>r0</option><option>r1</option><option>r2</option><option>r3</option><option>r4</option><option>r5</option><option>r6</option><option>r7</option><option>r8</option><option>r9</option><option>r10</option><option>r11</option><option>r12</option></select><select><option>r0</option><option>r1</option><option>r2</option><option>r3</option><option>r4</option><option>r5</option><option>r6</option><option>r7</option><option>r8</option><option>r9</option><option>r10</option><option>r11</option><option>r12</option></select></span><!----><table class="ctable">
+<tr><td>Name</td><td>Set Value</td></tr>
+<tr title="The Coutner Register counts to ARR and then is updated to 0."><td>CNT</td><td><input name="CNT"></input></td></tr>
+<tr title="The Prescaler Register divides the 48MHz clock."><td>PSC</td><td><input name="PSC"></input></td></tr>
+<tr title="The Auto-Reload Register is the value counted to by the counter."><td>ARR</td><td><input name="ARR"></input></td></tr>
+<tr title="This Compare-Capture Register provides the value to be compared to CNT. When CNT = CCR1, Channel 1 is subject to the state change defined by the OCM1M bit of the CCMR register."><td>CCR1</td><td><input name="CCR1"></input></td></tr>
+<tr title="This Compare-Capture Register provides the value to be compared to CNT. When CNT = CCR2, Channel 2 is subject to the state change defined by the OCM2M bit of the CCMR register."><td>CCR2</td><td><input name="CCR2"></input></td></tr>
+<tr title="This Compare-Capture Register provides the value to be compared to CNT. When CNT = CCR3, Channel 3 is subject to the state change defined by the OCM3M bit of the CCMR register."><td>CCR3</td><td><input name="CCR3"></input></td></tr>
+<tr title="This Compare-Capture Register provides the value to be compared to CNT. When CNT = CCR4, Channel 4 is subject to the state change defined by the OCM4M bit of the CCMR register."><td>CCR4</td><td><input name="CCR4"></input></td></tr>
+</table>--></span></div>'
+
+
 cTIM1T.content = '<div class="cT tim">TIM1 Configuration <span class="ctriangle">&#9654;</span><br><span class="cinfo">Select EN to Enable or DIS to Disable for the bits below. If you wish to leave a bit unchanged, leave the select blank.<!----><span class="cSel"><br>Select the peripheral you wish to use. <select><option>GPIOA</option><option>GPIOB</option><option>GPIOC</option><option>GPIOD</option><option>GPIOE</option><option>GPIOF</option></select></span><!----><span class="cR"><br>This configuration requires two registers. <select><option>r0</option><option>r1</option><option>r2</option><option>r3</option><option>r4</option><option>r5</option><option>r6</option><option>r7</option><option>r8</option><option>r9</option><option>r10</option><option>r11</option><option>r12</option></select><select><option>r0</option><option>r1</option><option>r2</option><option>r3</option><option>r4</option><option>r5</option><option>r6</option><option>r7</option><option>r8</option><option>r9</option><option>r10</option><option>r11</option><option>r12</option></select></span><!----><br>
 TIM1 CR1 & CR2 Control Register
 <table class="ctable">

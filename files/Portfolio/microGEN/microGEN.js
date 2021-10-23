@@ -133,11 +133,11 @@ $(document).ready(function(){
 					y = $('#codeC').children().eq(waitForReplace - 1);
 					$('#codeC').children().eq(waitForReplace - 1).children().css({'border':'0px solid black'});
 					xc = x.clone();
-					xc.find('textarea, select').bind('input propertychange', function() {
+					xc.find('textarea, select, input').bind('input propertychange', function() {
 						update();
 					});
 					yc = y.clone();
-					yc.find('textarea, select').bind('input propertychange', function() {
+					yc.find('textarea, select, input').bind('input propertychange', function() {
 						update();
 					});
 					z1 = y.replaceWith(xc);
@@ -165,7 +165,7 @@ $(document).ready(function(){
 				x.find('textarea').bind('input propertychange', function() {
 					update();
 				});
-				$('#codeC').find('select').bind('input propertychange', function() {
+				$('#codeC').find('select, input').bind('input propertychange', function() {
 					update();
 				});
 			}
@@ -182,7 +182,7 @@ $(document).ready(function(){
 				x.find('textarea').bind('input propertychange', function() {
 					update();
 				});
-				$('#codeC').find('select').bind('input propertychange', function() {
+				$('#codeC').find('select, input').bind('input propertychange', function() {
 					update();
 				});
 				waitForReplace = 0;
@@ -258,6 +258,28 @@ $(document).ready(function(){
 					}
 				}
 
+				function setC(sysName){
+					var out = "";		
+
+					for (j = 0; j < x.find('input').length; j++){
+						var val = x.find('input').eq(j).val();
+						var rName = x.find('input').eq(j).attr('name');
+						
+						if(j != 0){
+							out = out + "\n";
+						}
+
+						if(val != ""){
+							out = out + sysName + " -> " + rName + " = "+parseInt(val).toString(16)+";";
+						}
+						else{
+							out = out + "// No "+rName+" selection made."
+						}
+					}
+					
+					return out;
+				}
+
 				const cDict = {
 					"custom": x.find('textarea').val(),
 					"rccAHBENR": registerC("RCC -> AHBENR"),
@@ -265,7 +287,8 @@ $(document).ready(function(){
 					"rccAPB2ENR": registerC("RCC -> APB2ENR"),
 					"gpioMODER": registerC(x.find('.cSel').find('select').val()+"-> MODER"),
 					"gpioPUPDR": registerC(x.find('.cSel').find('select').val()+"-> PUPDR"),
-					"gpioODR": registerC(x.find('.cSel').find('select').val()+"-> ODR")
+					"gpioODR": registerC(x.find('.cSel').find('select').val()+"-> ODR"),
+					"tim1S": setC("TIM1")
 				};
 
   				$('#compiledT > textarea').val($('#compiledT > textarea').val() + cDict[codeList.children[i].id] + '\n')
@@ -334,6 +357,30 @@ $(document).ready(function(){
 						return "// No selection made. Make sure you have selected two different registers.";
 					}
 				}
+	
+				function setASM(sysName){
+					var r0 = x.find('.cR').find('select').eq(0).val();
+					var r1 = x.find('.cR').find('select').eq(1).val();
+					var out = "";		
+
+					for (j = 0; j < x.find('input').length; j++){
+						var val = x.find('input').eq(j).val();
+						var rName = x.find('input').eq(j).attr('name');
+						
+						if(j != 0){
+							out = out + "\n";
+						}
+
+						if(val != "" && r0 != r1){
+							out = out + "ldr "+r0+", =0x"+parseInt(val).toString(16)+"\nldr "+r1+", ="+sysName+"\nstr "+r0+", ["+r1+", #"+rName+"]";
+						}
+						else{
+							out = out + "// No "+rName+" selection made. Make sure you have selected two different registers."
+						}
+					}
+					
+					return out;
+				}
 
 				const asmDict = {
 					"custom": x.find('textarea').val(),
@@ -342,7 +389,8 @@ $(document).ready(function(){
 					"rccAPB2ENR": registerASM("RCC","APB2ENR"),
 					"gpioMODER": registerASM(x.find('.cSel').find('select').val(),"MODER"),
 					"gpioPUPDR": registerASM(x.find('.cSel').find('select').val(),"PUPDR"),
-					"gpioODR": registerASM(x.find('.cSel').find('select').val(),"ODR")
+					"gpioODR": registerASM(x.find('.cSel').find('select').val(),"ODR"),
+					"tim1S": setASM("TIM1")
 				};
 
   				$('#compiledT > textarea').val($('#compiledT > textarea').val() + asmDict[codeList.children[i].id] + '\n')
@@ -367,6 +415,10 @@ $(document).ready(function(){
 	});
 	
 	$('#codeC').find('select').bind('input propertychange', function() {
+		update();
+	});
+
+	$('#codeC').find('input').bind('input propertychange', function() {
 		update();
 	});
 
