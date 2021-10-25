@@ -283,11 +283,41 @@ $(document).ready(function(){
 				}
 
 				function setC(sysName){
-					var out = "";		
+					var out = "";	
+					const timx_reg = {
+						"dummy": ["CNT","PSC","ARR","CCR1","CCR2","CCR3","CCR4","DMAR"],
+						"TIM1": [1, 1, 1, 1, 1, 1, 1, 1],
+						"TIM2": [1, 1, 1, 1, 1, 1, 1, 1],
+						"TIM3": [1, 1, 1, 1, 1, 1, 1, 1],
+						"TIM6": [1, 1, 1, 0, 0, 0, 0, 0],
+						"TIM7": [1, 1, 1, 0, 0, 0, 0, 0],
+						"TIM14": [1, 1, 1, 1, 0, 0, 0, 0],
+						"TIM15": [1, 1, 1, 1, 1, 0, 0, 1],
+						"TIM16": [1, 1, 1, 1, 0, 0, 0, 1],
+						"TIM17": [1, 1, 1, 1, 0, 0, 0, 1]
+					};
+					const timx_ind = {
+						"CNT": 0,
+						"PSC": 1,
+						"ARR": 2,
+						"CCR1": 3,
+						"CCR2": 4,
+						"CCR3": 5,
+						"CCR4": 6,
+						"DMAR": 7
+					}
 
 					for (j = 0; j < x.find('input').length; j++){
 						var val = x.find('input').eq(j).val();
 						var rName = x.find('input').eq(j).attr('name');
+						var tim = x.find('.cTIMS').val();
+						
+						if(timx_reg[tim][timx_ind[rName]] == 0){
+							x.find('input[name="'+rName+'"]').parent().parent().hide();
+						}
+						else{
+							x.find('input[name="'+rName+'"]').parent().parent().show();
+						}
 						
 						if(j != 0){
 							out = out + "\n";
@@ -313,10 +343,10 @@ $(document).ready(function(){
 					"gpioPUPDR": registerC(x.find('.cSel').find('select').val()+"-> PUPDR"),
 					"gpioODR": registerC(x.find('.cSel').find('select').val()+"-> ODR"),
 					"gpioIDR": readC(x.find('.cSel').find('select').val()+" -> IDR"),
-					"tim1S": setC("TIM1")
+					"timxS": setC(x.find('.cTIMS').val())
 				};
 
-  				$('#compiledT > textarea').val($('#compiledT > textarea').val() + cDict[codeList.children[i].id] + '\n')
+  				$('#compiledT > textarea').val($('#compiledT > textarea').val() + cDict[codeList.children[i].id] + '\n');
 			}
 		}
 		else if($('#lang').val() == 'ASM'){
@@ -392,15 +422,19 @@ $(document).ready(function(){
 					if(rType == "Register"){
 						x.find('.cBit').hide();
 					}
+
 					else if(rType == "Bit Value"){
 						x.find('.cBit').show();
 					}
+
 					if(rType == "Register"){
 						return "ldr "+r0+", ="+sysName+"\nldr "+r0+", ["+r0+", #"+rName+"]";
 					}
+
 					else if(rType == "Bit Value" && r0 != r1){
 						return "ldr "+r1+", ="+rName+"\nadds "+r1+", "+r1+", #"+x.find('.cBit').val().split(' ')[1]+"\nldr "+r0+", ="+sysName+"\nldrb "+r0+", ["+r0+", #"+r1+"]";
 					}
+
 					else{
 						return "// No selection made. Make sure you have selected two different registers."
 					}
@@ -410,21 +444,53 @@ $(document).ready(function(){
 					var r0 = x.find('.cR').find('select').eq(0).val();
 					var r1 = x.find('.cR').find('select').eq(1).val();
 					var out = "";		
+					
+					const timx_reg = {
+						"dummy": ["CNT","PSC","ARR","CCR1","CCR2","CCR3","CCR4","DMAR"],
+						"TIM1": [1, 1, 1, 1, 1, 1, 1, 1],
+						"TIM2": [1, 1, 1, 1, 1, 1, 1, 1],
+						"TIM3": [1, 1, 1, 1, 1, 1, 1, 1],
+						"TIM6": [1, 1, 1, 0, 0, 0, 0, 0],
+						"TIM7": [1, 1, 1, 0, 0, 0, 0, 0],
+						"TIM14": [1, 1, 1, 1, 0, 0, 0, 0],
+						"TIM15": [1, 1, 1, 1, 1, 0, 0, 1],
+						"TIM16": [1, 1, 1, 1, 0, 0, 0, 1],
+						"TIM17": [1, 1, 1, 1, 0, 0, 0, 1]
+					};
+					const timx_ind = {
+						"CNT": 0,
+						"PSC": 1,
+						"ARR": 2,
+						"CCR1": 3,
+						"CCR2": 4,
+						"CCR3": 5,
+						"CCR4": 6,
+						"DMAR": 7
+					}
 
 					for (j = 0; j < x.find('input').length; j++){
 						var val = x.find('input').eq(j).val();
 						var rName = x.find('input').eq(j).attr('name');
-						
-						if(j != 0){
-							out = out + "\n";
-						}
-
-						if(val != "" && r0 != r1){
-							out = out + "ldr "+r0+", =0x"+parseInt(val).toString(16)+"\nldr "+r1+", ="+sysName+"\nstr "+r0+", ["+r1+", #"+rName+"]";
+						var tim = x.find('.cTIMS').val();
+		
+						if(timx_reg[tim][timx_ind[rName]] == 0){
+							x.find('input[name="'+rName+'"]').parent().parent().hide();
 						}
 						else{
-							out = out + "// No "+rName+" selection made. Make sure you have selected two different registers."
+							x.find('input[name="'+rName+'"]').parent().parent().show();
+							if(j != 0){
+								out = out + "\n";
+							}
+
+							if(val != "" && r0 != r1){
+								out = out + "ldr "+r0+", =0x"+parseInt(val).toString(16)+"\nldr "+r1+", ="+sysName+"\nstr "+r0+", ["+r1+", #"+rName+"]";
+							}
+							else{
+								out = out + "// No "+rName+" selection made. Make sure you have selected two different registers."
+							}
 						}
+
+						
 					}
 					
 					return out;
@@ -439,7 +505,7 @@ $(document).ready(function(){
 					"gpioPUPDR": registerASM(x.find('.cSel').find('select').val(),"PUPDR"),
 					"gpioODR": registerASM(x.find('.cSel').find('select').val(),"ODR"),
 					"gpioIDR": readASM(x.find('.cSel').find('select').val(),"IDR"),
-					"tim1S": setASM("TIM1")
+					"timxS": setASM(x.find('.cTIMS').val())
 				};
 
   				$('#compiledT > textarea').val($('#compiledT > textarea').val() + asmDict[codeList.children[i].id] + '\n')
@@ -459,7 +525,7 @@ $(document).ready(function(){
   		characterData: true
 	};
 
-	$('#codeC').find('textarea').bind('input propertychange', function() {
+	/*$('#codeC').find('textarea').bind('input propertychange', function() {
 		update();
 	});
 	
@@ -469,7 +535,7 @@ $(document).ready(function(){
 
 	$('#codeC').find('input').bind('input propertychange', function() {
 		update();
-	});
+	});*/
 
 	$('#lang').bind('input propertychange', function() {
 		update();
@@ -478,5 +544,52 @@ $(document).ready(function(){
 		$('#codeC').find('.c').css('margin-top','0px');
 	});
 
+	$('.cType').change(function() {
+		if($('.cType').find('select').val() == "Register"){
+			$('.cBit').hide();
+		}
+		else{
+			$('.cBit').show();
+		}
+		
+	});
+
+	$('.cTIMS').change(function() {
+		const timx_reg = {
+			"dummy": ["CNT","PSC","ARR","CCR1","CCR2","CCR3","CCR4","DMAR"],
+			"TIM1": [1, 1, 1, 1, 1, 1, 1, 1],
+			"TIM2": [1, 1, 1, 1, 1, 1, 1, 1],
+			"TIM3": [1, 1, 1, 1, 1, 1, 1, 1],
+			"TIM6": [1, 1, 1, 0, 0, 0, 0, 0],
+			"TIM7": [1, 1, 1, 0, 0, 0, 0, 0],
+			"TIM14": [1, 1, 1, 1, 0, 0, 0, 0],
+			"TIM15": [1, 1, 1, 1, 1, 0, 0, 1],
+			"TIM16": [1, 1, 1, 1, 0, 0, 0, 1],
+			"TIM17": [1, 1, 1, 1, 0, 0, 0, 1]
+		};
+
+		const timx_ind = {
+			"CNT": 0,
+			"PSC": 1,
+			"ARR": 2,
+			"CCR1": 3,
+			"CCR2": 4,
+			"CCR3": 5,
+			"CCR4": 6,
+			"DMAR": 7
+		}
+
+		var tim = $('.cTIMS').val();
+		for (j = 0; j < $('#timxS').find('input').length; j++){
+			var rName = $('#timxS').find('input').eq(j).attr('name');
+			if(timx_reg[tim][timx_ind[rName]] == 0){
+				$('#timxS').find('input[name="'+rName+'"]').parent().parent().hide();
+			}
+			else{
+				$('#timxS').find('input[name="'+rName+'"]').parent().parent().show();
+			}
+		}
+	});
+
 	observer.observe($('#codeC').get(0), config);
-});
+});i
