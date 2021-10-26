@@ -227,6 +227,11 @@
 	margin-top: 200vh;
 }
 
+#slide3{
+	margin-top: 300vh;
+}
+
+
 .trackSlide{
 	cursor: pointer;
 	position: absolute;

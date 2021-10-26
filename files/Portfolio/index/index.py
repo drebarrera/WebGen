@@ -53,6 +53,7 @@ slide2Text2 = mx.T()
 slide2Textbox3 = mx.C()
 slide2Title3 = mx.T()
 slide2Text3 = mx.T()
+slide3 = mx.C()
 
 
 ### CONTENT ###
@@ -66,7 +67,7 @@ center.content = [main, alert]
 alert.content = [alertText]
 
 # Main
-main.content = [slide1, slide2, mainLayer0]
+main.content = [slide1, slide2, slide3, mainLayer0]
 
 # Main Layer 0
 mainLayer0.content = [trackRedMain, trackBlueMain, trackYellowMain, trackPurpleMain, trainRedMain, trainBlueMain, trainYellowMain, trainPurpleMain, trackLabelMain,  mainLayerZ, mainClouds, mainText]
@@ -79,7 +80,7 @@ mainInstructions.content = 'Welcome! Choose a track and then press <span style="
 slide1.content = [trackMergeAll, slide1Textbox]
 slide1Textbox.content = [slide1Title, slide1Image, slide1Text, slide1ContactA, slide1ResumeA]
 slide1Title.content = 'hello world.'
-slide1Text.content = 'My name is Andrés Barrera, but you can call me Dre. I am a Computer Engineering senior at <a href="https://www.purdue.edu" target="_blank" class="textLink">Purdue University</a>. With a background in <span class="pseudoLink">Multidisciplinary Engineering</span>, <span class="pseudoLink">UI/UX</span>, and <span class="pseudoLink">Business Development</span>, I am much more than just a Computer Engineer.<br><br><span style="font-weight: 500;text-align: center; width:100%; display: block;">I am an ambitious creator.</span>'
+slide1Text.content = 'My name is Andr&eacute;s Barrera, but you can call me Dre. I am a Computer Engineering senior at <a href="https://www.purdue.edu" target="_blank" class="textLink">Purdue University</a>. With a background in <span class="pseudoLink">Multidisciplinary Engineering</span>, <span class="pseudoLink">UI/UX</span>, and <span class="pseudoLink">Business Development</span>, I am much more than just a Computer Engineer.<br><br><span style="font-weight: 500;text-align: center; width:100%; display: block;">I am an ambitious creator.</span>'
 slide1ResumeA.content = [slide1ResumeT]
 slide1ResumeT.content = 'My Resume'
 slide1ContactA.content = [slide1ContactT]
@@ -221,3 +222,8 @@ slide2Title3.type = 'h6'
 slide2Title3.color = '#ffba00'
 slide2Title3.cl = 'slideTitle'
 slide2Text3.cl = 'slideText'
+
+# Slide 3
+#slide2.background_color = '#fefefe'
+slide3.id = 'slide3'
+slide3.cl = 'slide'
