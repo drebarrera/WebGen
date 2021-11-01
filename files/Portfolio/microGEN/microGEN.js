@@ -33,9 +33,12 @@ $(document).ready(function(){
 
 	$("#commandC").on("click", ".ctriangle", function() {
 		prevHeight = $(this).parent().height();
+		$(this).parent().css('height', '1.5vh');
+		compHeight = $(this).parent().height();
 		$(this).parent().css('height', 'auto');
 		autoHeight = $(this).parent().height();
-		if(Math.floor(prevHeight) != Math.floor(autoHeight)){
+		
+		if(Math.floor(prevHeight) < Math.floor(autoHeight)-10){
 			$(this).parent().css('height', '1.5vh');
 			$(this).parent().animate({
 				height: autoHeight,
@@ -72,7 +75,7 @@ $(document).ready(function(){
 		prevHeight = $(this).parent().height();
 		$(this).parent().css('height', 'auto');
 		autoHeight = $(this).parent().height();
-		if(Math.floor(prevHeight) != Math.floor(autoHeight)){
+		if(Math.floor(prevHeight) < Math.floor(autoHeight) - 10){
 			$(this).parent().css('height', '1.5vh');
 			$(this).parent().animate({
 				height: autoHeight,
