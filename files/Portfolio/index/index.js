@@ -1,12 +1,11 @@
 $(document).ready(function(){
 	/// Globals and Initials ///
-	const trackTypes = [[0,0,0],[3,3,3],[1,1,1]]; // List of track types per slide
+	const trackTypes = [[0,0,0],[3,3,3],[1,1,1],[1,2,2],[1,1,1],[1,2,2],[1,1,1],[1,2,2]]; // List of track types per slide
 	var trackQueue = [0,0,0]; // Determines which tracks have been temporarily selected
 	let track = 0; // Track Color Chosen
 	let go = 1; // Cloud Enable
 	var scrollCoeff = 0; // Scroll Location
 	var slideHoverEN = 1; // Enable Hover Changes for Slide Text
-	$('html, body').scrollTop(0); // Reset Scroll Position
 	$(window).scrollTop(0) // Reset Scroll Position
 	$('body').css('overflow-y', 'hidden'); // Hide Overflow
 	const equals = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -215,7 +214,7 @@ $(document).ready(function(){
 	$('.trackSlide').click(function(){
 		var winHeight = jQuery(window).height();
 		var trackID = $(this).attr('id');
-		var hoverIndex = {'redTrack': 0, 'blueTrack':1, 'yellowTrack':2,'trackMergeAll': 3};	
+		var hoverIndex = {'redTrack': 0, 'blueTrack':1, 'yellowTrack':2,'trackMergeAll': 3, 'trackMergeBY':1};	
 		var trackColor = {0: 'Red', 1: 'Blue', 2: 'Yellow'};
 		
 		if (hoverIndex[trackID] != 3){
@@ -255,7 +254,7 @@ $(document).ready(function(){
 	$('.trackSlide').hover(function(){
 		if(slideHoverEN){
 			var trackID = $(this).attr('id');
-			var hoverIndex = {'redTrack': 0, 'blueTrack':1, 'yellowTrack':2,'trackMergeAll': 3};	
+			var hoverIndex = {'redTrack': 0, 'blueTrack':1, 'yellowTrack':2,'trackMergeAll': 3,'trackMergeBY':1};	
 			var trackColor = {0: 'Red', 1: 'Blue', 2: 'Yellow'};
 			$('#slide'+scrollCoeff+'Textbox'+trackColor[track - 1]).hide();
 			
@@ -269,7 +268,7 @@ $(document).ready(function(){
 	$('.trackSlide').mouseout(function(){
 		if(slideHoverEN){
 			var trackID = $(this).attr('id');
-			var hoverIndex = {'redTrack': 0, 'blueTrack':1, 'yellowTrack':2,'trackMergeAll': 3};	
+			var hoverIndex = {'redTrack': 0, 'blueTrack':1, 'yellowTrack':2,'trackMergeAll': 3, 'trackMergeBY':1};	
 			var trackColor = {0: 'Red', 1: 'Blue', 2: 'Yellow'};
 			$('#slide'+scrollCoeff+'Textbox'+trackColor[hoverIndex[trackID]]).hide();
 			document.getElementById('slide'+scrollCoeff+'Textbox'+trackColor[hoverIndex[trackID]]).style.opacity = "0";
@@ -299,7 +298,7 @@ $(document).ready(function(){
 			if(track == 1 && trackTypes[ind][0] == 1){
 				return 'Red';
 			}
-			else if(track == 2 && trackTypes[ind][1] == 1){
+			else if(track == 2 && trackTypes[ind][1] == 1 || trackTypes[ind][1] == 2){
 				return 'Blue';
 			}
 			else if(track == 3 && trackTypes[ind][2] == 1){
@@ -386,3 +385,7 @@ function resize(){
 }
 
 window.onresize = resize;
+
+$(window).on('beforeunload', function() {
+   $(window).scrollTop(0);
+});

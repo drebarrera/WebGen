@@ -231,6 +231,21 @@
 	margin-top: 300vh;
 }
 
+#slide4{
+	margin-top: 400vh;
+}
+
+#slide5{
+	margin-top: 500vh;
+}
+
+#slide6{
+	margin-top: 600vh;
+}
+
+#slide7{
+	margin-top: 700vh;
+}
 
 .trackSlide{
 	cursor: pointer;
