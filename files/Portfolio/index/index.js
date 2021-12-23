@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	window.resizeTo(500, 500);
 	/// Globals and Initials ///
 	const trackTypes = [[0,0,0],[3,3,3],[1,1,1],[1,2,2],[1,1,1],[1,2,2],[1,1,1],[1,2,2]]; // List of track types per slide
 	var trackQueue = [0,0,0]; // Determines which tracks have been temporarily selected
@@ -366,9 +367,8 @@ $(document).ready(function(){
 						}, 800);	
 					});
 					setTimeout(function(){
-						scrollReady = 1; 
-						if(scrollCoeff == 1){
-							scrollReady = 1;
+						if(scrollCoeff != 0){
+							scrollReady = 1; 
 							$('body').css('overflow-y', 'visible');
 						}
 					}, readySpeed);
