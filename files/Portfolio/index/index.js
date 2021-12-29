@@ -10,6 +10,8 @@ $(document).ready(function(){
 	$(window).scrollTop(0) // Reset Scroll Position
 	$('body').css('overflow-y', 'hidden'); // Hide Overflow
 	const equals = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+	$('#slideScrollMsg').hide();
+	$('#contactFloat').hide();
 
 	/// Custom Alert Generation ///
 	function alert(msg){
@@ -199,12 +201,12 @@ $(document).ready(function(){
 		}
 		else if(track == 4){
 			go = 0;
-			$('body').css('overflow-y', 'visible');
+			$('body').css('overflow-y', 'hidden');
 			$('#trainPurpleMain').animate({
 				top: "70vh"
 			},1000 );
 			$('#mainLayer0').animate({
-				left: "-100%"
+				left: "-105%"
 			},1200, function(){
 				$('#trainPurpleMain').css("margin-top","-100vh");
 			});
@@ -293,7 +295,7 @@ $(document).ready(function(){
 	jQuery(window).scroll(function(event){
 		var winHeight = jQuery(window).height();
 		var scrollTop = jQuery(this).scrollTop();
-		var scrollDirection = lastScrollTop - scrollTop;		
+		var scrollDirection = lastScrollTop - scrollTop;	
 		$('body').delay(2).css('overflow-y', 'hidden');
 		function trackColor(ind){
 			if(track == 1 && trackTypes[ind][0] == 1){
@@ -309,6 +311,7 @@ $(document).ready(function(){
 				return '';
 			}
 		}
+		//alert("scroll!");
 		if (scrollDirection < 0){
 			if (scrollReady == 1) {
 				scrollCoeff = scrollCoeff + 1;
@@ -317,10 +320,12 @@ $(document).ready(function(){
 				trackQueue[track - 1] = 1;
 				$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).css('display','block');
 				setTimeout(function(){
+					$('#slideScrollMsg').fadeOut(500);
+					$('#contactFloat').hide();
 					$('#slide'+(scrollCoeff-1)+'Textbox'+trackColor(scrollCoeff-1)).animate({
 						top: "5vh",
 						opacity: 0
-					}, 800);	
+					}, 800);
 					jQuery("html, body").delay(800).animate({ scrollTop: winHeight * scrollCoeff + "px" }, animationSpeed, function(){
 						$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).delay(200).animate({
 							top: "0vh",
@@ -344,6 +349,8 @@ $(document).ready(function(){
 					});
 					setTimeout(function(){
 						scrollReady = 1;
+						$('#slideScrollMsg').fadeIn(500);
+						$('#contactFloat').show();
 						$('body').css('overflow-y', 'visible');
 					}, readySpeed);
 				}, 100);
@@ -355,6 +362,8 @@ $(document).ready(function(){
 				scrollReady = 0;
 				$('#header').hide(1000);
 				setTimeout(function(){
+					$('#slideScrollMsg').fadeOut(500);
+					$('#contactFloat').hide();
 					$('#slide'+(scrollCoeff + 1)+'Textbox'+trackColor(scrollCoeff+1)).animate({
 						top: "5vh",
 						opacity: 0
@@ -364,11 +373,13 @@ $(document).ready(function(){
 						$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).animate({
 							top: "0vh",
 							opacity: 1
-						}, 800);	
+						}, 800);
 					});
 					setTimeout(function(){
 						if(scrollCoeff != 0){
 							scrollReady = 1; 
+							$('#slideScrollMsg').fadeIn(500);
+							$('#contactFloat').show();
 							$('body').css('overflow-y', 'visible');
 						}
 					}, readySpeed);
@@ -377,6 +388,88 @@ $(document).ready(function(){
 		}
 		lastScrollTop = scrollTop;
 	});
+
+	function scrollBy(newCoeff, trackSelect){
+		if (scrollReady == 1) {
+			var winHeight = jQuery(window).height();
+			scrollCoeff = scrollCoeff;
+			scrollReady = 0;
+			track = trackSelect;
+			trackQueue = [0,0,0];
+			trackQueue[track - 1] = 1;
+			function trackColor(ind){
+				if(track == 1 && trackTypes[ind][0] == 1){
+					return 'Red';
+				}
+				else if(track == 2 && trackTypes[ind][1] == 1 || trackTypes[ind][1] == 2){
+					return 'Blue';
+				}
+				else if(track == 3 && trackTypes[ind][2] == 1){
+					return 'Yellow';
+				}
+				else{
+					return '';
+				}
+			}
+			$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).css('display','block');
+			setTimeout(function(){
+				$('#slideScrollMsg').fadeOut(500);
+				$('#contactFloat').hide();
+				$('#slide'+(scrollCoeff)+'Textbox'+trackColor(scrollCoeff)).animate({
+					top: "5vh",
+					opacity: 0
+				}, 800);
+				jQuery("html, body").delay(800).animate({ scrollTop: winHeight * newCoeff + "px" }, animationSpeed, function(){
+					scrollCoeff = newCoeff;
+					$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).show();
+					$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).delay(200).animate({
+						top: "0vh",
+						opacity: 1
+					}, 800);	
+					if(track == 1){
+						$('#trainRedMain').animate({
+							top: winHeight * scrollCoeff + winHeight * 0.25								},1000);
+					}
+					if(track == 2){
+						$('#trainBlueMain').animate({
+							top: winHeight * scrollCoeff + winHeight * 0.25
+						},1000);
+					}
+					if(track == 3){
+						$('#trainYellowMain').animate({
+							top: winHeight * scrollCoeff + winHeight * 0.25
+						},1000);
+					}
+				});
+				setTimeout(function(){													scrollReady = 1;
+					if(newCoeff != 0){
+						$('#slideScrollMsg').fadeIn(500);
+						$('#contactFloat').show();
+						$('body').css('overflow-y', 'visible');
+					}
+				}, readySpeed);
+			}, 100);
+		}
+	}
+
+	$('.bookmark').click(function(){
+		scrollBy(parseInt($(this).attr("data-slide")),parseInt($(this).attr("data-track")));
+	});
+
+	function bounce(){
+		$('#contactFloat').animate({
+			top: "-=0.5vh"
+		}, 750, function(){
+			$('#contactFloat').animate({
+				top: "+=0.5vh"
+			}, 750);
+		});
+		setTimeout(function(){
+			bounce();
+		}, 1500);
+	}
+
+	bounce();
 });
 
 /// Resize Event ///
@@ -387,5 +480,5 @@ function resize(){
 window.onresize = resize;
 
 $(window).on('beforeunload', function() {
-   $(window).scrollTop(0);
+	$(window).scrollTop(0);
 });

@@ -1,3 +1,20 @@
+#contactFloat{
+	top: 90vh;
+	display: block;
+	margin-left: 10vh;
+	position: fixed;
+	z-index: 100;
+}
+
+#slideScrollMsg{
+	font-size: 3vh;
+	margin-top: 92vh;
+	display: block;
+	width: 90vw;
+	text-align: right;
+	position: fixed;
+}
+
 #alert{
 	width: 450px;
 	height: auto;
@@ -239,6 +256,11 @@
 	margin-top: 400vh;
 }
 
+#slide4TextboxRed{
+	background-image: url("images/green.jpg");
+	padding: 5vh;
+}
+
 #slide5{
 	margin-top: 500vh;
 }
@@ -261,8 +283,22 @@
 	margin-top: 600vh;
 }
 
+#slide6Map{
+	width: 100%;
+	height: calc(100vh * 300 / 768);
+}
+
 #slide7{
 	margin-top: 700vh;
+}
+
+#musicSlide{
+	height: 100vh;
+	width: 100vw;
+	margin-left: 50vw;
+	display: block;
+	position: relative;
+	margin-top: 0;
 }
 
 .trackSlide{
@@ -281,7 +317,7 @@
 	height: calc(100vh * 500 / 768);
 	position: absolute;
 	margin-left: 45%;
-	margin-top: 17vh;
+	margin-top: 10vh;
 	display: block;
 	opacity: 0;
 	display: none;
@@ -364,6 +400,7 @@
 	text-decoration: none;
 	font-size: 1.75vh;
 	margin: 1vh;
+	margin-left: 20vh;
 }
 
 .slideButton1 > p{
@@ -402,4 +439,31 @@
 .slideButton2:hover{
 	background-color: #ff5938;
 	color: white;
+}
+
+.slideButton3{
+	position: relative;
+	display: inline-block;
+	padding-left: 3%;
+	padding-right: 3%;
+	padding: 1.25vh;
+	border-radius: 1vh;
+	cursor: pointer;
+	background-color: #ff5938;
+	border: 2px solid #ff5938;
+	color: white;
+	text-decoration: none;
+	font-size: 1.75vh;
+	margin: 1vh;
+	float: right;
+}
+
+.slideButton3 > p{
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+}
+
+.slideButton3:hover{
+	background-color: white;
+	color: #ff5938;
 }

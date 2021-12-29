@@ -38,6 +38,9 @@ blueTrack = mx.Image()
 yellowTrack = mx.Image()
 trackMergeBY = mx.Image()
 trackMergeBYEOL = mx.Image()
+slideScrollMsg = mx.T()
+contactA = mx.Link()
+contactT = mx.T()
 slide1 = mx.C()
 slide1Textbox = mx.C()
 slide1Title = mx.T()
@@ -94,26 +97,37 @@ slide6Text2 = mx.T()
 slide6Textbox3 = mx.C()
 slide6Title3 = mx.T()
 slide6Text3 = mx.T()
+slide6Map = mx.X()
 slide7 = mx.C()
 slide7Textbox1 = mx.C()
 slide7Title1 = mx.T()
 slide7Text1 = mx.T()
+slide7TopA = mx.C()
+slide7TopT = mx.T()
 slide7Textbox2 = mx.C()
 slide7Title2 = mx.T()
 slide7Text2 = mx.T()
+musicSlide = mx.X()
 
 ### CONTENT ###
 # Body
-body.content = [center]
+body.content = [center, contactA, slideScrollMsg]
 
 # Center
 center.content = [main, alert]
+
+# contact
+contactA.content = [contactT]
+contactT.content = 'Contact Me'
+
+# slideScrollMsg
+slideScrollMsg.content = 'SCROLL TO NAVIGATE THE PAGE.'
 
 # Alert
 alert.content = [alertText]
 
 # Main
-main.content = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, mainLayer0]
+main.content = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, musicSlide, mainLayer0]
 
 # Main Layer 0
 mainLayer0.content = [trackRedMain, trackBlueMain, trackYellowMain, trackPurpleMain, trainRedMain, trainBlueMain, trainYellowMain, trainPurpleMain, trackLabelMain,  mainLayerZ, mainClouds, mainText]
@@ -126,7 +140,7 @@ mainInstructions.content = 'Welcome! Choose a track and then press <span style="
 slide1.content = [trackMergeAll, slide1Textbox]
 slide1Textbox.content = [slide1Title, slide1Image, slide1Text, slide1ContactA, slide1ResumeA]
 slide1Title.content = 'hello world.'
-slide1Text.content = 'My name is Andr&eacute;s Barrera, but you can call me Dre. I am a <span class="pseudoLink">Computer Engineering</span> senior at <a href="https://www.purdue.edu" target="_blank" class="textLink">Purdue University</a>. With a background in <span class="pseudoLink">Multidisciplinary Engineering</span>, <span class="pseudoLink">UI/UX</span>, and <span class="pseudoLink">Business Development</span>, I am much more than just a Computer Engineer.<br><br><span style="font-weight: 500;text-align: center; width:100%; display: block;">I am an ambitious creator.</span>'
+slide1Text.content = 'My name is Andr&eacute;s Barrera, but you can call me Dre. I am a <class="pseudoLink bookmark" data-slide="2" data-track = "2">Computer Engineering</span> senior at <a href="https://www.purdue.edu" target="_blank" class="textLink">Purdue University</a>. With a background in <span class="pseudoLink bookmark" data-slide="6" data-track = "2">Multidisciplinary Engineering</span>, <span class="pseudoLink bookmark" data-slide="3" data-track = "3">UI/UX</span>, and <span class="pseudoLink bookmark" data-slide="5" data-track = "2">Business Development</span>, I am much more than just a Computer Engineer.<br><br><span style="font-weight: 500;text-align: center; width:100%; display: block;">I am an ambitious creator.</span>'
 slide1ResumeA.content = [slide1ResumeT]
 slide1ResumeT.content = 'My Resume'
 slide1ContactA.content = [slide1ContactT]
@@ -139,7 +153,7 @@ slide2Title1.content = 'My Skills'
 slide2Text1.content = 'My skills are not confined to my field or degree, but are the culmination of my experiences. I am very ambitious - almost to a fault. Having graduated high school at 16, I have always found myself to be the youngest in the room. But through perserverance, trial and error, and continuous learning, I grow everyday.<br><br><span style="margin-left:30px;"><span style="font-weight: 500; font-size: 2.75vh;">What I Bring to the Team</span><ul style="color: #005580; text-align: left; margin-left: 75px;font-weight: 300; font-size: 2.5vh;line-height: 1.2;margin-top: 1vh;"><li>Ambitious Undertaker</li><li>Goal Setter / Self Starter</li><li>Natural Leader</li><li>Diligent Organizer</li><li>Jack of All Trades</li></ul></span>'
 slide2Textbox2.content = [slide2Title2, slide2Text2,slide2CurrA]
 slide2Title2.content = 'Circuit Design'
-slide2Text2.content = 'As a Computer Engineer, I have been formally trained to understand the fundamentals of electricity, analog and digial hardware design, and the connection between the physical and digital world. I have applied my skills in this field to a number of projects, both in an educational and professional landscape.<br><br><span style="font-weight: 500; font-size: 2.75vh;">Circuit Design Projects</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>Geoamperic Interpreter (Device / PCB Design and Industrial Application, 2021)</li><li>Optical Heart Rate Sensor Design (Device / Circuit Design With Analog and Digital Output, 2021)</li></ul><br><span style="font-weight: 500; font-size: 2.75vh; text-align: left;width: 100%;margin-left: 25px;">Related Coursework</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh; margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;margin-left: 25px;"><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=725&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE - Electrical Engineering Fundamentals I and II</a></li><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=607&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE 270 - Introduction to Digital Logic Design</a></li><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=612&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE 362 - Microprocessor Systems and Interfacing</a></li></ul>'
+slide2Text2.content = 'As a Computer Engineer, I have been formally trained to understand the fundamentals of electricity, analog and digial hardware design, and the connection between the physical and digital world. I have applied my skills in this field to a number of projects, both in an educational and professional landscape.<br><br><span style="font-weight: 500; font-size: 2.75vh;">Circuit Design Projects</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>Digital WAV Player Design (Device / PCB Design and Microcontroller Programming, 2021)</li><li>Geoamperic Interpreter (Device / PCB Design and Industrial Application, 2021)</li><li>Optical Heart Rate Sensor Design (Device / Circuit Design With Analog and Digital Output, 2021)</li></ul><br><span style="font-weight: 500; font-size: 2.75vh; text-align: left;width: 100%;margin-left: 25px;">Related Coursework</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh; margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;margin-left: 25px;"><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=725&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE - Electrical Engineering Fundamentals I and II</a></li><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=607&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE 270 - Introduction to Digital Logic Design</a></li><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=612&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE 362 - Microprocessor Systems and Interfacing</a></li></ul>'
 slide2CurrA.content = [slide2CurrT]
 slide2CurrT.content = 'Full Curriculum'
 slide2Textbox3.content = [slide2Title3, slide2Text3]
@@ -150,10 +164,10 @@ slide2Text3.content = 'For the last eight years, I have honed my visual design s
 slide3.content = [redTrack2, trackMergeBY, slide3Textbox1,slide3Textbox2]
 slide3Textbox1.content = [slide3Title1,slide3Text1]
 slide3Title1.content = 'My Curiosity'
-slide3Text1.content = 'Upon writing this, I was initially going to call this section of my portfolio "My Interests". But I thought that "My Curiosity" is a much more fitting title, as a curiosity expresses one&#39s eagerness to learn and explore.<br><br>I am curious of just about everything. You will often find me <span class="pseudoLink">creating something innovative or new</span>, <span class="pseudoLink">speaking a new language</span>, or <span class="pseudoLink">analyzing the world around me and my place within it</span>. These are pretty broad topics, so here is a list of some of my more specific passions:<br><ol style="color: #005580; text-align: left; margin-left: 75px;font-weight: 300; font-size: 2.5vh;line-height: 1.2;margin-top: 1vh;"><li>Writing and Producing Music</li><li>Green Engineering Paper</li><li>Organizing and Optimizing</li><li>Warm Espresso</li><li>Project Management</li><li>Summiting Mountains</li><li>Exploring New Cities</li></ol></span>'
+slide3Text1.content = 'Upon writing this, I was initially going to call this section of my portfolio "My Interests". But I thought that "My Curiosity" is a much more fitting title, as a curiosity expresses one&#39s eagerness to learn and explore.<br><br>I am curious of just about everything. You will often find me <span class="pseudoLink bookmark" data-slide="4" data-track = "1">creating something innovative or new</span>, <span class="pseudoLink bookmark" data-slide="6" data-track = "1">speaking a new language</span>, or <span class="pseudoLink bookmark" data-slide="5" data-track = "1">analyzing the world around me and my place within it</span>. These are pretty broad topics, so here is a list of some of my more specific passions:<br><ol style="color: #005580; text-align: left; margin-left: 75px;font-weight: 300; font-size: 2.5vh;line-height: 1.2;margin-top: 1vh;"><li>Writing and Producing Music</li><li>Green Engineering Paper</li><li>Organizing and Optimizing</li><li>Warm Espresso</li><li>Project Management</li><li>Summiting Mountains</li><li>Exploring New Cities</li></ol></span>'
 slide3Textbox2.content = [slide3Title2,slide3Text2]
 slide3Title2.content = 'UI/UX Design'
-slide3Text2.content = 'Whether a software or hardware design problem, I am always excited to put my User Interface and User Experience skills to the test. For the last nine years, I have worked to develop my UI skills with website and product design. When it comes to UX, I am very keen to gather data and analyze the user mindset.<br>A list of my most recent UI/UX projects can be found below:'
+slide3Text2.content = 'Whether a software or hardware design problem, I am always excited to put my User Interface and User Experience skills to the test. For the last nine years, I have worked to develop my UI skills with website and product design. When it comes to UX, I am very keen to gather data and analyze the user mindset.<br>A list of my most recent UI/UX projects can be found below:<br><br><span style="font-weight: 500; font-size: 2.75vh;">UI/UX Projects</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>microGEN - Microcontroller Programming Interface (User Interface / Microcontrollers, 2021)</li><li>Alpen Aerial Company Website Design (Website Design, 2021)</li><li>Aesthetic Brand Design Partnership For Shopify Store Transfer (Data Collection / Website Design, 2021)</li></ul>'
 
 # Slide 4
 slide4.content = [redTrack, blueTrack, yellowTrack, slide4Textbox1, slide4Textbox2, slide4Textbox3]
@@ -162,7 +176,7 @@ slide4Title1.content = 'My Creative Process'
 slide4Text1.content = '<em>My creative process usually starts with a sheet of green engineering paper and a mug of warm green tea.</em><br><br>Whether an engineering project, business plan, or new art piece, I always have a vision in mind and start with a <a href="" target="_blank" class="textLink">brainstorming session</a>. These sessions can occupy hours, but ultimately outline the features I hope to create. These features are then expanded upon with rough drafts and research. This step of my process often includes the implementation of code, data processing, and <a href="" target="_blank" class="textLink">lots of typed formal documents</a>. I am very organized and like having documentation of my development. After lots of drafts and incremental tests, I typically conclude my project with a <a href="" target="_blank" class="textLink">final product paired with firm documentation of the outcome</a>. Every project is different and many are monitored for effectiveness.'
 slide4Textbox2.content = [slide4Title2, slide4Text2]
 slide4Title2.content = 'Data Processing and Algorithms'
-slide4Text2.content = 'I am very fond of using data to ...'
+slide4Text2.content = 'One of my skills is my ability to use code to analyze complex data. Whether developing graphs for analysis with a simple program like Excel or applying algorithms to produce results with runtime and memory efficiency, I am excited to put my data solving to the test.'
 slide4Textbox3.content = [slide4Title3, slide4Text3]
 slide4Title3.content = 'Music Production'
 slide4Text3.content = 'Ever I was three years old, music has perpetuated my life...'
@@ -178,11 +192,12 @@ slide5Text2.content = 'I am an entrepeneur by heart. With technical training fro
 
 # Slide 6
 slide6.content = [redTrack, blueTrack, yellowTrack, slide6Textbox1, slide6Textbox2, slide6Textbox3]
-slide6Textbox1.content = [slide6Title1, slide6Text1]
+slide6Textbox1.content = [slide6Title1, slide6Text1, slide6Map]
 slide6Title1.content = 'My Travels'
-slide6Text1.content = 'I am not your average traveller. When I decide to venture into the unknown, I like to pack light and go where my journey takes me. I often travel to visit art galleries, remote destinations, and locations with new possibilities. The view from the top of a mountain or adrenaline rush of ordering food in a foreign language are experiences which can never be replaced.<br><br>Some of my favorite destinations include: <span style="color:#005580;font-size:2.25vh;">Mao, Dominican Republic; The Catalina Range, Arizona; Tokyo, Japan; Mt. Sherman &#40;14,046 ft&#41;, Colorado; Contemporary Art Museums, Ciudad de Panam&#225;, Panam&#225;</span>'
+slide6Text1.content = 'I am not your average traveller. When I decide to venture into the unknown, I like to pack light and go where my journey takes me. I often travel to visit art galleries, remote destinations, and locations with new possibilities. The view from the top of a mountain or adrenaline rush of ordering food in a foreign language are experiences which can never be replaced.<br><br><!--Some of my favorite destinations include: <span style="color:#005580;font-size:2.25vh;">Mao, Dominican Republic; The Catalina Range, Arizona; Tokyo, Japan; Mt. Sherman &#40;14,046 ft&#41;, Colorado; Contemporary Art Museums, Ciudad de Panam&#225;, Panam&#225;</span>-->'
+slide6Map.content = '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1omavXYyY8ELxH27LAsLj-LePRtYv--RJ&ehbc=2E312F" id="slide6Map"></iframe>'
 slide6Textbox2.content = [slide6Title2, slide6Text2]
-slide6Title2.content = 'Mechanical Engineering and Manufacturing'
+slide6Title2.content = 'Multidisciplinary Engineering'
 slide6Text2.content = 'Experience with MechE...'
 slide6Textbox3.content = [slide6Title3, slide6Text3]
 slide6Title3.content = 'Art and Cinematography'
@@ -190,12 +205,17 @@ slide6Text3.content = 'Ever I was three years old, music has perpetuated my life
 
 # Slide 7
 slide7.content = [redTrackEOL, trackMergeBYEOL, slide7Textbox1,slide7Textbox2]
-slide7Textbox1.content = [slide7Title1,slide7Text1]
+slide7Textbox1.content = [slide7Title1,slide7Text1, slide7TopA]
 slide7Title1.content = 'Why Trains?'
-slide7Text1.content = 'When I was a child...'
+slide7Text1.content = 'Trains are my favorite form of transportation. When I was young, I was fascinated by locomotives. Today, I often take advantage of transcontinental railway and city subways when traveling.<br><br>I find trains to be a great metaphor for life. We choose the stations we wish to stop at and which trains to board to take us to our next destination.'
+slide7TopA.content = [slide7TopT]
+slide7TopT.content = 'Back to Top'
 slide7Textbox2.content = [slide7Title2,slide7Text2]
 slide7Title2.content = 'Computer Aided Design'
 slide7Text2.content = 'Experience with Solidworks...'
+
+# musicSlide
+musicSlide.content = '<iframe src="https://open.spotify.com/embed/artist/3BFGzlgZp1l9E527dWSgEG?utm_source=generator" id="musicSlide" width="100%" height="100vh" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
 
 ### PROPERTIES ###
 # Body
@@ -206,6 +226,17 @@ center.display = 'flex'
 center.justify_content = 'center'
 center.background_color = 'white'
 center.background_color = '#242323'
+
+# contact
+contactA.id = 'contactFloat'
+contactA.cl = 'slideButton3'
+contactA.target = '_blank'
+contactA.src = 'https://www.google.com'
+
+# slideScrollMsg 
+slideScrollMsg.id = 'slideScrollMsg'
+slideScrollMsg.color = '#d8d8d8'
+slideScrollMsg.font_weight = '700'
 
 # Alert
 alert.id = 'alert'
@@ -331,7 +362,7 @@ slide2Title2.color = '#006497'
 slide2Title2.cl = 'slideTitle'
 slide2Text2.cl = 'slideText'
 slide2CurrA.id = 'currLink'
-slide2CurrA.cl = 'slideButton1'
+slide2CurrA.cl = 'slideButton1 centerLink'
 slide2CurrA.target = '_blank'
 slide2CurrA.src = 'https://www.google.com'
 slide2Textbox3.id = 'slide2TextboxYellow'
@@ -445,6 +476,10 @@ slide7Title1.type = 'h6'
 slide7Title1.color = '#ff5938'
 slide7Title1.cl = 'slideTitle'
 slide7Text1.cl = 'slideText'
+slide7TopA.id = 'topLink'
+slide7TopA.background_color = ''
+slide7TopA.cl = 'slideButton1 bookmark'
+slide7TopA.attr = 'data-slide="0" data-track="1"'
 slide7Textbox2.id = 'slide7TextboxBlue'
 slide7Textbox2.cl = 'textboxSlide'
 slide7Textbox2.background_color = ''

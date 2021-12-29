@@ -1,5 +1,5 @@
 import sys
-inadmissible = ["type", "id", "cl", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop"]
+inadmissible = ["type", "id", "cl", "onclick", "onhover", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop"]
 dynamic = ["font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom"]
 
 # Data -> Webpage Header Data
@@ -75,6 +75,9 @@ class C:
         self.name = "container"
         self.id = ""
         self.cl = ""
+        self.onclick = ""
+        self.onhover = ""
+        self.attr = ""
         self.background_color = "lightblue"
         self.overflow_x = "visible"
         self.overflow_y = "visible"
@@ -83,9 +86,11 @@ class C:
     def c(self, inadmissible, dynamic):
         i = ' id="'+self.id+'"' if self.id != "" else ""
         c = ' class="'+self.cl+'"' if self.cl != "" else ""
+        click = ' onclick="'+self.onclick+'"' if self.onclick != "" else ""
+        hover = ' onclick="'+self.onhover+'"' if self.onhover != "" else ""
         content = [i.c(inadmissible, dynamic) for i in self.content]
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<div'+i+c+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(content)+'</div>'
+        return '<div'+i+c+click+hover+self.attr+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(content)+'</div>'
         
 # Table -> Table
 class Table:
