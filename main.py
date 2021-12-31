@@ -32,6 +32,8 @@ def main():
                 exec(cmd)
             elif cmd == "restart":
                 os.execv(sys.executable, ['python'] + sys.argv)
+            elif cmd == "exit":
+                continue
             else:
                 print('Unrecognized command. Type "help" for list of commands.')
         except Exception as exc:
@@ -87,11 +89,11 @@ def f(folder, filename):
         print("-", end="")
         sleep(0.02)
     print("\n")
-    if sys.platform == "win32":
-        subprocess.Popen(["notepad.exe", path+filename+".py"])
-    elif sys.platform == "darwin":
-        subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
-    fedit(folder,filename)
+    #if sys.platform == "win32":
+    #    subprocess.Popen(["notepad.exe", path+filename+".py"])
+    #elif sys.platform == "darwin":
+    #    subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
+    fedit(folder,filename,g)
 
 def gf(folder, filename):
     f(folder, filename+"///")
@@ -100,7 +102,7 @@ def gf(folder, filename):
 def export(folder, destination):
     print('hi')
 
-def fedit(folder,filename):
+def fedit(folder,filename,g):
     path = "files/"+folder+"/"+filename+"/"
     cmd = ""
     modules, descriptions = getModules()
@@ -108,7 +110,7 @@ def fedit(folder,filename):
         try:
             cmd = input(">> ")
             if cmd == "help":
-                print("\tlm -> list modules\n\tmod m -> print the properties of mod m\n\tlgf -> list global files\n\te -> open file editor\n\tcss - > open a CSS document\n\tjs -> open a JavaScript document\n\tfdir -> open file directory\n\tr -> refresh\n\tdel -> delete file\n\texit -> exit file\n\trestart -> restart program\n")
+                print("\tlm -> list modules\n\tmod m -> print the properties of mod m\n\tlgf -> list global files\n\te -> open file editor\n\tcss - > open a CSS document\n\tjs -> open a JavaScript document\n\tfdir -> open file directory\n\tr -> refresh\n\texport(directory_name) -> export compiled file\n\tdel -> delete file\n\texit -> exit file\n\trestart -> restart program\n")
             elif cmd == "lm":
                 for m in descriptions:
                     print("\t"+m)
@@ -120,7 +122,7 @@ def fedit(folder,filename):
                 p = "files/"+folder+"/"
                 if os.path.exists(p+"gf.txt"):
                     gftxt = open(p+"gf.txt",'r')
-                    print([x for x in gftxt.read().split("\n")])
+                    print([x for x in gftxt.read().split("\n") if x != ''])
                     gftxt.close()
             elif cmd == "r":
                 c(folder, filename)
@@ -132,10 +134,16 @@ def fedit(folder,filename):
                 url = "file:///"+str(os.getcwd())+"/"+path
                 webbrowser.open(url, new=0)
             elif cmd == "e":
-                if sys.platform == "win32":
-                    subprocess.Popen(["notepad.exe", path+filename+".py"])
-                elif sys.platform == "darwin":
-                    subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
+                if(g == False):
+                    if sys.platform == "win32":
+                        subprocess.Popen(["notepad.exe", path+filename+".py"])
+                    elif sys.platform == "darwin":
+                        subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
+                else:
+                    if sys.platform == "win32":
+                        subprocess.Popen(["notepad.exe", "files/"+folder+"/"+filename+".py"])
+                    elif sys.platform == "darwin":
+                        subprocess.call(['open', '-a', 'TextEdit', "files/"+folder+"/"+filename+".py"])
             elif cmd == "del":
                 print('Are you sure you want to delete '+filename+'? Type [y] or [n].')
                 sure = input('>> ')
@@ -151,10 +159,38 @@ def fedit(folder,filename):
                     print('Informal response. Files saved.')
             elif cmd == "restart":
                 os.execv(sys.executable, ['python'] + sys.argv)
+            elif re.search("export(.+)", cmd):
+                dest = cmd.replace('export("','').replace('")','')
+                export(dest,folder,filename)
+            elif cmd == "exit":
+                continue
             else:
                 print('Unrecognized command. Type "help" for list of commands.')
         except Exception as exc:
             print('[!!!] {err}'.format(err=exc))
+
+def export(home,folder,filename):
+    path = "files/"+folder+"/"+filename+"/"
+    os.makedirs(home+"\\"+filename)
+    comp.main(folder,filename)
+    f = open(path+"/index.html",'r')
+    fr = open(home+"/"+filename+"/index.html",'w')
+    fr.write(f.read())
+    fr.close()
+    f.close()
+    print('copied index.html')
+    os.makedirs(home+"\\"+filename+"\\images")
+    for file_name in os.listdir(path+"/images"):
+        source = path+"/images/" + file_name
+        destination = home+"\\"+filename+"\\images\\" + file_name
+        shutil.copy(source, destination)
+        print('copied', file_name)
+    prevdir = os.getcwd()
+    os.chdir(home)
+    shutil.make_archive(filename, 'zip', filename)
+    shutil.rmtree(home+"\\"+filename)
+    print('zipped', filename+'.zip')
+    os.chdir(prevdir)
 
 def css(folder, filename):
     path = "files/"+folder+"/"+filename+"/"
@@ -175,6 +211,7 @@ def js(folder, filename):
         subprocess.Popen(["notepad.exe", path+filename+".js"])
     elif sys.platform == "darwin":
         subprocess.call(['open', '-a', 'TextEdit', path+filename+".js"])
+    
 
 def copyrootf(filename, p):
     p = "files/"+p+"/"
