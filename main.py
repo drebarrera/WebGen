@@ -18,7 +18,7 @@ def main():
         try:
             cmd = input(">> ")
             if cmd == "help":
-                print("\tf(folder,filename) -> opens or creates a new webfile\n\tgf(folder,filename) -> creates an importable global file\n\tfdir -> open file directory\n\texit -> exit WebGen\n\texport(folder, destination) -> exports all webpages to an destination\n\trestart -> restart program\n")
+                print("\tf(folder,filename) -> opens or creates a new webfile\n\tgf(folder,filename) -> creates an importable global file\n\tfdir -> open file directory\n\tkill(folder) -> delete a project (folder)\n\texit -> exit WebGen\n\texport(folder, destination) -> exports all webpages to an destination\n\trestart -> restart program\n")
             elif re.search("f(.+,.+)", cmd):
                 exec(cmd)
                 print("\n\n--------------- W E B G E N ---------------")
@@ -29,6 +29,8 @@ def main():
                 url = "file:///"+str(os.getcwd())
                 webbrowser.get().open(url, new=1)
             elif re.search("export(.+,.+)", cmd):
+                exec(cmd)
+            elif re.search("kill(.+)", cmd):
                 exec(cmd)
             elif cmd == "restart":
                 os.execv(sys.executable, ['python'] + sys.argv)
@@ -63,11 +65,10 @@ def f(folder, filename):
         print("creating new file...")
     if not os.path.exists(path+filename+".py"):
         ftxt = open(path+filename+".py", 'a')
-        ftxt.write("import modules as mx\nimport sys\nsys.path.append('"+os.getcwd()+"/"+folder+"')\nfrom prop import *\ninfo = info()\ndata = mx.Data()\nbody = mx.Body()\n")
-        fpropdefault = open('prop_default.txt','r').read()
-        fprop = open(path+"prop.py", 'a')
-        fprop.write(fpropdefault)
-        fprop.close()
+        if g == False:
+            ftxt.write("import modules as mx\nimport sys\nsys.path.append(r'"+os.getcwd()+"\\files\\"+folder+"')\ndata = mx.Data()\nbody = mx.Body()\n")
+        else:
+            ftxt.write("import modules as mx\n")
     else:
         ftxt = open(path+filename+".py", 'a')
     if g == False:
@@ -95,6 +96,24 @@ def f(folder, filename):
     #    subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
     fedit(folder,filename,g)
 
+def kill(folder):
+    print('Are you sure you want to delete '+folder+'? Type [y] or [n].')
+    sure = input('>> ')
+    if sure == 'y':
+        print('Please double confirm [y] or [n]. By confirming you may be deleting multiple pages.')
+        sure = input('>> ')
+        if sure == 'y':
+            shutil.rmtree('files/'+folder)
+            print("Project terminated.")
+        elif sure == 'n':
+            print('Project saved.')
+        else:
+            print('Informal response. Project saved.')
+    elif sure == 'n':
+        print('Project saved.')
+    else:
+        print('Informal response. Project saved.')
+
 def gf(folder, filename):
     f(folder, filename+"///")
     return
@@ -103,7 +122,10 @@ def export(folder, destination):
     print('hi')
 
 def fedit(folder,filename,g):
-    path = "files/"+folder+"/"+filename+"/"
+    if g == True:
+        path = "files/"+folder+"/"
+    else:
+        path = "files/"+folder+"/"+filename+"/"
     cmd = ""
     modules, descriptions = getModules()
     while cmd != "exit":
@@ -125,11 +147,14 @@ def fedit(folder,filename,g):
                     print([x for x in gftxt.read().split("\n") if x != ''])
                     gftxt.close()
             elif cmd == "r":
-                c(folder, filename)
+                if g == True:
+                    print("[!!!] global file cannot be executed.")
+                else:
+                    c(folder, filename)
             elif cmd == "css":
-                css(folder, filename)
+                css(folder, filename, g)
             elif cmd == "js":
-                js(folder, filename)
+                js(folder, filename, g)
             elif cmd == "fdir":
                 url = "file:///"+str(os.getcwd())+"/"+path
                 webbrowser.open(url, new=0)
@@ -144,13 +169,20 @@ def fedit(folder,filename,g):
                         subprocess.Popen(["notepad.exe", "files/"+folder+"/"+filename+".py"])
                     elif sys.platform == "darwin":
                         subprocess.call(['open', '-a', 'TextEdit', "files/"+folder+"/"+filename+".py"])
-            elif cmd == "del":
+            elif cmd == "kill":
                 print('Are you sure you want to delete '+filename+'? Type [y] or [n].')
                 sure = input('>> ')
                 if sure == 'y':
-                    shutil.rmtree(path)
-                    if len(os.listdir("files/"+folder+"/")) == 1 and os.listdir("files/"+folder+"/")[0] == '.DS_Store':
-                        shutil.rmtree("files/"+folder+"/")
+                    if g == False:
+                        shutil.rmtree(path)
+                        if len(os.listdir("files/"+folder+"/")) == 0 or len(os.listdir("files/"+folder+"/")) == 1 and os.listdir("files/"+folder+"/")[0] == '.DS_Store':
+                            shutil.rmtree("files/"+folder+"/")
+                    elif g == True and os.path.exists("files/"+folder+"/"+filename+".py"):
+                        os.remove("files/"+folder+"/"+filename+".py")
+                        if os.path.exists("files/"+folder+"/"+filename+".css"):
+                            os.remove("files/"+folder+"/"+filename+".css")
+                        if os.path.exists("files/"+folder+"/"+filename+".js"):
+                            os.remove("files/"+folder+"/"+filename+".js")
                     print('Files terminated.')
                     cmd = "exit"
                 elif sure == 'n':
@@ -192,8 +224,11 @@ def export(home,folder,filename):
     print('zipped', filename+'.zip')
     os.chdir(prevdir)
 
-def css(folder, filename):
-    path = "files/"+folder+"/"+filename+"/"
+def css(folder, filename, g):
+    if g == True:
+        path = "files/"+folder+"/"
+    else:
+        path = "files/"+folder+"/"+filename+"/"
     fcss = open(path+filename+".css", 'a')
     fcss.close()
     if sys.platform == "win32":
@@ -201,10 +236,14 @@ def css(folder, filename):
     elif sys.platform == "darwin":
         subprocess.call(['open', '-a', 'TextEdit', path+filename+".css"])
 
-def js(folder, filename):
-    path = "files/"+folder+"/"+filename+"/"
-    copyrootf("JQuery.js", folder)
-    copyrootf("JQuery-UI.js", folder)
+def js(folder, filename, g):
+    if g == True:
+        path = "files/"+folder+"/"
+    else:
+        path = "files/"+folder+"/"+filename+"/"
+    if not os.path.exists(path+"JQuery.js"):
+        copyrootf("JQuery.js", folder)
+        copyrootf("JQuery-UI.js", folder)
     fjs = open(path+filename+".js", 'a')
     fjs.close()
     if sys.platform == "win32":

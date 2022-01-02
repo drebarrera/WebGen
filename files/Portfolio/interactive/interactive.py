@@ -83,6 +83,8 @@ slide4Text2 = mx.T()
 slide4Textbox3 = mx.C()
 slide4Title3 = mx.T()
 slide4Text3 = mx.T()
+slide4MusicA = mx.Link()
+slide4MusicT = mx.T()
 slide5 = mx.C()
 slide5Textbox1 = mx.C()
 slide5Title1 = mx.T()
@@ -111,8 +113,12 @@ slide7TopT = mx.T()
 slide7Textbox2 = mx.C()
 slide7Title2 = mx.T()
 slide7Text2 = mx.T()
-musicSlide = mx.C()
-musicBar = mx.X()
+slide7TopA2 = mx.C()
+slide7TopT2 = mx.T()
+slide2GalleryA2 = mx.Link()
+slide2GalleryT2 = mx.T()
+#musicSlide = mx.C()
+#musicBar = mx.X()
 
 ### CONTENT ###
 # Body
@@ -132,7 +138,7 @@ slideScrollMsg.content = 'SCROLL TO NAVIGATE THE PAGE.'
 alert.content = [alertText]
 
 # Main
-main.content = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, musicSlide, mainLayer0]
+main.content = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, mainLayer0]
 
 # Main Layer 0
 mainLayer0.content = [trackRedMain, trackBlueMain, trackYellowMain, trackPurpleMain, trainRedMain, trainBlueMain, trainYellowMain, trainPurpleMain, trackLabelMain,  mainLayerZ, mainClouds, mainText]
@@ -174,7 +180,7 @@ slide3Title1.content = 'My Curiosity'
 slide3Text1.content = 'Upon writing this, I was initially going to call this section of my portfolio "My Interests". But I thought that "My Curiosity" is a much more fitting title, as a curiosity expresses one&#39s eagerness to learn and explore.<br><br>I am curious of just about everything. You will often find me <span class="pseudoLink bookmark" data-slide="4" data-track = "1">creating something innovative or new</span>, <span class="pseudoLink bookmark" data-slide="6" data-track = "1">speaking a new language</span>, or <span class="pseudoLink bookmark" data-slide="5" data-track = "1">analyzing the world around me and my place within it</span>. These are pretty broad topics, so here is a list of some of my more specific passions:<br><ol style="color: #005580; text-align: left; margin-left: 75px;font-weight: 300; font-size: 2.5vh;line-height: 1.2;margin-top: 1vh;"><li>Writing and Producing Music</li><li>Green Engineering Paper</li><li>Organizing and Optimizing</li><li>Warm Espresso</li><li>Project Management</li><li>Summiting Mountains</li><li>Exploring New Cities</li></ol></span>'
 slide3Textbox2.content = [slide3Title2,slide3Text2, slide3ResumeA]
 slide3Title2.content = 'UI/UX Design'
-slide3Text2.content = 'Whether a software or hardware design problem, I am always excited to put my User Interface and User Experience skills to the test. For the last nine years, I have worked to develop my UI skills with website and product design. When it comes to UX, I am very keen to gather data and analyze the user mindset. UX Design hones my <span class="pseudoLink bookmark" data-slide="5" data-track = "2">Business Development</span> skills.<br><br><span style="font-weight: 500; font-size: 2.75vh;">UI/UX Projects</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>WebGen - Python Based UI Compiler (User Interface, Website Design, and Python, 2021)</li><!--li>microGEN - Microcontroller Programming Interface [WIP] (User Interface / Microcontrollers, 2021)</li--><li>Alpen Aerial Company Website Design (Website Design, 2021)</li><li>Aesthetic Brand Design Partnership For Shopify Store Transfer (Data Collection / Website Design, 2021)</li></ul><br><br><span style="font-weight: 500; font-size: 2.75vh;text-align: left;width: 100%;margin-left: 25px;">UI/UX Skills</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>Front-End Development with HTML, CSS, JavaScript</li><li>Back-End Development with PHP, C, and Python</li><li>Data Analytics and Collection Experience with MATLAB, VBA, and Excel</li></ul>'
+slide3Text2.content = 'Whether a software or hardware design problem, I am always excited to put my User Interface and User Experience skills to the test. For the last nine years, I have worked to develop my UI skills with website and product design. When it comes to UX, I am very keen to gather data and analyze the user mindset. UX Design hones my <span class="pseudoLink bookmark" data-slide="5" data-track = "2">Business Development</span> skills.<br><br><span style="font-weight: 500; font-size: 2.75vh;">UI/UX Projects</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>WebGen - Python Based UI Compiler (User Interface, Website Design, and Python, 2021)</li><!--li>microGEN - Microcontroller Programming Interface [WIP] (User Interface / Microcontrollers, 2021)</li--><li>Alpen Aerial Company Website Design (Website Design, 2021)</li><li>Aesthetic Brand Design Partnership For Shopify Store Transfer (Data Collection / Website Design, 2021)</li></ul><br><span style="font-weight: 500; font-size: 2.75vh;text-align: left;width: 100%;margin-left: 25px;">UI/UX Skills</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>Front-End Development with HTML, CSS, JavaScript</li><li>Back-End Development with PHP, C, and Python</li><li>Data Analytics and Collection Experience with MATLAB, VBA, and Excel</li></ul>'
 slide3ResumeA.content = [slide3ResumeT]
 slide3ResumeT.content = 'My Resume'
 
@@ -186,18 +192,20 @@ slide4Text1.content = '<em>My creative process usually starts with a sheet of gr
 slide4Textbox2.content = [slide4Title2, slide4Text2, slide2CurrA]
 slide4Title2.content = 'Data Processing and Algorithms'
 slide4Text2.content = 'One of my skills is my ability to use code to analyze complex data. Whether applying algorithms to produce results with space and runtime efficiency or developing simple figures for data analysis with a program like Excel, I am excited to put my data solving to the test.<br><br><span style="font-weight: 500; font-size: 2.75vh;">Data Projects</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>Shortest Path Grid Traversal Program (C Programming and Data Structures / Algorithms, 2021)</li><li>GPS-Based 3-Dimensional Coordinate Plotting Program (Python, MATLAB, and Data Processing, 2020)</li><li>WYd. Startup Directory Data Collection (VBA, HTML, Data Collection, and Business Development, 2020)</li></ul><br><span style="font-weight: 500; font-size: 2.75vh; text-align: left;width: 100%;margin-left: 25px;">Related Coursework</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh; margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;margin-left: 25px;"><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=591&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE 264 - Advanced C Programming</a></li><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=729&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE 20875 - Python for Data Science</a></li><li><a href="https://engineering.purdue.edu/ECE/Academics/Undergraduates/UGO/CourseInfo/courseInfo?courseid=542&show=true&type=undergrad" target="_blank" class="textLink2">Purdue University ECE 368 - Data Structures</a></li></ul>'
-slide4Textbox3.content = [slide4Title3, slide4Text3]
+slide4Textbox3.content = [slide4Title3, slide4Text3, slide4MusicA]
 slide4Title3.content = 'Music Production'
-slide4Text3.content = 'Ever I was three years old, music has perpetuated my life...'
+slide4Text3.content = 'Ever I was three years old, music has perpetuated my life. My love for music started with classical piano lessons and has formed into digital music production as a medium for personal expression. I now write and produce music with modern mixing and mastering techniques. The songs I deem worthy to share, I release on straming platforms world-wide.<br>'
+slide4MusicA.content = [slide4MusicT]
+slide4MusicT.content = 'Listen to My Music Now!'
 
 # Slide 5
 slide5.content = [redTrack2, trackMergeBY, slide5Textbox1,slide5Textbox2]
 slide5Textbox1.content = [slide5Title1, slide5Image, slide5Text1]
 slide5Title1.content = 'My Identity'
 slide5Text1.content = 'A person&#39s identity is important - not because it determines the expectations of who they should be, but becuase it helps us understand how they fit within our world. I am a Latino of Dominican and Mexican descent with an open-minded, yet ever-callibrating view of the world. I was raised with discipline by a former immigrant and active-duty military father, who taught me to never squander opportunity; while my mother taught me to be compassionate and conscious. I am goal-oriented and incrediby ambitious. Nomadic by nature, I am never hesitant to travel or explore new ideas.<br><br>My motto:<br><em style="margin-left:5vh;">Life is a choice we make everyday.</em><br><br>This phrase becomes ever clearer when faced with difficulty and strife. Embracing it, I never shy away from a challenge.'
-slide5Textbox2.content = [slide5Title2,slide5Text2]
+slide5Textbox2.content = [slide5Title2,slide5Text2,slide3ResumeA]
 slide5Title2.content = 'Business and Entrepeneurship'
-slide5Text2.content = 'I am an entrepeneur by heart. With technical training from the <a href="https://purduefoundry.com/" target="_blank" class="textLink2">Purdue University Foundry</a> and pracitce with many business building opportunities, I am notorious for taking leadership and being excited to take on innovative challenges in industry.'
+slide5Text2.content = 'I am an entrepeneur by heart. With technical training from the <a href="https://purduefoundry.com/" target="_blank" class="textLink2">Purdue University Foundry</a> and pracitce with many business building opportunities, I am notorious for taking leadership and being excited to take on innovative challenges in industry.<br><br><span style="font-weight: 500; font-size: 2.75vh;">Business and Entrepeneurship Experience</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh;margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;text-align: left;width: 100%;margin-left: 25px;"><li>Chief Design Officer of Alpen Aerial Media Solutions Company (Startup Company, 2021)</li><li>Texas Center for Facial Plastics and ENT Social Media Campaign Design (Advertisement and Media, 2020)</li><li>Counsel to Student-Led WYd. App Startup [now known as Clix] (Startup Company, 2020)</li><li>Purdue University Foundry Firestarter Program (Startup Development Program, 2019)</li></ul>'
 
 # Slide 6
 slide6.content = [redTrack, blueTrack, yellowTrack, slide6Textbox1, slide6Textbox2, slide6Textbox3]
@@ -205,12 +213,12 @@ slide6Textbox1.content = [slide6Title1, slide6Text1, slide6Map]
 slide6Title1.content = 'My Travels'
 slide6Text1.content = 'I am not your average traveller. When I decide to venture into the unknown, I like to pack light and go where my journey takes me. I often travel to visit art galleries, remote destinations, and locations with new possibilities. The view from the top of a mountain or adrenaline rush of ordering food in a foreign language are experiences which can never be replaced.<br><br><!--Some of my favorite destinations include: <span style="color:#005580;font-size:2.25vh;">Mao, Dominican Republic; The Catalina Range, Arizona; Tokyo, Japan; Mt. Sherman &#40;14,046 ft&#41;, Colorado; Contemporary Art Museums, Ciudad de Panam&#225;, Panam&#225;</span>-->'
 slide6Map.content = '<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1omavXYyY8ELxH27LAsLj-LePRtYv--RJ&ehbc=2E312F" id="slide6Map"></iframe>'
-slide6Textbox2.content = [slide6Title2, slide6Text2]
+slide6Textbox2.content = [slide6Title2, slide6Text2, slide2CurrA]
 slide6Title2.content = 'Multidisciplinary Engineering'
-slide6Text2.content = 'Experience with MechE...'
-slide6Textbox3.content = [slide6Title3, slide6Text3]
+slide6Text2.content = 'Since starting my college career four years ago, I have worked on four different curricula: Mechanical Engineering, Mechanical Engineering Technology, First Year Engineering, and Computer Engineering. My exposure to these different disciplines, combined with my field experience, have broadened my ability to respond to complex problems. Among other skills, I am now capable with <span <span class="pseudoLink bookmark" data-slide="7" data-track = "3">Computer Aided Design</span>, <span class="pseudoLink">Basic Manufacturing Practices</span>, and the <span class="pseudoLink">Physical Theory of Acoustics</span>.<br><br><span style="font-weight: 500; font-size: 2.75vh; text-align: left;width: 100%;margin-left: 25px;">Notable Coursework</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh; margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;margin-left: 25px;"><li><a href="https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202220&subj_code_in=ME&crse_numb_in=41300" target="_blank" class="textLink2">Purdue University ME 413 - Noise Control</a></li><li><a href="https://selfservice.mypurdue.purdue.edu/prod/bwckctlg.p_disp_course_detail?cat_term_in=202220&subj_code_in=MET&crse_numb_in=14400" target="_blank" class="textLink2">Purdue University MET 144 - Materials and Processes II</a></li><li><a href="https://catalog.utsa.edu/undergraduate/coursedescriptions/me/" target="_blank" class="textLink2">University of Texas at San Antonio ME 1403 - Engineering Practice and Graphics</a></li></ul>'
+slide6Textbox3.content = [slide6Title3, slide6Text3, slide2GalleryA]
 slide6Title3.content = 'Art and Cinematography'
-slide6Text3.content = 'Ever I was three years old, music has perpetuated my life...'
+slide6Text3.content = 'I like to dabble in art and cinematography. Although much of my art is digital, I have recently taken to multimedia art design. In terms of cinematography, although I am a novice, I grew more and more capable with each project.<br><br><span style="font-weight: 500; font-size: 2.75vh; text-align: left;width: 100%;margin-left: 25px;">Notable Coursework</span><br><ul style="color: #005580; font-weight: 300; font-size: 2.0vh; margin-block-start: 0em; margin-block-end: 0em; margin-top: 0.25vh;margin-left: 25px;"><li><a href="https://www.behance.net/gallery/134202847/f-S-%28the-dropout-series%29" target="_blank" class="textLink2">Multimedia Art Design - f!&$ (the dropout series) (2021)</a></li><li><a href="https://www.behance.net/gallery/134129035/Unearth-%28Official-Music-Video%29" target="_blank" class="textLink2">Cinematography - Unearth Music Video (2021)</a></li></ul>'
 
 # Slide 7
 slide7.content = [redTrackEOL, trackMergeBYEOL, slide7Textbox1,slide7Textbox2]
@@ -219,17 +227,21 @@ slide7Title1.content = 'Why Trains?'
 slide7Text1.content = 'Trains are my favorite form of transportation. When I was young, I was fascinated by locomotives. Today, I often take advantage of transcontinental railway and city subways when traveling.<br><br>I find trains to be a great metaphor for life. We choose the stations we wish to stop at and which trains to board to take us to our next destination.'
 slide7TopA.content = [slide7TopT]
 slide7TopT.content = 'Back to Top'
-slide7Textbox2.content = [slide7Title2,slide7Text2]
+slide7TopA2.content = [slide7TopT2]
+slide7TopT2.content = 'Back to Top'
+slide7Textbox2.content = [slide7Title2,slide7Text2, slide2GalleryA2, slide7TopA2]
 slide7Title2.content = 'Computer Aided Design'
-slide7Text2.content = 'Experience with Solidworks...'
+slide2GalleryA2.content = [slide2GalleryT2]
+slide2GalleryT2.content = 'Computer Aided Design Gallery'
+slide7Text2.content = 'I am no stranger to Computer Aided Design. With six years of practice with software such as Solidworks and Autodesk&#39s AutoCAD I am more than capable with creating three dimensional models. In the past, I have used CAD to develop mechanical prototypes, design custom casing, and dimension devices.<br>'
 
 # musicSlide
-musicSlide.content = [musicBar]
-musicBar.content = '<iframe id="musicBar" src="https://open.spotify.com/embed/artist/3BFGzlgZp1l9E527dWSgEG?utm_source=generator" width="100%" height="80" style="left: 0px;" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
+#musicSlide.content = [musicBar]
+#musicBar.content = '<iframe id="musicBar" src="https://open.spotify.com/embed/artist/3BFGzlgZp1l9E527dWSgEG?#utm_source=generator" width="100%" height="80" style="left: 0px;" frameBorder="0" allowfullscreen="" allow="autoplay; #clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>'
 
 ### PROPERTIES ###
 # Body
-body.background_color = '#fefefe'
+body.background_color = '#green'
 
 # Center
 center.display = 'flex'
@@ -435,6 +447,10 @@ slide4Title3.type = 'h6'
 slide4Title3.color = '#ffba00'
 slide4Title3.cl = 'slideTitle'
 slide4Text3.cl = 'slideText'
+slide4MusicA.id = 'currLink'
+slide4MusicA.cl = 'slideButton4 centerLink'
+slide4MusicA.target = '_blank'
+slide4MusicA.src = 'https://www.google.com'
 
 # Slide 5
 slide5.background_color = '#fefefe'
@@ -498,6 +514,10 @@ slide7TopA.id = 'topLink'
 slide7TopA.background_color = ''
 slide7TopA.cl = 'slideButton1 bookmark'
 slide7TopA.attr = 'data-slide="0" data-track="1"'
+slide7TopA2.id = 'topLink2'
+slide7TopA2.background_color = ''
+slide7TopA2.cl = 'slideButton1 bookmark'
+slide7TopA2.attr = 'data-slide="0" data-track="2"'
 slide7Textbox2.id = 'slide7TextboxBlue'
 slide7Textbox2.cl = 'textboxSlide'
 slide7Textbox2.background_color = ''
@@ -505,6 +525,10 @@ slide7Title2.type = 'h6'
 slide7Title2.color = '#006497'
 slide7Title2.cl = 'slideTitle'
 slide7Text2.cl = 'slideText'
+slide2GalleryA2.id = 'galleryLink'
+slide2GalleryA2.cl = 'slideButton4 centerLink'
+slide2GalleryA2.target = '_blank'
+slide2GalleryA2.src = 'https://www.behance.net/gallery/134201927/Computer-Aided-Design-Gallery'
 
 # musicSlide
-musicSlide.cl = 'slide'
+#musicSlide.cl = 'slide'
