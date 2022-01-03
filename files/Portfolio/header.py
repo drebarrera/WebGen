@@ -20,7 +20,6 @@ option4T = mx.T()
 nav.content = [nav_center]
 nav_center.content = [htitleA, menu]
 
-
 # Menu
 menu.content = [option1A, option2A, option3A, option4A]
 
@@ -40,14 +39,21 @@ option4T.content = 'Projects'
 
 ### PROPERTIES ###
 nav.id = "nav"
-nav.background_color = ""
+nav.background_color = "#fefefe"
 nav_center.id = "nav_center"
-nav_center.background_color = ""
+nav_center.background_color = "#fefefe"
 menu.id = "menu"
 menu.background_color = ""
 htitleA.id = "htitle"
-htitleA.href = "."
+htitleA.src = "https://www.drebarrera.com"
 option1A.cl = 'button buttonRed'
 option2A.cl = 'button buttonBlue'
 option3A.cl = 'button buttonYellow'
 option4A.cl = 'button buttonPurple'
+option1A.src = 'https://www.drebarrera.com'
+option2A.src = 'https://www.drebarrera.com/resources/resume.pdf'
+option2A.target = "_blank"
+option3A.src = 'https://www.drebarrera.com/contact/'
+option3A.target = "_blank"
+option4A.src = 'https://www.drebarrera.com/projects/'
+option4A.target = "_blank"

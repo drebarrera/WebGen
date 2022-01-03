@@ -35,6 +35,16 @@ p{
 	padding-right: 14vw;
 }
 
+@media only screen and (max-width:1000px) {
+	#htitle{
+		padding-right: 10vw;
+	}
+
+	#nav_center{
+		width: 80%;
+	}
+}
+
 .hoption{
 	display: inline-block;
 }
@@ -109,4 +119,14 @@ p{
 .buttonPurple:hover{
 	background-color: white;
 	color: rgb(138, 74, 255);
+}
+
+.pseudoLink{
+	color: #005580;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.pseudoLink:hover{
+	color: #ff5938;
 }

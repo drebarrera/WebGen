@@ -9,6 +9,8 @@ body = mx.Body()
 from header import *
 importlib.reload(sys.modules['header'])
 from alert import *
+importlib.reload(sys.modules['alert'])
+from visitInfoIndex import *
 
 ### DATA ###
 data.title = "Dre Barrera"
@@ -34,6 +36,8 @@ musicA = mx.Link()
 musicT = mx.T()
 galleryA = mx.Link()
 galleryT = mx.T()
+currA = mx.Link()
+currT = mx.T()
 
 ### CONTENT ###
 # Body
@@ -47,7 +51,7 @@ welcome.content = [slide1Textbox]
 slide1Textbox.content = [slide1Title, slide1Image, slide1Text, slide1Links]
 slide1Title.content = 'hello world.'
 slide1Text.content = 'My name is Andr&eacute;s Barrera, but you can call me Dre. I am a <class="pseudoLink bookmark" data-slide="2" data-track = "2">Computer Engineering</span> senior at <a href="https://www.purdue.edu" target="_blank" class="textLink">Purdue University</a>. With a background in <span class="pseudoLink bookmark" data-slide="6" data-track = "2">Multidisciplinary Engineering</span>, <span class="pseudoLink bookmark" data-slide="3" data-track = "3">UI/UX</span>, and <span class="pseudoLink bookmark" data-slide="5" data-track = "2">Business Development</span>, I am much more than just a Computer Engineer.<br><br><em style="font-weight: 500;text-align: center; width:100%; display: block;">I am an ambitious creator.</em>'
-slide1Links.content = [slide1ResumeA, interactiveButtonA, slide1ContactA, githubA, galleryA, musicA]
+slide1Links.content = [slide1ResumeA, interactiveButtonA, slide1ContactA, githubA, currA, galleryA, musicA]
 slide1ResumeA.content = [slide1ResumeT]
 slide1ResumeT.content = 'My Resume'
 slide1ContactA.content = [slide1ContactT]
@@ -60,6 +64,8 @@ musicA.content = [musicT]
 musicT.content = 'Music'
 galleryA.content = [galleryT]
 galleryT.content = 'Behance Gallery'
+currA.content = [currT]
+currT.content = 'Curriculum'
 
 ### PROPERTIES ###
 body.background_color = '#fefefe'
@@ -85,10 +91,11 @@ slide1Links.id = "welcomeLinks"
 slide1ResumeA.id = 'resumeLink'
 slide1ResumeA.cl = 'button buttonBlue'
 slide1ResumeA.target = '_blank'
-slide1ResumeA.src = 'https://www.google.com'
+slide1ResumeA.src = 'https://www.drebarrera.com/resources/resume.pdf'
 slide1ContactA.id = 'contactLink'
 slide1ContactA.cl = 'button buttonRedRing'
 slide1ContactA.target = '_blank'
+slide1ContactA.src = 'https://www.drebarrera.com/contact/'
 interactiveButtonA.background_color = ""
 interactiveButtonA.cl = 'button buttonRed'
 interactiveButtonA.id = 'interactive'
@@ -97,7 +104,10 @@ githubA.target = '_blank'
 githubA.src = 'https://github.com/drebarrera'
 musicA.cl = 'button buttonBlue'
 musicA.target = '_blank'
-musicA.src = ''
+musicA.src = 'https://www.drebarrera.com/music/'
 galleryA.cl = 'button buttonYellow'
 galleryA.target = '_blank'
 galleryA.src = 'https://behance.net/drebarrera'
+currA.cl = 'button buttonPurple'
+currA.target = '_blank'
+currA.src = 'https://www.drebarrera.com/resources/curriculum.pdf'

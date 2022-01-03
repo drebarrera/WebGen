@@ -454,13 +454,6 @@ $(document).ready(function(){
 
 });
 
-/// Resize Event ///
-function resize(){
-	location.reload();
-}
-
-window.onresize = resize;
-
 $(window).on('beforeunload', function() {
 	$(window).scrollTop(0);
 });

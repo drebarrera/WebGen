@@ -9,7 +9,7 @@ $(document).ready(function(){
 		ratioNorm = yNorm / xNorm;
 		ratioMin = yNorm / xMin;
 		if(ratio < ratioMin){
-			window.location.href = "../interactive/index.html";
+			window.open("https://www.drebarrera.com/interactive", '_blank');
 		}
 		else{
 			alert("Your browser does not properly support the display of the portfolio. Please try again on a widescreen browser.");

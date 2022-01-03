@@ -1,4 +1,12 @@
-<!DOCTYPE html><html><head><title>Dre Barrera</title><meta charset="utf-8"><meta name="description" content="Default WebGen Page"><meta name="keywords" content=""><meta name="description" content="Andres Barrera"><script src="..\JQuery.js"></script><script src="..\JQuery-UI.js"></script><script>$(document).ready(function(){
+<?php $visitInfo = $_SERVER['REQUEST_URI'].',';
+$visitInfo .= $_SERVER['REMOTE_ADDR'];
+date_default_timezone_set("America/New_York");
+$visitInfo .= ','.date("Y-m-d;h:i:sA").','.$email.PHP_EOL;
+file_put_contents('../data/visitInfo.txt', $visitInfo, FILE_APPEND); ?><?php $visitInfo = $_SERVER['REQUEST_URI'].',';
+$visitInfo .= $_SERVER['REMOTE_ADDR'];
+date_default_timezone_set("America/New_York");
+$visitInfo .= ','.date("Y-m-d;h:i:sA").','.$email.PHP_EOL;
+file_put_contents('data/visitInfo.txt', $visitInfo, FILE_APPEND); ?><!DOCTYPE html><html><head><title>Dre Barrera</title><meta charset="utf-8"><meta name="description" content="Default WebGen Page"><meta name="keywords" content=""><meta name="description" content="Andres Barrera"><script src="..\JQuery.js"></script><script src="..\JQuery-UI.js"></script><script>$(document).ready(function(){
 	/* -------------------- JQuery .clone() Fixes ------------------ */
 	(function (original) {
   		jQuery.fn.clone = function () {

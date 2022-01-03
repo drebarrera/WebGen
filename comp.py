@@ -31,11 +31,11 @@ def main(folder, filename):
                     head += '<script src="..\JQuery-UI.js"></script>'
                     jquery = True
                 f = open("files/"+folder+"/"+g.replace('.py','.js'), 'r')
-                head += "<script>" + f.read() + "</script>"
+                head += "<script>" + f.read().replace("\n"," ") + "</script>"
                 f.close()
             if os.path.exists("files/"+folder+"/"+g.replace('.py','.css')) and (g.replace('.py','') in sys.modules):
                 f = open("files/"+folder+"/"+g.replace('.py','.css'), 'r')
-                head += "<style>" + f.read() + "</style>"
+                head += "<style>" + f.read().replace("\n"," ") + "</style>"
                 f.close()
             if os.path.exists("files/"+folder+"/"+g.replace('.py','.php')) and (g.replace('.py','') in sys.modules):
                 f = open("files/"+folder+"/"+g.replace('.py','.php'), 'r')
@@ -48,9 +48,15 @@ def main(folder, filename):
     body = x.body.c(x.mx.inadmissible, x.mx.dynamic)
     if php == False:
         fhtml = open(path+"index.html", 'w+')
+        fhtml.write("<!DOCTYPE html><html>"+head+"\n"+body+"</html>")
+        fhtml.close()
     else:
-        fhtml = open(path+"index.php", 'w+')
-    fhtml.write(phpcode+"<!DOCTYPE html><html>"+head+"\n"+body+"</html>")
-    fhtml.close()
+        fhtml1 = open(path+"index.html", 'w+')
+        fhtml1.write("<!DOCTYPE html><html>"+head+"\n"+body+"</html>")
+        fhtml1.close()
+        fhtml2 = open(path+"index.php", 'w+')
+        fhtml2.write(phpcode+"<!DOCTYPE html><html>"+head+"\n"+body+"</html>")
+        fhtml2.close()
+    
     sys.modules.pop(filename)
     return

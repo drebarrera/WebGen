@@ -5,6 +5,7 @@ info = info()
 data = mx.Data()
 body = mx.Body()
 from alert import *
+from visitInfo import *
 
 ### INFO ###
 data.title = 'Dre Barrera | Portfolio'
@@ -249,7 +250,7 @@ center.background_color = '#242323'
 contactA.id = 'contactFloat'
 contactA.cl = 'slideButton3'
 contactA.target = '_blank'
-contactA.src = 'https://www.google.com'
+contactA.src = 'https://www.drebarrera.com/contact/'
 
 # slideScrollMsg 
 slideScrollMsg.id = 'slideScrollMsg'
@@ -350,11 +351,11 @@ slide1Text.cl = 'slideText'
 slide1ResumeA.id = 'resumeLink'
 slide1ResumeA.cl = 'slideButton1'
 slide1ResumeA.target = '_blank'
-slide1ResumeA.src = 'https://www.google.com'
+slide1ResumeA.src = 'https://www.drebarrera.com/resources/resume.pdf'
 slide1ContactA.id = 'contactLink'
 slide1ContactA.cl = 'slideButton2'
 slide1ContactA.target = '_blank'
-slide1ContactA.src = 'https://www.google.com'
+slide1ContactA.src = 'https://www.drebarrera.com/contact/'
 
 # Slide 2
 slide2.background_color = '#fefefe'
@@ -377,7 +378,7 @@ slide2Text2.cl = 'slideText'
 slide2CurrA.id = 'currLink'
 slide2CurrA.cl = 'slideButton1 centerLink'
 slide2CurrA.target = '_blank'
-slide2CurrA.src = 'https://www.google.com'
+slide2CurrA.src = 'https://www.drebarrera.com/resources/curriculum.pdf'
 slide2Textbox3.id = 'slide2TextboxYellow'
 slide2Textbox3.cl = 'textboxSlide'
 slide2Textbox3.background_color = ''
@@ -411,7 +412,7 @@ slide3Text2.cl = 'slideText'
 slide3ResumeA.id = 'currLink'
 slide3ResumeA.cl = 'slideButton1 centerLink'
 slide3ResumeA.target = '_blank'
-slide3ResumeA.src = 'https://www.google.com'
+slide3ResumeA.src = 'https://www.drebarrera.com/resources/resume.pdf'
 
 # Slide 4
 slide4.background_color = '#fefefe'
@@ -441,7 +442,7 @@ slide4Text3.cl = 'slideText'
 slide4MusicA.id = 'currLink'
 slide4MusicA.cl = 'slideButton4 centerLink'
 slide4MusicA.target = '_blank'
-slide4MusicA.src = 'https://www.google.com'
+slide4MusicA.src = 'https://www.drebarrera.com/music/'
 
 # Slide 5
 slide5.background_color = '#fefefe'

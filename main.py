@@ -68,9 +68,9 @@ def f(folder, filename):
     if not os.path.exists(path+filename+".py"):
         ftxt = open(path+filename+".py", 'a')
         if g == False:
-            ftxt.write("import modules as mx\nimport sys\nsys.path.append(r'"+os.getcwd()+"\\files\\"+folder+"')\ndata = mx.Data()\nbody = mx.Body()\n")
+            ftxt.write("import modules as mx\nimport sys\nsys.path.append(r'"+os.getcwd()+"\\files\\"+folder+"')\ndata = mx.Data()\nbody = mx.Body()\n\n### OBJECTS ###\n\n### CONTENT ###\n\n### PROPERTIES ###")
         else:
-            ftxt.write("import modules as mx\n")
+            ftxt.write("import modules as mx\n\n### OBJECTS ###\n\n### CONTENT ###\n\n### PROPERTIES ###")
     else:
         ftxt = open(path+filename+".py", 'a')
     if g == False:
@@ -149,6 +149,8 @@ def exportf(folder, destination):
                 destination = newhome+"\\"+filename+"\\images\\" + file_name
                 shutil.copy(source, destination)
                 print('copied', file_name)
+    shutil.copy('JQuery.js', home+"\\"+folder)
+    shutil.copy('JQuery-UI.js', home+"\\"+folder)
     prevdir = os.getcwd()
     os.chdir(home)
     shutil.make_archive(folder, 'zip', folder)

@@ -1,0 +1,42 @@
+#main{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#container{
+	max-width: 600px;
+	width: 90%;
+	margin-top: 150px;
+	font-size: 2.5vh;
+}
+
+@media only screen and (max-width:1000px) {
+	#container{
+		margin-top: 300px;
+	}
+}
+
+#form{
+	border-radius: 4vh;
+	padding: 2vh;
+}
+
+#title{
+	font-size: 4vh;
+	margin-top: 1vh;
+	color: #ff5938;
+	margin-bottom: 25px;
+}
+
+#contact{
+	width: 90%;
+	margin-left: 2.5%;
+	margin-top: 25px;
+	border-radius: 3vh;
+	padding: 4%;
+}
+
+label{
+	color: white;
+}

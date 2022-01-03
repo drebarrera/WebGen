@@ -1,17 +1,24 @@
 #alert{
-	width: 450px;
+	max-width: 450px;
+	width: 80%;
 	height: auto;
 	position: fixed;
 	z-index; 50;
 	margin-top: 200px;
 	display: none;
-	padding: 25px;
-	padding-left: 30px;
-	padding-right: 30px;
-	border-radius: 25px;
-	font-size: 24px;
+	padding: 2.5vh;
+	padding-left: 2.5vh;
+	padding-right: 2.5vh;
+	border-radius: 2vh;
+	font-size: 3vh;
 	font-weight: 500;
 	text-align: center;
+}
+
+@media only screen and (max-width:1000px) {
+	#alert{
+		margin-top: 300px;
+	}
 }
 
 #alertText > span{

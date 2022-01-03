@@ -10,6 +10,12 @@
 	margin-top: 200px;
 }
 
+@media only screen and (max-width:1000px) {
+	#welcome{
+		margin-top: 300px;
+	}
+}
+
 #slide1Image{
 	height: 15vh;
 	width: 15vh;
@@ -22,6 +28,12 @@
 	filter: brightness(110%);
 	display: block;
 	padding: 0.75vh;
+}
+
+@media only screen and (max-width:1000px) {
+	#slide1Image{
+		margin-top: 3vh;
+	}
 }
 
 #welcomeLinks{
