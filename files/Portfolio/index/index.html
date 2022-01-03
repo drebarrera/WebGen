@@ -1,19 +1,23 @@
-<!DOCTYPE html><html><head><title>Default Page</title><meta charset="utf-8"><meta name="description" content="Default WebGen Page"><meta name="keywords" content=""><meta name="description" content="Andres Barrera"><script src="..\JQuery.js"></script><script src="..\JQuery-UI.js"></script><script>$(document).ready(function(){
-	/*var winHeight = jQuery(window).height();
-	var winWidth = jQuery(window).width();
-	xNorm = 1368;
-	yNorm = 783;
-	xMin = 1075;
-	ratio = winHeight / winWidth;
-	ratioNorm = yNorm / xNorm;
-	ratioMin = yNorm / xMin;
-	setTimeout(function(){
+<!DOCTYPE html><html><head><title>Dre Barrera</title><meta charset="utf-8"><meta name="description" content="Default WebGen Page"><meta name="keywords" content=""><meta name="description" content="Andres Barrera"><script src="..\JQuery.js"></script><script src="..\JQuery-UI.js"></script><script>$(document).ready(function(){
+	$('#interactive').click(function(){
+		var winHeight = jQuery(window).height();
+		var winWidth = jQuery(window).width();
+		xNorm = 1368;
+		yNorm = 783;
+		xMin = 1075;
+		ratio = winHeight / winWidth;
+		ratioNorm = yNorm / xNorm;
+		ratioMin = yNorm / xMin;
 		if(ratio < ratioMin){
 			window.location.href = "../interactive/index.html";
 		}
-	}, 100);*/
+		else{
+			alert("Your browser does not properly support the display of the portfolio. Please try again on a widescreen browser.");
+		}
+	});
 	
-});</script><style>#main{ 	width: 100%; }</style><style>p{
+	
+});</script><style>#main{ 	width: 100%; 	display: flex; 	justify-content: center; }  #welcome{ 	max-width: 600px; 	width: 90%; 	margin-top: 200px; }  #slide1Image{ 	height: 15vh; 	width: 15vh; 	border-radius: 1000px; 	position: relative; 	z-index: 0; 	margin-top: -10vh; 	margin-right: 0px; 	float: right; 	filter: brightness(110%); 	display: block; 	padding: 0.75vh; }  #welcomeLinks{ 	margin-top: 25px; 	display: flex; 	justify-content: center; 	width: 100%; 	flex-wrap: wrap; }  .slideTitle{ 	font-size: 5vh; 	font-weight: 300; 	position:relative; 	display: block; 	text-align: left; 	margin-block-start: 0em; 	margin-block-end: 0em; }  .slideText{ 	font-size: 2.5vh; 	font-weight: 300; 	position: relative; 	display: block; 	margin-top: 1vh; 	width: 95%; 	margin-left: 5%; 	text-align: left; 	margin-block-start: 1vh; 	margin-block-end: 0em; }  .textLink{ 	color: #005580; 	text-decoration: none; 	cursor: pointer; }  .textLink:hover{ 	color: #ff5938; }  .textLink2{ 	color: #005580; 	text-decoration: none; 	cursor: pointer; }  .textLink2:hover{ 	color: black; 	text-decoration: underline; }  .textLink3{ 	color: black; 	cursor: pointer; }  .textLink3:hover{ 	color: #005580; }  .pseudoLink{ 	color: #005580; 	text-decoration: none; 	cursor: pointer; }  .pseudoLink:hover{ 	color: #ff5938; } </style><style>p{
 	margin-block-start: 0px;
 	margin-block-end: 0px;
 }
@@ -124,5 +128,37 @@
 .buttonPurple:hover{
 	background-color: white;
 	color: rgb(138, 74, 255);
+}</style><script>/// Custom Alert Generation ///
+function alert(msg){
+	$("#alert").css('display', 'block');
+	document.getElementById('alertText').innerHTML = msg+'<br><br><span style="padding: 5px; padding-left: 12px; padding-right: 12px; border-radius: 5px; cursor: pointer;">OK</span>';
+	$('#alertText > span').click(function(){
+		$("#alert").css('display', 'none');
+	});
+}</script><style>#alert{
+	width: 450px;
+	height: auto;
+	position: fixed;
+	z-index; 50;
+	margin-top: 200px;
+	display: none;
+	padding: 25px;
+	padding-left: 30px;
+	padding-right: 30px;
+	border-radius: 25px;
+	font-size: 24px;
+	font-weight: 500;
+	text-align: center;
+}
+
+#alertText > span{
+	background-color: #ff5938;
+	color: white;
+}
+
+#alertText > span:hover{
+	background-color: white;
+	border: 2px solid #ff5938;
+	color: black;
 }</style></head>
-<body style="margin:0;background-color:#fefefe;overflow-x:hidden;font-family:Helvetica;color:black;"><div id="main" style="background-color:lightblue;overflow-x:visible;overflow-y:visible;"><div id="nav" style="overflow-x:visible;overflow-y:visible;"><div id="nav_center" style="overflow-x:visible;overflow-y:visible;"><a id="htitle" href="" target="_self" style="href:.;"><p style="">dre barrera_</p></a><div id="menu" style="overflow-x:visible;overflow-y:visible;"><a class="button buttonRed" href="" target="_self" style=""><p style="">Home</p></a><a class="button buttonBlue" href="" target="_self" style=""><p style="">Resume</p></a><a class="button buttonYellow" href="" target="_self" style=""><p style="">Contact</p></a><a class="button buttonPurple" href="" target="_self" style=""><p style="">Projects</p></a></div></div></div></div></body></html>
+<body style="margin:0;background-color:#fefefe;overflow-x:hidden;font-family:Helvetica;color:black;"><div id="main" style="overflow-x:visible;overflow-y:visible;"><div id="nav" style="overflow-x:visible;overflow-y:visible;"><div id="nav_center" style="overflow-x:visible;overflow-y:visible;"><a id="htitle" href="" target="_self" style="href:.;"><p style="">dre barrera_</p></a><div id="menu" style="overflow-x:visible;overflow-y:visible;"><a class="button buttonRed" href="" target="_self" style=""><p style="">Home</p></a><a class="button buttonBlue" href="" target="_self" style=""><p style="">Resume</p></a><a class="button buttonYellow" href="" target="_self" style=""><p style="">Contact</p></a><a class="button buttonPurple" href="" target="_self" style=""><p style="">Projects</p></a></div></div></div><div id="welcome" style="overflow-x:visible;overflow-y:visible;"><div id="slide1Textbox" class="textboxSlide" style="overflow-x:visible;overflow-y:visible;"><h6 class="slideTitle" style="color:#ff5938;">hello world.</h6><img  id="slide1Image" style="" src="images/portrait.jpeg"/><p class="slideText" style="">My name is Andr&eacute;s Barrera, but you can call me Dre. I am a <class="pseudoLink bookmark" data-slide="2" data-track = "2">Computer Engineering</span> senior at <a href="https://www.purdue.edu" target="_blank" class="textLink">Purdue University</a>. With a background in <span class="pseudoLink bookmark" data-slide="6" data-track = "2">Multidisciplinary Engineering</span>, <span class="pseudoLink bookmark" data-slide="3" data-track = "3">UI/UX</span>, and <span class="pseudoLink bookmark" data-slide="5" data-track = "2">Business Development</span>, I am much more than just a Computer Engineer.<br><br><em style="font-weight: 500;text-align: center; width:100%; display: block;">I am an ambitious creator.</em></p><div id="welcomeLinks" style="overflow-x:visible;overflow-y:visible;"><a id="resumeLink" class="button buttonBlue" href="https://www.google.com" target="_blank" style=""><p style="">My Resume</p></a><div id="interactive" class="button buttonRed" style="overflow-x:visible;overflow-y:visible;"><p style="">Try the Interactive Portfolio!</p></div><a id="contactLink" class="button buttonRedRing" href="" target="_blank" style=""><p style="">Contact Me</p></a><a class="button buttonPurple" href="https://github.com/drebarrera" target="_blank" style=""><p style="">GitHub</p></a><a class="button buttonYellow" href="https://behance.net/drebarrera" target="_blank" style=""><p style="">Behance Gallery</p></a><a class="button buttonBlue" href="" target="_blank" style=""><p style="">Music</p></a></div></div></div><div id="alert" style="background-color:rgba(255, 255, 255, 0.9);overflow-x:visible;overflow-y:visible;"><p id="alertText" style=""></p></div></div></body></html>

@@ -4,14 +4,13 @@ from prop import *
 info = info()
 data = mx.Data()
 body = mx.Body()
+from alert import *
 
 ### INFO ###
-data.title = 'Dre Barrera'
+data.title = 'Dre Barrera | Portfolio'
 data.author = 'Andres Barrera'
 
 ### OBJECTS ###
-alert = mx.C()
-alertText = mx.T()
 center = mx.C()
 main = mx.C()
 mainLayer0 = mx.C()
@@ -134,9 +133,6 @@ contactT.content = 'Contact Me'
 # slideScrollMsg
 slideScrollMsg.content = 'SCROLL TO NAVIGATE THE PAGE.'
 
-# Alert
-alert.content = [alertText]
-
 # Main
 main.content = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, mainLayer0]
 
@@ -151,7 +147,7 @@ mainInstructions.content = 'Welcome! Choose a track and then press <span style="
 slide1.content = [trackMergeAll, slide1Textbox]
 slide1Textbox.content = [slide1Title, slide1Image, slide1Text, slide1ContactA, slide1ResumeA]
 slide1Title.content = 'hello world.'
-slide1Text.content = 'My name is Andr&eacute;s Barrera, but you can call me Dre. I am a <class="pseudoLink bookmark" data-slide="2" data-track = "2">Computer Engineering</span> senior at <a href="https://www.purdue.edu" target="_blank" class="textLink">Purdue University</a>. With a background in <span class="pseudoLink bookmark" data-slide="6" data-track = "2">Multidisciplinary Engineering</span>, <span class="pseudoLink bookmark" data-slide="3" data-track = "3">UI/UX</span>, and <span class="pseudoLink bookmark" data-slide="5" data-track = "2">Business Development</span>, I am much more than just a Computer Engineer.<br><br><span style="font-weight: 500;text-align: center; width:100%; display: block;">I am an ambitious creator.</span>'
+slide1Text.content = 'My name is Andr&eacute;s Barrera, but you can call me Dre. I am a <class="pseudoLink bookmark" data-slide="2" data-track = "2">Computer Engineering</span> senior at <a href="https://www.purdue.edu" target="_blank" class="textLink">Purdue University</a>. With a background in <span class="pseudoLink bookmark" data-slide="6" data-track = "2">Multidisciplinary Engineering</span>, <span class="pseudoLink bookmark" data-slide="3" data-track = "3">UI/UX</span>, and <span class="pseudoLink bookmark" data-slide="5" data-track = "2">Business Development</span>, I am much more than just a Computer Engineer.<br><br><em style="font-weight: 500;text-align: center; width:100%; display: block;">I am an ambitious creator.</em>'
 slide1ResumeA.content = [slide1ResumeT]
 slide1ResumeT.content = 'My Resume'
 slide1ContactA.content = [slide1ContactT]
@@ -259,11 +255,6 @@ contactA.src = 'https://www.google.com'
 slideScrollMsg.id = 'slideScrollMsg'
 slideScrollMsg.color = '#d8d8d8'
 slideScrollMsg.font_weight = '700'
-
-# Alert
-alert.id = 'alert'
-alert.background_color = 'rgba(255, 255, 255, 0.9)'
-alertText.id = 'alertText'
 
 # Main
 main.id = 'main'

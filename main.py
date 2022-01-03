@@ -18,7 +18,7 @@ def main():
         try:
             cmd = input(">> ")
             if cmd == "help":
-                print("\tf(folder,filename) -> opens or creates a new webfile\n\tgf(folder,filename) -> creates an importable global file\n\tfdir -> open file directory\n\tkill(folder) -> delete a project (folder)\n\texit -> exit WebGen\n\texport(folder, destination) -> exports all webpages to an destination\n\trestart -> restart program\n")
+                print("\tf(folder,filename) -> opens or creates a new webfile\n\tgf(folder,filename) -> creates an importable global file\n\tfdir -> open file directory\n\tkill(folder) -> delete a project (folder)\n\texit -> exit WebGen\n\texportf(folder, destination) -> exports all webpages to an destination\n\trestart -> restart program\n")
             elif re.search("f(.+,.+)", cmd):
                 exec(cmd)
                 print("\n\n--------------- W E B G E N ---------------")
@@ -28,7 +28,7 @@ def main():
             elif cmd == "fdir":
                 url = "file:///"+str(os.getcwd())
                 webbrowser.get().open(url, new=1)
-            elif re.search("export(.+,.+)", cmd):
+            elif re.search("exportf(.+,.+)", cmd):
                 exec(cmd)
             elif re.search("kill(.+)", cmd):
                 exec(cmd)
@@ -40,6 +40,8 @@ def main():
                 print('Unrecognized command. Type "help" for list of commands.')
         except Exception as exc:
             print('[!!!] {err}'.format(err=exc))
+            if re.search("exportf(.+,.+)", cmd):
+                print('When referencing the destination path, make sure to prepend with the letter r like so: r"THIS\IS\A\PATH"')
 
 def f(folder, filename):
     if not re.search(".+///",filename):
@@ -118,8 +120,41 @@ def gf(folder, filename):
     f(folder, filename+"///")
     return
 
-def export(folder, destination):
-    print('hi')
+def exportf(folder, destination):
+    home = destination
+    os.makedirs(home+"\\"+folder)
+    for filename in os.listdir("files/"+folder+"/"):
+        if "." in filename:
+            continue
+        if not os.path.exists("files/"+folder+"/"+filename+"/index.html"):
+            continue
+        path = "files/"+folder+"/"+filename+"/"
+        newhome = home + "/" + folder + "/"
+        os.makedirs(newhome+"\\"+filename)
+        comp.main(folder,filename)
+        if os.path.exists(path+"/index.php"):
+            f = open(path+"/index.php",'r')
+            fr = open(newhome+"/"+filename+"/index.php",'w')
+        else:
+            f = open(path+"/index.html",'r')
+            fr = open(newhome+"/"+filename+"/index.html",'w')
+        fr.write(f.read())
+        fr.close()
+        f.close()
+        print('copied '+filename)
+        if os.path.exists(path+"/images"):
+            os.makedirs(newhome+"\\"+filename+"\\images")
+            for file_name in os.listdir(path+"/images"):
+                source = path+"/images/" + file_name
+                destination = newhome+"\\"+filename+"\\images\\" + file_name
+                shutil.copy(source, destination)
+                print('copied', file_name)
+    prevdir = os.getcwd()
+    os.chdir(home)
+    shutil.make_archive(folder, 'zip', folder)
+    shutil.rmtree(home+"\\"+folder)
+    print('zipped', folder+'.zip')
+    os.chdir(prevdir)
 
 def fedit(folder,filename,g):
     if g == True:
@@ -132,7 +167,7 @@ def fedit(folder,filename,g):
         try:
             cmd = input(">> ")
             if cmd == "help":
-                print("\tlm -> list modules\n\tmod m -> print the properties of mod m\n\tlgf -> list global files\n\te -> open file editor\n\tcss - > open a CSS document\n\tjs -> open a JavaScript document\n\tfdir -> open file directory\n\tr -> refresh\n\texport(directory_name) -> export compiled file\n\tdel -> delete file\n\texit -> exit file\n\trestart -> restart program\n")
+                print("\tlm -> list modules\n\tmod m -> print the properties of mod m\n\tlgf -> list global files\n\te -> open file editor\n\tcss - > open a CSS document\n\tjs -> open a JavaScript document\n\tphp -> open a PHP document (for global files only)\n\tfdir -> open file directory\n\timages -> open images directory\n\tr -> refresh\n\texport(directory_name) -> export compiled file\n\tkill -> delete file\n\texit -> exit file\n\trestart -> restart program\n")
             elif cmd == "lm":
                 for m in descriptions:
                     print("\t"+m)
@@ -155,6 +190,8 @@ def fedit(folder,filename,g):
                 css(folder, filename, g)
             elif cmd == "js":
                 js(folder, filename, g)
+            elif cmd == "php":
+                php(folder, filename, g)
             elif cmd == "fdir":
                 url = "file:///"+str(os.getcwd())+"/"+path
                 webbrowser.open(url, new=0)
@@ -169,6 +206,12 @@ def fedit(folder,filename,g):
                         subprocess.Popen(["notepad.exe", "files/"+folder+"/"+filename+".py"])
                     elif sys.platform == "darwin":
                         subprocess.call(['open', '-a', 'TextEdit', "files/"+folder+"/"+filename+".py"])
+            elif cmd == "images":
+                if g == False:
+                    if not os.path.exists("files/"+folder+"/"+filename+"/images"):
+                        os.makedirs("files/"+folder+"/"+filename+"/images")
+                    url = "file:///"+str(os.getcwd())+"/files/"+folder+"/"+filename+"/images"
+                    webbrowser.open(url, new=0)
             elif cmd == "kill":
                 print('Are you sure you want to delete '+filename+'? Type [y] or [n].')
                 sure = input('>> ')
@@ -205,18 +248,23 @@ def export(home,folder,filename):
     path = "files/"+folder+"/"+filename+"/"
     os.makedirs(home+"\\"+filename)
     comp.main(folder,filename)
-    f = open(path+"/index.html",'r')
-    fr = open(home+"/"+filename+"/index.html",'w')
+    if os.path.exists(path+"/index.php"):
+        f = open(path+"/index.php",'r')
+        fr = open(home+"/"+filename+"/index.php",'w')
+    else:
+        f = open(path+"/index.html",'r')
+        fr = open(home+"/"+filename+"/index.html",'w')
     fr.write(f.read())
     fr.close()
     f.close()
-    print('copied index.html')
-    os.makedirs(home+"\\"+filename+"\\images")
-    for file_name in os.listdir(path+"/images"):
-        source = path+"/images/" + file_name
-        destination = home+"\\"+filename+"\\images\\" + file_name
-        shutil.copy(source, destination)
-        print('copied', file_name)
+    print('copied index')
+    if os.path.exists(path+"/images"):
+        os.makedirs(home+"\\"+filename+"\\images")
+        for file_name in os.listdir(path+"/images"):
+            source = path+"/images/" + file_name
+            destination = home+"\\"+filename+"\\images\\" + file_name
+            shutil.copy(source, destination)
+            print('copied', file_name)
     prevdir = os.getcwd()
     os.chdir(home)
     shutil.make_archive(filename, 'zip', filename)
@@ -251,6 +299,17 @@ def js(folder, filename, g):
     elif sys.platform == "darwin":
         subprocess.call(['open', '-a', 'TextEdit', path+filename+".js"])
     
+def php(folder, filename, g):
+    if g == True:
+        path = "files/"+folder+"/"
+        fcss = open(path+filename+".php", 'a')
+        fcss.close()
+        if sys.platform == "win32":
+            subprocess.Popen(["notepad.exe", path+filename+".php"])
+        elif sys.platform == "darwin":
+            subprocess.call(['open', '-a', 'TextEdit', path+filename+".php"])
+    else:
+        print('[!!!] to add php to a file, create a global file and link it with "import"')
 
 def copyrootf(filename, p):
     p = "files/"+p+"/"
