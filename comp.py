@@ -8,7 +8,7 @@ def main(folder, filename):
     php = False
 
     jquery = False
-    head = "<head>"+x.data.c()
+    head = "<head>"+x.data.c()+'<meta name="viewport" content="width=device-width, initial-scale=1">'
     phpcode = ""
     if os.path.exists(path+filename+".js"):
         head += '<script src="..\JQuery.js"></script>'
@@ -31,7 +31,7 @@ def main(folder, filename):
                     head += '<script src="..\JQuery-UI.js"></script>'
                     jquery = True
                 f = open("files/"+folder+"/"+g.replace('.py','.js'), 'r')
-                head += "<script>" + f.read().replace("\n"," ") + "</script>"
+                head += "<script>" + f.read() + "</script>"
                 f.close()
             if os.path.exists("files/"+folder+"/"+g.replace('.py','.css')) and (g.replace('.py','') in sys.modules):
                 f = open("files/"+folder+"/"+g.replace('.py','.css'), 'r')

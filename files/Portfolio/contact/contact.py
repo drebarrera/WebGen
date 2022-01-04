@@ -35,7 +35,7 @@ captionT.content = 'Feel free to reach out to me via the form below, directly at
 formC.content = [contact]
 title.content = 'What&#39;s On Your Mind...'
 contact.content = [form]
-form.content = '<?=$thankYou ?><form method="post" action="index.php"><label for="name">Your Name</label><input type="text" name="name" placeholder="First and last, please!" required><label for="email">E-Mail Address</label><input type="text" name="email" placeholder="johnnyappleseed@gmail.com" required><label for="phone">Phone Number</label><input type="text" name="phone" placeholder="In case you&#39;d like a call back"><label for="message">Subject</label><textarea name="message" placeholder="Write something.." style="height:200px" required></textarea><input type="submit" value="Submit" name="submit"></form>'
+form.content = '<form method="post" action="index.php"><label for="name">Your Name</label><input type="text" name="name" placeholder="First and last, please!" required><label for="email">E-Mail Address</label><input type="text" name="email" placeholder="johnnyappleseed@gmail.com" required><label for="phone">Phone Number</label><input type="text" name="phone" placeholder="In case you&#39;d like a call back"><label for="message">Subject</label><textarea name="message" type="text" placeholder="Write something.." style="height:200px" required></textarea><input type="submit" value="Submit" name="submit"></form><p style="color: white;"><?=$thankyou ?></p>'
 
 ### PROPERTIES ###
 # Body

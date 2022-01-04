@@ -7,13 +7,7 @@
 #welcome{
 	max-width: 600px;
 	width: 90%;
-	margin-top: 200px;
-}
-
-@media only screen and (max-width:1000px) {
-	#welcome{
-		margin-top: 300px;
-	}
+	margin-top: 20vh;
 }
 
 #slide1Image{
@@ -42,6 +36,7 @@
 	justify-content: center;
 	width: 100%;
 	flex-wrap: wrap;
+	padding-bottom: 25px;
 }
 
 .slideTitle{

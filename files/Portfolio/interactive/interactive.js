@@ -7,8 +7,8 @@ $(document).ready(function(){
 	let go = 1; // Cloud Enable
 	var scrollCoeff = 0; // Scroll Location
 	var slideHoverEN = 1; // Enable Hover Changes for Slide Text
-	$(window).scrollTop(0) // Reset Scroll Position
-	$('body').css('overflow-y', 'hidden'); // Hide Overflow
+	//$("#main").scrollTop(0) // Reset Scroll Position
+	$('#main').css('overflow-y', 'hidden'); // Hide Overflow
 	const equals = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 	$('#slideScrollMsg').hide();
 	$('#contactFloat').fadeOut(500);
@@ -105,13 +105,13 @@ $(document).ready(function(){
 
 	/// Start Click /// 
 	$('#mainInstructions > span').click(function(){
-		var winHeight = jQuery(window).height();
+		var winHeight = jQuery("#main").height();
 		if(track == 0){
 			alert('Please select a track by clicking to the left and then try "Start!" again.');
 		}
 		else if(track == 1){
 			go = 0;
-			$('body').css('overflow-y', 'visible');
+			$('#main').css('overflow-y', 'visible');
 			$('#trainRedMain').animate({
 				top: "145vh"
 			},1600, function(){
@@ -119,26 +119,15 @@ $(document).ready(function(){
 				$('#trainRedMain').hide();
 				$('#slide1Textbox').css('opacity',0);
 				$('#slide1Textbox').css('top','5vh');
-				$("html, body").animate({
-					scrollTop: winHeight
-				},1000, function(){
-					$('body').css('overflow-y', 'hidden');
-					$('#slide1Textbox').animate({
-						top: "0vh",
-						opacity: 1
-					}, 800);
+				$("#main").scrollTop(1);
+				setTimeout(function(){
 					$('#trainRedMain').show();
-					$('#trainRedMain').animate({
-						top: "125vh"
-					},500, function(){
-						$('body').css('overflow-y', 'visible');
-					});
-				});
+				}, 1800);
 			});
 		}
 		else if(track == 2){
 			go = 0;
-			$('body').css('overflow-y', 'visible');
+			$('#main').css('overflow-y', 'visible');
 			$('#trainBlueMain').animate({
 				top: "145vh"
 			},1600, function(){
@@ -146,53 +135,31 @@ $(document).ready(function(){
 				$('#trainBlueMain').hide();
 				$('#slide1Textbox').css('opacity',0);
 				$('#slide1Textbox').css('top','5vh');
-				$("html, body").animate({
-					scrollTop: winHeight
-				},1000, function(){
-					$('body').css('overflow-y', 'hidden');
-					$('#slide1Textbox').animate({
-						top: "0vh",
-						opacity: 1
-					}, 800);
+				$("#main").scrollTop(1);
+				setTimeout(function(){
 					$('#trainBlueMain').show();
-					$('#trainBlueMain').animate({
-						top: "125vh"
-					},500, function(){
-						$('body').css('overflow-y', 'visible');
-					});
-				});
+				}, 1800);
 			});
 		}
 		else if(track == 3){
 			go = 0;
-			$('body').css('overflow-y', 'visible');
+			$('#main').css('overflow-y', 'visible');
 			$('#trainYellowMain').animate({
 				top: "145vh"
 			},1600, function(){
-				$('#slide1Textbox').css('opacity',0);
-				$('#slide1Textbox').css('top','5vh');
 				$('#trainYellowMain').css("top","100vh");
 				$('#trainYellowMain').hide();
-				$("html, body").animate({
-					scrollTop: winHeight
-				},1000, function(){
-					$('body').css('overflow-y', 'hidden');
-					$('#slide1Textbox').animate({
-						top: "0vh",
-						opacity: 1
-					}, 800);
+				$('#slide1Textbox').css('opacity',0);
+				$('#slide1Textbox').css('top','5vh');
+				$("#main").scrollTop(1);
+				setTimeout(function(){
 					$('#trainYellowMain').show();
-					$('#trainYellowMain').animate({
-						top: "125vh"
-					},500, function(){
-						$('body').css('overflow-y', 'visible');
-					});
-				});
+				}, 1800);
 			});
 		}
 		else if(track == 4){
 			go = 0;
-			$('body').css('overflow-y', 'hidden');
+			$('#main').css('overflow-y', 'hidden');
 			$('#trainPurpleMain').animate({
 				top: "70vh"
 			},1000 );
@@ -200,13 +167,14 @@ $(document).ready(function(){
 				left: "-105%"
 			},1200, function(){
 				$('#trainPurpleMain').css("margin-top","-100vh");
+				window.open("https://www.drebarrera.com/music", '_self');
 			});
 		}
 	});
 
 	/// TrackSlide Click /// 
 	$('.trackSlide').click(function(){
-		var winHeight = jQuery(window).height();
+		var winHeight = jQuery("#main").height();
 		var trackID = $(this).attr('id');
 		var hoverIndex = {'redTrack': 0, 'blueTrack':1, 'yellowTrack':2,'trackMergeAll': 3, 'trackMergeBY':1};	
 		var trackColor = {0: 'Red', 1: 'Blue', 2: 'Yellow'};
@@ -281,13 +249,12 @@ $(document).ready(function(){
 	setTimeout(function(){
 		scrollReady = 1;
 	}, 100);
-
 	/// Scroll Events ///
-	jQuery(window).scroll(function(event){
-		var winHeight = jQuery(window).height();
-		var scrollTop = jQuery(this).scrollTop();
+	jQuery("#main").scroll(function(){
+		var winHeight = jQuery("#main").height();
+		var scrollTop = jQuery("#main").scrollTop();
 		var scrollDirection = lastScrollTop - scrollTop;	
-		$('body').delay(2).css('overflow-y', 'hidden');
+		$('#main').delay(2).css('overflow-y', 'hidden');
 		function trackColor(ind){
 			if(track == 1 && trackTypes[ind][0] == 1){
 				return 'Red';
@@ -302,51 +269,51 @@ $(document).ready(function(){
 				return '';
 			}
 		}
-		//alert("scroll!");
-		if (scrollDirection < 0){
+		if (scrollDirection < 0){		
 			if (scrollReady == 1) {
 				scrollCoeff = scrollCoeff + 1;
 				scrollReady = 0;
 				trackQueue = [0,0,0];
 				trackQueue[track - 1] = 1;
 				$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).css('display','block');
+				jQuery("#main").stop().scrollTop((scrollCoeff - 1) * winHeight);
+				$('#slideScrollMsg').fadeOut(500);
+				$('#contactFloat').fadeOut(500);
+				$('#slide'+(scrollCoeff-1)+'Textbox'+trackColor(scrollCoeff-1)).animate({
+					top: "5vh",
+					opacity: 0
+				}, 800);
 				setTimeout(function(){
-					$('#slideScrollMsg').fadeOut(500);
-					$('#contactFloat').fadeOut(500);
-					$('#slide'+(scrollCoeff-1)+'Textbox'+trackColor(scrollCoeff-1)).animate({
-						top: "5vh",
-						opacity: 0
-					}, 800);
-					jQuery("html, body").delay(800).animate({ scrollTop: winHeight * scrollCoeff + "px" }, animationSpeed, function(){
-						$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).delay(200).animate({
-							top: "0vh",
-							opacity: 1
-						}, 800);	
-						if(track == 1){
-							$('#trainRedMain').animate({
-								top: winHeight * scrollCoeff + winHeight * 0.25
-							},1000);
-						}
-						if(track == 2){
-							$('#trainBlueMain').animate({
-								top: winHeight * scrollCoeff + winHeight * 0.25
-							},1000);
-						}
-						if(track == 3){
-							$('#trainYellowMain').animate({
-								top: winHeight * scrollCoeff + winHeight * 0.25
-							},1000);
-						}
-					});
-					setTimeout(function(){
-						scrollReady = 1;
-						$('#slideScrollMsg').fadeIn(500);
-						if(scrollCoeff != 1){
-							$('#contactFloat').fadeIn(500);
-						}
-						$('body').css('overflow-y', 'visible');
-					}, readySpeed);
-				}, 100);
+				jQuery("#main").animate({ scrollTop: scrollCoeff * winHeight + "px" }, animationSpeed, function(){
+					$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).delay(200).animate({
+						top: "0vh",
+						opacity: 1
+					}, 800);	
+					if(track == 1){
+						$('#trainRedMain').animate({
+							top: winHeight * scrollCoeff + winHeight * 0.25
+						},1000);
+					}
+					if(track == 2){
+						$('#trainBlueMain').animate({
+							top: winHeight * scrollCoeff + winHeight * 0.25
+						},1000);
+					}
+					if(track == 3){
+						$('#trainYellowMain').animate({
+							top: winHeight * scrollCoeff + winHeight * 0.25
+						},1000);
+					}
+				});
+				setTimeout(function(){
+					scrollReady = 1;
+					$('#slideScrollMsg').fadeIn(500);
+					if(scrollCoeff != 1){
+						$('#contactFloat').fadeIn(500);
+					}
+					$('#main').css('overflow-y', 'visible');
+				}, readySpeed);
+				}, 800);
 			}
 		}
 		else {
@@ -361,7 +328,7 @@ $(document).ready(function(){
 						top: "5vh",
 						opacity: 0
 					}, 800);	
-					jQuery("html, body").delay(800).animate({ scrollTop: winHeight * scrollCoeff + "px" }, animationSpeed, function(){
+					jQuery("#main").delay(800).animate({ scrollTop: winHeight * scrollCoeff + "px" }, animationSpeed, function(){
 						$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).show();
 						$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).animate({
 							top: "0vh",
@@ -375,7 +342,7 @@ $(document).ready(function(){
 							if(scrollCoeff != 1){
 								$('#contactFloat').fadeIn(500);
 							}
-							$('body').css('overflow-y', 'visible');
+							$('#main').css('overflow-y', 'visible');
 						}
 					}, readySpeed);
 				}, 200);
@@ -386,7 +353,7 @@ $(document).ready(function(){
 
 	function scrollBy(newCoeff, trackSelect){
 		if (scrollReady == 1) {
-			var winHeight = jQuery(window).height();
+			var winHeight = jQuery("#main").height();
 			scrollReady = 0;
 			track = trackSelect;
 			trackQueue = [0,0,0];
@@ -413,7 +380,7 @@ $(document).ready(function(){
 					top: "5vh",
 					opacity: 0
 				}, 800);
-				jQuery("html, body").delay(800).animate({ scrollTop: winHeight * newCoeff + "px" }, animationSpeed, function(){
+				jQuery("#main").delay(800).animate({ scrollTop: winHeight * newCoeff + "px" }, animationSpeed, function(){
 					scrollCoeff = newCoeff;
 					$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).show();
 					$('#slide'+scrollCoeff+'Textbox'+trackColor(scrollCoeff)).delay(200).animate({
@@ -441,7 +408,7 @@ $(document).ready(function(){
 						if(newCoeff != 1){
 							$('#contactFloat').fadeIn(500);
 						}
-						$('body').css('overflow-y', 'visible');
+						$('#main').css('overflow-y', 'visible');
 					}
 				}, readySpeed);
 			}, 100);
@@ -455,5 +422,5 @@ $(document).ready(function(){
 });
 
 $(window).on('beforeunload', function() {
-	$(window).scrollTop(0);
+	$("#main").scrollTop(0);
 });

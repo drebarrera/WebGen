@@ -13,8 +13,8 @@ if($_POST["submit"]) {
 	if (strstr($message,'drebarrera.com') or strstr($message,'.xyz') or strstr($message,'bit.ly')) {
         	file_put_contents('../data/scamInfo.txt', $visitInfo, FILE_APPEND);
     	} else {
-        	$mailBody="Name: $name\nEmail: $email\nPhone: $phone\n\n$message";
-		mail($recipient, $subject, $mailBody, "From: $sender <$senderEmail>");
+        	$mailBody="Name: $name\nEmail: $email\nPhone: $phone\n\n$message\n\n$visitInfo";
+		mail($recipient, $subject, $mailBody, "From: $name <$email>");
 		$thankYou="<p>Thank you! Your message has been sent.</p>";
     	}
 }

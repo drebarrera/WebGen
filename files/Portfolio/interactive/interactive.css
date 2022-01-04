@@ -300,7 +300,6 @@
 	margin-top: 10vh;
 	display: block;
 	opacity: 0;
-	display: none;
 }
 
 .slideTitle{
@@ -501,4 +500,3 @@
 	background-color: white;
 	color: rgb(138, 74, 255);;
 }
-
