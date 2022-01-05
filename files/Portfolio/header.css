@@ -37,11 +37,11 @@ p{
 
 @media only screen and (max-width:1000px) {
 	#htitle{
-		padding-right: 10vw;
+		padding-right: 5vw;
 	}
 
 	#nav_center{
-		width: 80%;
+		width: 90%;
 	}
 }
 

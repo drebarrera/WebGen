@@ -18,7 +18,7 @@ class Data:
         charset = '<meta charset="'+self.charset+'">'
         description = '<meta name="description" content="'+self.description+'">'
         keywords = '<meta name="keywords" content="'+','.join(self.keywords)+'">'
-        author = '<meta name="description" content="'+self.author+'">'
+        author = '<meta name="author" content="'+self.author+'">'
         return "".join([title,charset,description,keywords,author])
         
 # Body -> Body Properties
