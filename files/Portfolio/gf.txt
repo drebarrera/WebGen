@@ -1,8 +1,0 @@
-header.py
-index.py
-alert.py
-interactive.py
-contact.py
-forms.py
-visitInfo.py
-visitInfoIndex.py

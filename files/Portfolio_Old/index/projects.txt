@@ -1,3 +1,0 @@
-ID,Title,Type,Category,CoverImage,ProjectImage,Description,OverlayColor,TextColor,SubtextColor
-WebGen,WebGen,Python/HTML/CSS/JavaScript,Engineering,/Volumes/Software SSD/WebGen/files/Portfolio/supporting/projects/webgenImage.jpeg,,This is a project description for WebGen. WebGen is a compiler that turns Python objects in HTML/CSS/Javascript objects. It was designed very carefully to allow for maximum website design support. The way it works is that it creates a website design workspace that maximizes website design productivity. It applies custom objects which correspond to HTML objects to build websites.,,,
-GVproject,Geovoltaic Interpreter,Prototyping/PCB/Python/GPS,Engineering,/Volumes/Software SSD/WebGen/files/Portfolio/supporting/projects/gvImage.jpg,,,,,
