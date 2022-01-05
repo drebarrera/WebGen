@@ -7,15 +7,22 @@ $visitInfo .= $_SERVER['REMOTE_ADDR'];
 date_default_timezone_set("America/New_York");
 $visitInfo .= ','.date("Y-m-d;h:i:sA").','.$email.PHP_EOL;
 file_put_contents('data/visitInfo.txt', $visitInfo, FILE_APPEND); ?><!DOCTYPE html><html><head><title>Dre Barrera</title><meta charset="utf-8"><meta name="description" content="Default WebGen Page"><meta name="keywords" content=""><meta name="description" content="Andres Barrera"><meta name="viewport" content="width=device-width, initial-scale=1"><script src="..\JQuery.js"></script><script src="..\JQuery-UI.js"></script><script>$(document).ready(function(){
+	var winHeight = jQuery(window).height();
+	var winWidth = jQuery(window).width();
+	xNorm = 1368;
+	yNorm = 783;
+	xMin = 1075;
+	ratio = winHeight / winWidth;
+	ratioNorm = yNorm / xNorm;
+	ratioMin = yNorm / xMin;
+	if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) && ratio < ratioMin) {
+		window.open("https://www.drebarrera.com/interactive", '_self');
+	}
+
 	$('#interactive').click(function(){
 		var winHeight = jQuery(window).height();
 		var winWidth = jQuery(window).width();
-		xNorm = 1368;
-		yNorm = 783;
-		xMin = 1075;
 		ratio = winHeight / winWidth;
-		ratioNorm = yNorm / xNorm;
-		ratioMin = yNorm / xMin;
 		if(ratio < ratioMin){
 			window.open("https://www.drebarrera.com/interactive", '_blank');
 		}
