@@ -68,7 +68,7 @@ def f(folder, filename):
     if not os.path.exists(path+filename+".py"):
         ftxt = open(path+filename+".py", 'a')
         if g == False:
-            ftxt.write("import modules as mx\nimport sys\nsys.path.append(r'"+os.getcwd()+"\\files\\"+folder+"')\ndata = mx.Data()\nbody = mx.Body()\n\n### OBJECTS ###\n\n### CONTENT ###\n\n### PROPERTIES ###")
+            ftxt.write("import modules as mx\nimport sys\nimport os\nhomedir = os.getcwd() + r'/files/Portfolio/'\nsys.path.append(homedir)\ndata = mx.Data()\nbody = mx.Body()\n\n### OBJECTS ###\n\n### CONTENT ###\n\n### PROPERTIES ###")
         else:
             ftxt.write("import modules as mx\n\n### OBJECTS ###\n\n### CONTENT ###\n\n### PROPERTIES ###")
     else:
@@ -92,10 +92,6 @@ def f(folder, filename):
         print("-", end="")
         sleep(0.02)
     print("\n")
-    #if sys.platform == "win32":
-    #    subprocess.Popen(["notepad.exe", path+filename+".py"])
-    #elif sys.platform == "darwin":
-    #    subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
     fedit(folder,filename,g)
 
 def kill(folder):
@@ -200,20 +196,34 @@ def fedit(folder,filename,g):
             elif cmd == "e":
                 if(g == False):
                     if sys.platform == "win32":
-                        subprocess.Popen(["notepad.exe", path+filename+".py"])
+                        try:
+                            subprocess.Popen([sys.exec_prefix+r"\Lib\idlelib\idle.bat", path+filename+".py"])
+                        except Exception as exc:
+                            print(exc)
+                            print('opening notepad.exe as subtitute...')
+                            subprocess.Popen(["notepad.exe", path+filename+".py"])
                     elif sys.platform == "darwin":
-                        subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
+                        try:
+                            subprocess.call(['open', '-a', 'IDLE 3', path+filename+".py"])
+                        except Exception as exc:
+                            print(exc)
+                            print('opening TextEdit as subtitute...')
+                            subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
                 else:
                     if sys.platform == "win32":
-                        subprocess.Popen(["notepad.exe", "files/"+folder+"/"+filename+".py"])
+                        try:
+                            subprocess.Popen([sys.exec_prefix+r"\Lib\idlelib\idle.bat", "files/"+folder+"/"+filename+".py"])
+                        except Exception as exc:
+                            print(exc)
+                            print('opening notepad.exe as subtitute...')
+                            subprocess.Popen(["notepad.exe", "files/"+folder+"/"+filename+".py"])
                     elif sys.platform == "darwin":
-                        subprocess.call(['open', '-a', 'TextEdit', "files/"+folder+"/"+filename+".py"])
-            elif cmd == "images":
-                if g == False:
-                    if not os.path.exists("files/"+folder+"/"+filename+"/images"):
-                        os.makedirs("files/"+folder+"/"+filename+"/images")
-                    url = "file:///"+str(os.getcwd())+"/files/"+folder+"/"+filename+"/images"
-                    webbrowser.open(url, new=0)
+                        try:
+                            subprocess.call(['open', '-a', 'IDLE 3', "files/"+folder+"/"+filename+".py"])
+                        except Exception as exc:
+                            print(exc)
+                            print('opening TextEdit as subtitute...')
+                            subprocess.call(['open', '-a', 'TextEdit', "files/"+folder+"/"+filename+".py"])
             elif cmd == "kill":
                 print('Are you sure you want to delete '+filename+'? Type [y] or [n].')
                 sure = input('>> ')
