@@ -118,7 +118,7 @@ def gf(folder, filename):
 
 def exportf(folder, destination):
     home = destination
-    os.makedirs(home+"\\"+folder)
+    os.makedirs(home+"/"+folder)
     for filename in os.listdir("files/"+folder+"/"):
         if "." in filename:
             continue
@@ -126,7 +126,7 @@ def exportf(folder, destination):
             continue
         path = "files/"+folder+"/"+filename+"/"
         newhome = home + "/" + folder + "/"
-        os.makedirs(newhome+"\\"+filename)
+        os.makedirs(newhome+"/"+filename)
         comp.main(folder,filename)
         if os.path.exists(path+"/index.php"):
             f = open(path+"/index.php",'r')
@@ -139,18 +139,18 @@ def exportf(folder, destination):
         f.close()
         print('copied '+filename)
         if os.path.exists(path+"/images"):
-            os.makedirs(newhome+"\\"+filename+"\\images")
+            os.makedirs(newhome+"/"+filename+"/images")
             for file_name in os.listdir(path+"/images"):
                 source = path+"/images/" + file_name
-                destination = newhome+"\\"+filename+"\\images\\" + file_name
+                destination = newhome+"/"+filename+"/images/" + file_name
                 shutil.copy(source, destination)
                 print('copied', file_name)
-    shutil.copy('JQuery.js', home+"\\"+folder)
-    shutil.copy('JQuery-UI.js', home+"\\"+folder)
+    shutil.copy('JQuery.js', home+"/"+folder)
+    shutil.copy('JQuery-UI.js', home+"/"+folder)
     prevdir = os.getcwd()
     os.chdir(home)
     shutil.make_archive(folder, 'zip', folder)
-    shutil.rmtree(home+"\\"+folder)
+    shutil.rmtree(home+"/"+folder)
     print('zipped', folder+'.zip')
     os.chdir(prevdir)
 
@@ -258,7 +258,7 @@ def fedit(folder,filename,g):
 
 def export(home,folder,filename):
     path = "files/"+folder+"/"+filename+"/"
-    os.makedirs(home+"\\"+filename)
+    os.makedirs(home+"/"+filename)
     comp.main(folder,filename)
     if os.path.exists(path+"/index.php"):
         f = open(path+"/index.php",'r')
@@ -271,16 +271,16 @@ def export(home,folder,filename):
     f.close()
     print('copied index')
     if os.path.exists(path+"/images"):
-        os.makedirs(home+"\\"+filename+"\\images")
+        os.makedirs(home+"/"+filename+"/images")
         for file_name in os.listdir(path+"/images"):
             source = path+"/images/" + file_name
-            destination = home+"\\"+filename+"\\images\\" + file_name
+            destination = home+"/"+filename+"/images/" + file_name
             shutil.copy(source, destination)
             print('copied', file_name)
     prevdir = os.getcwd()
     os.chdir(home)
     shutil.make_archive(filename, 'zip', filename)
-    shutil.rmtree(home+"\\"+filename)
+    shutil.rmtree(home+"/"+filename)
     print('zipped', filename+'.zip')
     os.chdir(prevdir)
 
