@@ -1,0 +1,3 @@
+special-vendored-path/* linguist-vendored
+JQuery-UI.js linguist-vendored=true
+JQuery.js linguist-vendored=true
