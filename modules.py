@@ -12,6 +12,9 @@ class Data:
         self.description = "Default WebGen Page"
         self.keywords = []
         self.author = "Andres Barrera"
+        self.jquery_script = True
+        self.jquery_ui_script = True
+        self.scripts = []
             
     def c(self):
         title = '<title>'+self.title+'</title>'

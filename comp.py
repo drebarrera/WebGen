@@ -11,8 +11,10 @@ def main(folder, filename):
     head = "<head>"+x.data.c()+'<meta name="viewport" content="width=device-width, initial-scale=1">'
     phpcode = ""
     if os.path.exists(path+filename+".js"):
-        head += '<script src="..\JQuery.js"></script>'
-        head += '<script src="..\JQuery-UI.js"></script>'
+        head += '<script src="..\JQuery.js"></script>' if x.data.jquery_script else ''
+        head += '<script src="..\JQuery-UI.js"></script>' if x.data.jquery_ui_script else ''
+        for script in x.data.scripts:
+            head += '<script src="'+script+'"></script>'
         jquery = True
         fjs = open(path+filename+".js", 'r')
         head += "<script>" + fjs.read() + "</script>"
@@ -27,8 +29,8 @@ def main(folder, filename):
         for g in gf:
             if os.path.exists("files/"+folder+"/"+g.replace('.py','.js')) and (g.replace('.py','') in sys.modules):
                 if jquery == False:
-                    head += '<script src="..\JQuery.js"></script>'
-                    head += '<script src="..\JQuery-UI.js"></script>'
+                    head += '<script src="..\JQuery.js"></script>' if x.data.jquery_script else ''
+                    head += '<script src="..\JQuery-UI.js"></script>' if x.data.jquery_ui_script else ''
                     jquery = True
                 f = open("files/"+folder+"/"+g.replace('.py','.js'), 'r')
                 head += "<script>" + f.read() + "</script>"
