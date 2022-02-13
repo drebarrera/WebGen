@@ -1,5 +1,5 @@
 <h1 align="center">WebGen</h1>
-WebGen is a custom Python to User Interface compiler with the goal of making website and app design cleaner and more efficient.  WebGen uses Python classes to represent HTML elements, creating repeated structures much more reliably than copy/paste. Javascript, CSS, and PHP global files can be created and linked to pages, giving creators the ability to use the same pieces of code on every site. WebGen operates much more effectively than programming from scratch in HTML, while still presenting the customizable flexibility of creating a website through code. Created by <a href="https://www.drebarrera.com" target="_blank">Dre Barrera</a>
+WebGen is a custom Python to User Interface compiler with the goal of making website and app design cleaner and more efficient.  WebGen uses Python classes to represent HTML elements, creating repeated structures much more reliably than copy/paste. Javascript, CSS, and PHP global files can be created and linked to pages, giving creators the ability to use the same pieces of code on every site. WebGen operates much more effectively than programming from scratch in HTML, while still presenting the customizable flexibility of creating a website through code. Created by <a href="https://www.drebarrera.com" target="_blank">Dre Barrera</a>.
 
 <h2>Setting Up WebGen</h2>
 All that is necessary to get started is to download this repository! No imported libraries necessary! There are three key files necessary to run WebGen: main.py, modules.py, and comp.py.
@@ -58,21 +58,59 @@ Interface commands are used to create, organize, edit, delete, compile, and expo
 Modular commands refer the Python commands used to define objects and their properties. To find the modules offered by <code>modules.py</code> and the properties of said modules, use the <code>lm</code> and <code>mod m</code> commands in the WebGen interface (see File Commands above). To assign an object, follow the steps below:
 <ol>
 <li><code>container_elem = mx.C()</code> - Object assignment is done by assigning a variable to a class (in this example the container class, <code>C()</code>, is used). Remember to prepend the class with <code>mx.</code> to declare the object as an imported module class.</li>
-<li><code>container_elem.content = [text_elem]</code> - Content assignment is done by two different methods: For container classes such as <code>C()</code> and <code>Table()</code>, the objects stored within the containers are stored within lists and are in object form (in this example, text_elem is an object within container_elem). For text-based elements, such as <code>T()</code> and <code>Link()</code>, the content refers to text (ie. <code> text_elem.content = "This is text"</code>).</li>
+<li><code>container_elem.content = [text_elem]</code> - Content assignment is done by two different methods: For container classes such as <code>C()</code> and <code>Table()</code>, the objects stored within the containers are stored within lists and are in object form (in this example, text_elem is an object within container_elem). For text-based elements, such as <code>T()</code>, the content refers to text (ie. <code> text_elem.content = "This is text"</code>).</li>
 <li><code>container_elem.text_align = "center"</code> - Property assignment is done by assigning values to the style properties desired. Note that properties using hyphenation, such as <code>text-align</code> replace the hyphen with an underscore in Python scripts (ie. <code>text_align</code>). Some properties have defaults which may be overriden by reassignment.</li>
 </ol>
 
 <h5>Featured Classes</h5>
 <ul>
-<li><code>Data()</code> - The Data element provides the different components and metadata used in the <code>head</code> element of the webpage.</li>
+<li><code>mx.Data()</code> - The Data element provides the different components and metadata used in the <code>head</code> element of the webpage.</li>
 <ul>
-<li><code>data.title</code> - The title of the webpage.</li>
-<li><code>data.charset</code> - The charset of the webpage.</li>
+
+  <li><code>data.title</code> - The title of the webpage.</li>
+  <li><code>data.charset</code> - The charset metadata of the webpage. Default is "utf-8".</li>
+  <li><code>data.description</code> - The description metadata of the webpage.</li>
+  <li><code>data.keywords</code> - The keyword metadata of the webpage. List your keywords within a list: <code>data.keywords = ['these','are','keywords']</code></li>
+  <li><code>data.author</code> - The author metadata of the webpage.</li>
+  <li><code>data.viewport</code> - The viewport metadata of the webpage. Default is "width=device-width, initial-scale=1".</li>
+  <li><code>data.jquery_script</code> - The jquery_script property enables the use of the jQuery source file imported from the WebGen directory. Default is True. To disable, reassign to False.</li>
+  <li><code>data.jquery_ui_script</code> - The jquery_ui_script property enables the use of the jQuery-UI source file imported from the WebGen directory. Default is True. To disable, reassign to False.</li>
+  <li><code>data.scripts</code> - The scripts property contains a list of imported scripts via source URLs. List the imported script locations like so: <code>data.scripts = ['script1_location','script2_location']</code>.</li>
+</ul>
+  <p></p>
+<li><code>mx.Body()</code> - The Body element allows for the adjustment of the style properties and content of the <code>body</code> element of the webpage.</li>
+<ul>
+
+  <li><code>body.background_color</code> - The background color of the webpage. Default is "#ffffff".</li>
+  <li><code>body.overflow_x</code> - The overflow-x property of the webpage. Default is "hidden".</li>
+  <li><code>body.font_family</code> - The font-family property of the webpage. Default is "Helvetica".</li>
+  <li><code>body.color</code> - The color property of the webpage. Default is "black".</li>
+  <li><code>body.content</code> - The content of the webpage. Body is a container object, meaning that all content should also be objects, listed in order of priority like so: <code>body.content = [element1, element2, element3]</code>.</li>
+</ul>
+  <p></p>
+<li><code>mx.T()</code> - The Text element generates paragraph, heading, and other text content.</li>
+<ul>
+
+  <li><code>text_elem.type</code> - The text tag represented by the element. Default is a paragraph tag, "p", but can be reassigned to "h1", "em", or other tags.</li>
+  <li><code>text_elem.id</code> - The ID HTML attribute.</li>
+  <li><code>text_elem.cl</code> - The Class HTML attribute.</li>
+  <li><code>text_elem.content</code> - The content of the text element. Text element content is a string and can be assigned like so: <code>text_elem.content = "This is text content"</code></li>
+</ul>
+ <p></p>
+<li><code>mx.Link()</code> - The Link element generates a link container which acts as a link wrapper around other object content.</li>
+<ul>
+
+  <li><code>text_elem.src</code> - The href source of the link. Assign a URL to this property.</li>
+  <li><code>text_elem.id</code> - The ID HTML attribute.</li>
+  <li><code>text_elem.cl</code> - The Class HTML attribute.</li>
+  <li><code>text_elem.content</code> - The content of the link element. Link element content is a list of objects wrapped by the link like so: <code>link_elem.content = [element1, element2]</code></li>
 </ul>
 </ul>
 
 <h2>FAQs</h2>
 <ul>
+<li>Why is my content not showing on my compiled webpage?</li>
+<p>If you are having a hard time seeing your content appear on your compiled webpage after using the <code>r</code> command, make sure that the desired elements have been added as content within the <code>body</code> element of the webpage or another embedded container element. Elements must be embedded in order to be properly compiled: <code>container_elem.content = [element]</code>.</p>
 <li>How do I create a PHP webpage?</li>
 <p>To create a PHP page, simply create a normal file with the Interface Command <code>f(folder, filename)</code> and add the HTML components (forms, containers, etc.) of the webpage. Then, use the <code>exit</code> command to return to the main interface and create a global file with the <code>gf(folder, global_filename)</code> command. Instead of using the <code>e</code> command to edit the HTML elements (forms, containers, etc.) of the page, use the <code>php</code> File Command to add PHP content. No enclosing PHP tags are needed - just start programming your PHP content.</p>
 </ul>
