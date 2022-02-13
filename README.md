@@ -59,7 +59,7 @@ Modular commands refer the Python commands used to define objects and their prop
 <ol>
 <li><code>container_elem = mx.C()</code> - Object assignment is done by assigning a variable to a class (in this example the container class, <code>C()</code>, is used). Remember to prepend the class with <code>mx.</code> to declare the object as an imported module class.</li>
 <li><code>container_elem.content = [text_elem]</code> - Content assignment is done by two different methods: For container classes such as <code>C()</code> and <code>Table()</code>, the objects stored within the containers are stored within lists and are in object form (in this example, text_elem is an object within container_elem). For text-based elements, such as <code>T()</code>, the content refers to text (ie. <code> text_elem.content = "This is text"</code>).</li>
-<li><code>container_elem.text_align = "center"</code> - Property assignment is done by assigning values to the style properties desired. Note that properties using hyphenation, such as <code>text-align</code> replace the hyphen with an underscore in Python scripts (ie. <code>text_align</code>). Some properties have defaults which may be overriden by reassignment.</li>
+<li><code>container_elem.text_align = "center"</code> - Property assignment is done by assigning values to the style properties desired. Note that properties using hyphenation, such as <code>text-align</code> replace the hyphen with an underscore in Python scripts (ie. <code>text_align</code>). Some properties have defaults which may be overriden by reassignment. Properties such as <code>margin</code>, <code>padding</code>, and <code>width</code> are considered Dynamic Properites because they typically vary by viewport dimensions. Because style properties are fixed and cannot be adjusted with CSS after being set, Dynamic Properties are restricted from being set with style properties, but instead must be adjusted with CSS or JavaScript code.</li>
 </ol>
 
 <h5>Featured Classes</h5>
@@ -94,16 +94,39 @@ Modular commands refer the Python commands used to define objects and their prop
   <li><code>text_elem.type</code> - The text tag represented by the element. Default is a paragraph tag, "p", but can be reassigned to "h1", "em", or other tags.</li>
   <li><code>text_elem.id</code> - The ID HTML attribute.</li>
   <li><code>text_elem.cl</code> - The Class HTML attribute.</li>
-  <li><code>text_elem.content</code> - The content of the text element. Text element content is a string and can be assigned like so: <code>text_elem.content = "This is text content"</code></li>
+  <li><code>text_elem.content</code> - The content of the text element. Text element content is a string and can be assigned like so: <code>text_elem.content = "This is text content"</code>.</li>
 </ul>
  <p></p>
-<li><code>mx.Link()</code> - The Link element generates a link container which acts as a link wrapper around other object content.</li>
+<li><code>mx.Link()</code> - The Link element generates a link container around other object content.</li>
 <ul>
 
-  <li><code>text_elem.src</code> - The href source of the link. Assign a URL to this property.</li>
-  <li><code>text_elem.id</code> - The ID HTML attribute.</li>
-  <li><code>text_elem.cl</code> - The Class HTML attribute.</li>
-  <li><code>text_elem.content</code> - The content of the link element. Link element content is a list of objects wrapped by the link like so: <code>link_elem.content = [element1, element2]</code></li>
+  <li><code>link_elem.src</code> - The href source of the link. Assign a URL to this property.</li>
+  <li><code>link_elem.id</code> - The ID HTML attribute.</li>
+  <li><code>link_elem.cl</code> - The Class HTML attribute.</li>
+  <li><code>link_elem.content</code> - The content of the link element. Link element content is a list of objects wrapped by the link like so: <code>link_elem.content = [element1, element2]</code>.</li>
+</ul>
+  
+ <p></p>
+<li><code>mx.C()</code> - The Container element generates a div container with other object content.</li>
+<ul>
+  <li><code>container_elem.id</code> - The ID HTML attribute.</li>
+  <li><code>container_elem.cl</code> - The Class HTML attribute.</li>
+  <li><code>container_elem.onclick</code> - The onclick event HTML attribute.</li>
+  <li><code>container_elem.onhover</code> - The onhover event HTML attribute.</li>
+  <li><code>container_elem.attr</code> - This property serves to define a custom HTML attribute.</li>
+  <li><code>container_elem.background_color</code> - The background color of the container. Default is "lightblue" for visibility and identification. To override for CSS adjustment, reassign to <code>container_elem.background_color = ""</code>.</li>
+  <li><code>container_elem.overflow_x</code> - The overflow-x property of the container. Default is "visible".</li>
+  <li><code>container_elem.overflow_y</code> - The overflow-y property of the container. Default is "visible".</li>
+  <li><code>container_elem.content</code> - The content of the container element. Container element content is a list of objects wrapped by the container like so: <code>container_elem.content = [element1, element2]</code>.</li>
+</ul>
+  
+<p></p>
+<li><code>mx.Table()</code> - The Table element generates a table with cells defined by nested lists.</li>
+<ul>
+  <li><code>table_elem.id</code> - The ID HTML attribute. When assigned an ID, the cells of the Table will also assume the same ID with the appended "_rowNumber_columnNumber". The default ID is "#table". Thus, row 2, column 4 will have the ID "#table_2_4" unless the ID is adjusted.</li>
+  <li><code>table_elem.cl</code> - The Class HTML attribute. Default is ".table".</li>
+  <li><code>table_elem.background_color</code> - The background color of the table. Default is "coral" for visibility and identification. To override for CSS adjustment, reassign to <code>table_elem.background_color = ""</code>.</li>
+  <li><code>table_elem.content</code> - The content of the table element. Table element content is generated by a nested list of objects wrapped by the table like so: <code>table_elem.content = [[row1_col1_content, row1_col2_content, row1_col3_content], [row2_col1_content, row2_col2_content, row2_col3_content]]</code>.</li>
 </ul>
 </ul>
 
