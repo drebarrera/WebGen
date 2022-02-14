@@ -1,5 +1,5 @@
 <h1 align="center">WebGen</h1>
-WebGen is a custom Python to User Interface compiler with the goal of making website and app design cleaner and more efficient.  WebGen uses Python classes to represent HTML elements, creating repeated structures much more reliably than copy/paste. Javascript, CSS, and PHP global files can be created and linked to pages, giving creators the ability to use the same pieces of code on every site. WebGen operates much more effectively than programming from scratch in HTML, while still presenting the customizable flexibility of creating a website through code. Created by <a href="https://www.drebarrera.com" target="_blank">Dre Barrera</a>
+WebGen is a custom Python to User Interface compiler with the goal of making website and app design cleaner and more efficient.  WebGen uses Python classes to represent HTML elements, creating repeated structures much more reliably than copy/paste. Javascript, CSS, and PHP global files can be created and linked to pages, giving creators the ability to use the same pieces of code on every site. WebGen operates much more effectively than programming from scratch in HTML, while still presenting the customizable flexibility of creating a website through code. Created by <a href="https://www.drebarrera.com" target="_blank">Dre Barrera</a>.
 
 <h2>Setting Up WebGen</h2>
 All that is necessary to get started is to download this repository! No imported libraries necessary! There are three key files necessary to run WebGen: main.py, modules.py, and comp.py.
@@ -58,21 +58,147 @@ Interface commands are used to create, organize, edit, delete, compile, and expo
 Modular commands refer the Python commands used to define objects and their properties. To find the modules offered by <code>modules.py</code> and the properties of said modules, use the <code>lm</code> and <code>mod m</code> commands in the WebGen interface (see File Commands above). To assign an object, follow the steps below:
 <ol>
 <li><code>container_elem = mx.C()</code> - Object assignment is done by assigning a variable to a class (in this example the container class, <code>C()</code>, is used). Remember to prepend the class with <code>mx.</code> to declare the object as an imported module class.</li>
-<li><code>container_elem.content = [text_elem]</code> - Content assignment is done by two different methods: For container classes such as <code>C()</code> and <code>Table()</code>, the objects stored within the containers are stored within lists and are in object form (in this example, text_elem is an object within container_elem). For text-based elements, such as <code>T()</code> and <code>Link()</code>, the content refers to text (ie. <code> text_elem.content = "This is text"</code>).</li>
-<li><code>container_elem.text_align = "center"</code> - Property assignment is done by assigning values to the style properties desired. Note that properties using hyphenation, such as <code>text-align</code> replace the hyphen with an underscore in Python scripts (ie. <code>text_align</code>). Some properties have defaults which may be overriden by reassignment.</li>
+<li><code>container_elem.content = [text_elem]</code> - Content assignment is done by two different methods: For container classes such as <code>C()</code> and <code>Table()</code>, the objects stored within the containers are stored within lists and are in object form (in this example, text_elem is an object within container_elem). For text-based elements, such as <code>T()</code>, the content refers to text (ie. <code> text_elem.content = "This is text"</code>).</li>
+<li><code>container_elem.text_align = "center"</code> - Property assignment is done by assigning values to the style properties desired. Note that properties using hyphenation, such as <code>text-align</code> replace the hyphen with an underscore in Python scripts (ie. <code>text_align</code>). Some properties have defaults which may be overriden by reassignment. Properties such as <code>margin</code>, <code>padding</code>, and <code>width</code> are considered Dynamic Properites because they typically vary by viewport dimensions. Because style properties are fixed and cannot be adjusted with CSS after being set, Dynamic Properties are restricted from being set with style properties, but instead must be adjusted with CSS or JavaScript code.</li>
 </ol>
 
 <h5>Featured Classes</h5>
 <ul>
-<li><code>Data()</code> - The Data element provides the different components and metadata used in the <code>head</code> element of the webpage.</li>
+<li><code>data = mx.Data()</code> - The Data element provides the different components and metadata used in the <code>head</code> element of the webpage.</li>
 <ul>
-<li><code>data.title</code> - The title of the webpage.</li>
-<li><code>data.charset</code> - The charset of the webpage.</li>
+
+  <li><code>data.title</code> - The title of the webpage.</li>
+  <li><code>data.charset</code> - The charset metadata of the webpage. Default is "utf-8".</li>
+  <li><code>data.description</code> - The description metadata of the webpage.</li>
+  <li><code>data.keywords</code> - The keyword metadata of the webpage. List your keywords within a list: <code>data.keywords = ['these','are','keywords']</code></li>
+  <li><code>data.author</code> - The author metadata of the webpage.</li>
+  <li><code>data.viewport</code> - The viewport metadata of the webpage. Default is "width=device-width, initial-scale=1".</li>
+  <li><code>data.jquery_script</code> - The jquery_script property enables the use of the jQuery source file imported from the WebGen directory. Default is True. To disable, reassign to False.</li>
+  <li><code>data.jquery_ui_script</code> - The jquery_ui_script property enables the use of the jQuery-UI source file imported from the WebGen directory. Default is True. To disable, reassign to False.</li>
+  <li><code>data.scripts</code> - The scripts property contains a list of imported scripts via source URLs. List the imported script locations like so: <code>data.scripts = ['script1_location','script2_location']</code>.</li>
 </ul>
+  <p></p>
+<li><code>body = mx.Body()</code> - The Body element allows for the adjustment of the style properties and content of the <code>body</code> element of the webpage.</li>
+<ul>
+
+  <li><code>body.background_color</code> - The background color of the webpage. Default is "#ffffff".</li>
+  <li><code>body.overflow_x</code> - The overflow-x property of the webpage. Default is "hidden".</li>
+  <li><code>body.font_family</code> - The font-family property of the webpage. Default is "Helvetica".</li>
+  <li><code>body.color</code> - The color property of the webpage. Default is "black".</li>
+  <li><code>body.content</code> - The content of the webpage. Body is a container object, meaning that all content should also be objects, listed in order of priority like so: <code>body.content = [element1, element2, element3]</code>.</li>
+</ul>
+  <p></p>
+<li><code>text_elem = mx.T()</code> - The Text element generates paragraph, heading, and other text content.</li>
+<ul>
+
+  <li><code>text_elem.type</code> - The text tag represented by the element. Default is a paragraph tag, "p", but can be reassigned to "h1", "em", or other tags.</li>
+  <li><code>text_elem.id</code> - The ID HTML attribute.</li>
+  <li><code>text_elem.cl</code> - The Class HTML attribute.</li>
+  <li><code>text_elem.content</code> - The content of the text element. Text element content is a string and can be assigned like so: <code>text_elem.content = "This is text content"</code>.</li>
+</ul>
+ <p></p>
+<li><code>link_elem = mx.Link()</code> - The Link element generates a link container around other object content.</li>
+<ul>
+
+  <li><code>link_elem.src</code> - The href source of the link. Assign a URL to this property.</li>
+  <li><code>link_elem.id</code> - The ID HTML attribute.</li>
+  <li><code>link_elem.cl</code> - The Class HTML attribute.</li>
+  <li><code>link_elem.content</code> - The content of the link element. Link element content is a list of objects wrapped by the link like so: <code>link_elem.content = [element1, element2]</code>.</li>
+</ul>
+  
+ <p></p>
+<li><code>container_elem = mx.C()</code> - The Container element generates a div container with other object content.</li>
+<ul>
+  <li><code>container_elem.id</code> - The ID HTML attribute.</li>
+  <li><code>container_elem.cl</code> - The Class HTML attribute.</li>
+  <li><code>container_elem.onclick</code> - The onclick event HTML attribute.</li>
+  <li><code>container_elem.onhover</code> - The onhover event HTML attribute.</li>
+  <li><code>container_elem.attr</code> - This property serves to define a custom HTML attribute.</li>
+  <li><code>container_elem.background_color</code> - The background color of the container. Default is "lightblue" for visibility and identification. To override for CSS adjustment, reassign to <code>container_elem.background_color = ""</code>.</li>
+  <li><code>container_elem.overflow_x</code> - The overflow-x property of the container. Default is "visible".</li>
+  <li><code>container_elem.overflow_y</code> - The overflow-y property of the container. Default is "visible".</li>
+  <li><code>container_elem.content</code> - The content of the container element. Container element content is a list of objects wrapped by the container like so: <code>container_elem.content = [element1, element2]</code>.</li>
+</ul>
+  
+<p></p>
+<li><code>table_elem = mx.Table()</code> - The Table element generates a table with cells defined by nested lists.</li>
+<ul>
+  <li><code>table_elem.id</code> - The ID HTML attribute. When assigned an ID, the cells of the Table will also assume the same ID with the appended "_rowNumber_columnNumber". The default ID is "table". Thus, row 2, column 4 will have the ID "table_2_4" unless the ID is adjusted.</li>
+  <li><code>table_elem.cl</code> - The Class HTML attribute. Default is ".table".</li>
+  <li><code>table_elem.background_color</code> - The background color of the table. Default is "coral" for visibility and identification. To override for CSS adjustment, reassign to <code>table_elem.background_color = ""</code>.</li>
+  <li><code>table_elem.content</code> - The content of the table element. Table element content is generated by a nested list of objects wrapped by the table like so: <code>table_elem.content = [[row1_col1_content, row1_col2_content, row1_col3_content], [row2_col1_content, row2_col2_content, row2_col3_content]]</code>.</li>
+</ul>
+
+<p></p>
+<li><code>nav = mx.Nav()</code> - The Nav element generates a container wrapped table, which is great for creating navigational bars.</li>
+<ul>
+  <li><code>nav.id</code> - The ID HTML attribute of the Container. The default ID is "nav".</li>
+  <li><code>nav.cl</code> - The Class HTML attribute of the Container.</li>
+  <li><code>nav.tableid</code> - The ID HTML attribute of the Table. When assigned an ID, the cells of the Table will also assume the same ID with the appended "_rowNumber_columnNumber". The default ID is "navtable". Thus, row 2, column 4 will have the ID "navtable_2_4" unless the ID is adjusted.</li>
+  <li><code>nav.background_color</code> - The background color of the Container. Default is "orange" for visibility and identification. To override for CSS adjustment, reassign to <code>nav.background_color = ""</code>.</li>
+  <li><code>nav.position</code> - The position style property of the Container. Default is "fixed". To override for CSS adjustment, reassign to <code>nav.position = ""</code>.</li>
+  <li><code>nav.z_index</code> - The z-index style property of the Container.</li>
+  <li><code>nav.content</code> - The content of the Table element. Table element content is generated by a nested list of objects wrapped by the table like so: <code>nav.content = [[row1_col1_content, row1_col2_content, row1_col3_content], [row2_col1_content, row2_col2_content, row2_col3_content]]</code>.</li>
+</ul>
+  
+<p></p>
+<li><code>menu_icon = mx.Menu()</code> - The Menu element generates a 3-bar customizable svg menu icon.</li>
+<ul>
+  <li><code>menu_icon.id</code> - The ID HTML attribute of the Menu. The default ID is "menubutton".</li>
+  <li><code>menu_icon.length</code> - The length property determines the horizontal length of the Menu in pixels. Default is "35".</li>
+  <li><code>menu_icon.width</code> - The width property determines the thickness or width of the Menu bars in pixels. Default is "4".</li>
+  <li><code>menu_icon.spacing</code> - The spacing property determines the height of the Menu as a percentage of the length property. Spacing is a number on a scale of 0 to 1. Default is "0.85".</li>
+  <li><code>menu_icon.radius</code> - The radius property determines the border radius of the Menu bars in pixels. Default is "1.75".</li>
+  <li><code>menu_icon.color</code> - The color of the Menu. The default is "black".</li>
+</ul>
+
+  <p></p>
+<li><code>icon = mx.Icon()</code> - The Icon element generates a custom svg icon with a preconceived or user-defined path.</li>
+<ul>
+  <li><code>icon.id</code> - The ID HTML attribute of the Icon. The default ID is "icon".</li>
+  <li><code>icon.cl</code> - The Class HTML attribute of the Icon.</li>
+  <li><code>icon.type</code> - The type property allows for the selection of an icon with a preconceived path, overriding the <code>icon.path</code> property. The "x" type produces an X icon. By default, no type is selected and the icon's path is defined by <code>icon.path</code>.</li>
+  <li><code>icon.path</code> - The custom svg HTML path of the icon. Svg tags are already supported by the compiler and are not needed to be included in the path. If <code>icon.type</code> is defined, this property is overriden.</li>
+  <li><code>icon.height</code> - The height property determines the height of the Menu in pixels. Default is "35".</li>
+  <li><code>icon.width</code> - The width property determines the width of the Menu in pixels. Default is "35".</li>
+  <li><code>icon.stroke</code> - The stroke property determines the thickness or stroke width of preconceived paths in pixels. Default is 3. If <code>icon.type</code> is not defined, this property has no effect.</li>
+  <li><code>icon.color</code> - The color property determines the color of preconceived paths. The default is "black". If <code>icon.type</code> is not defined, this property has no effect.</li>
+</ul>
+  
+  <p></p>
+<li><code>image = mx.Image()</code> - The Image element generates an image.</li>
+<ul>
+  <li><code>image.id</code> - The ID HTML attribute of the Image.</li>
+  <li><code>image.cl</code> - The Class HTML attribute of the Image.</li>
+  <li><code>image.src</code> - The Src HTML attribute of the Image. Use the <code>images</code> command in the WebGen interface to find the image directory for your project. Store images in the image directory and use the source "../images/image_name.jpg" to reference your media.</li>
+</ul>
+  
+  <p></p>
+<li><code>video = mx.Video()</code> - The Image element generates an image.</li>
+<ul>
+  <li><code>video.id</code> - The ID HTML attribute of the Image.</li>
+  <li><code>video.cl</code> - The Class HTML attribute of the Image.</li>
+  <li><code>video.autoplay</code> - The Autoplay HTML attribute of the Video. If assigned the boolean True, the video will autoplay on load. Default is False.</li>
+  <li><code>video.muted</code> - The Muted HTML attribute of the Video. If assigned the boolean True, the video will be muted. Default is False.</li>
+  <li><code>video.controls</code> - The Controls HTML attribute of the Video. If assigned the boolean True, the video will show play controls. Default is True.</li>
+  <li><code>video.loop</code> - The Loop HTML attribute of the Video. If assigned the boolean True, the video will loop when finished. Default is False.</li>
+  <li><code>video.src</code> - The Src HTML attribute of the Video. Use the <code>images</code> command in the WebGen interface to find the image directory for your project. Store videos in the image directory and use the source "../images/video_name.jpg" to reference your media.</li>
+</ul>
+ 
+  <p></p>
+<li><code>x = mx.X()</code> - The X element generates a custom HTML element with user-generated HTML source code.</li>
+<ul>
+  <li><code>x.content</code> - The HTML source code of the X element. In order to program custom HTML code, simply write it as a string assigned to a X element like so: <code>x.content = "&lt;p&gt;This is a custom paragraph&lt;/p&gt;"</code>.</li>
+</ul>
+  
 </ul>
 
 <h2>FAQs</h2>
 <ul>
+  <li>Why won't WebGen let me define the margin property?</li>
+  <p>Properties such as <code>margin</code>, <code>padding</code>, and <code>width</code> are considered Dynamic Properites because they typically vary by viewport dimensions. Because style properties are fixed and cannot be adjusted with CSS after being set, Dynamic Properties are restricted from being set with style properties, but instead must be adjusted with CSS or JavaScript code.</p>
+<li>Why is my content not showing on my compiled webpage?</li>
+<p>If you are having a hard time seeing your content appear on your compiled webpage after using the <code>r</code> command, make sure that the desired elements have been added as content within the <code>body</code> element of the webpage or another embedded container element. Elements must be embedded in order to be properly compiled: <code>container_elem.content = [element]</code>.</p>
 <li>How do I create a PHP webpage?</li>
 <p>To create a PHP page, simply create a normal file with the Interface Command <code>f(folder, filename)</code> and add the HTML components (forms, containers, etc.) of the webpage. Then, use the <code>exit</code> command to return to the main interface and create a global file with the <code>gf(folder, global_filename)</code> command. Instead of using the <code>e</code> command to edit the HTML elements (forms, containers, etc.) of the page, use the <code>php</code> File Command to add PHP content. No enclosing PHP tags are needed - just start programming your PHP content.</p>
 </ul>
