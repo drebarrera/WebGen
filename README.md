@@ -23,7 +23,7 @@ All that is necessary to get started is to download this repository! No imported
   <li>When ready to export your webpages, use the <code>exportf(filename, destination)</code> or <code>export(destination)</code> explained in detail in the programming with WebGen section below.</li>
 </ol>
 <h3>Example Webpage with WebGen</h3>
-<code>
+```
   import modules as mx  # Imports modules.py
   import sys
   import os
@@ -37,7 +37,7 @@ All that is necessary to get started is to download this repository! No imported
   ### CONTENT ###
 
   ### PROPERTIES ###
-</code>
+```
 
 <h2>Programming With WebGen</h2>
 There are three different components to WebGen:
