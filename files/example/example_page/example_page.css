@@ -1,0 +1,69 @@
+body {
+	display: flex;
+	justify-content: center;
+}
+
+p, h1, h2, h3 {
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+}
+
+.button {
+	position: relative;
+	display: inline-block;
+	padding: 1.25vh;
+	border-radius: 1vh;
+	cursor: pointer;
+	color: white;
+	text-decoration: none;
+	font-size: 1.75vh;
+	margin: 1vh;
+	margin-left: 1.5vh;
+	margin-right: 1.5vh;
+	filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.25));
+}
+
+.buttonRed {
+	background-color: #ff5938;
+	border: 2px solid #ff5938;
+}
+
+.buttonRed:hover {
+	background-color: white;
+	color: #ff5938;
+}
+
+.buttonBlue{
+	background-color: #005580;
+	border: 2px solid #005580;
+}
+
+.buttonBlue:hover{
+	background-color: white;
+	color: #005580;
+}
+
+#nav {
+	display: flex;
+	justify-content: center;
+	width: 100vw;
+	background-color: #fafafa;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+#navTable_0_0{
+	text-align: center;
+}
+
+#navTable_0_1 {
+	width: 6vw; /* Adjust the nav_space size */
+}
+
+#pageContent {
+	border: 2px solid #005580;
+	padding: 25px;
+	margin-top: 100px;
+	max-width: 700px;
+	width: 90vw;
+	position: absolute;
+}

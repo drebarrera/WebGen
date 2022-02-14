@@ -162,102 +162,105 @@ def fedit(folder,filename,g):
     cmd = ""
     modules, descriptions = getModules()
     while cmd != "exit":
-        cmd = input(">> ")
-        if cmd == "help":
-            print("\tlm -> list modules\n\tmod m -> print the properties of mod m\n\tlgf -> list global files\n\te -> open file editor\n\tcss - > open a CSS document\n\tjs -> open a JavaScript document\n\tphp -> open a PHP document (for global files only)\n\tfdir -> open file directory\n\timages -> open images directory\n\tr -> refresh\n\texport(directory_name) -> export compiled file\n\tkill -> delete file\n\texit -> exit file\n\trestart -> restart program\n")
-        elif cmd == "lm":
-            for m in descriptions:
-                print("\t"+m)
-        elif re.search("mod .+", cmd):
-            props = modules[cmd[4:]]
-            for p in props:
-                print("\t"+p)
-        elif cmd == "lgf":
-            p = "files/"+folder+"/"
-            if os.path.exists(p+"gf.txt"):
-                gftxt = open(p+"gf.txt",'r')
-                print([x for x in gftxt.read().split("\n") if x != ''])
-                gftxt.close()
-        elif cmd == "r":
-            if g == True:
-                print("[!!!] global file cannot be executed.")
-            else:
-                c(folder, filename)
-        elif cmd == "css":
-            css(folder, filename, g)
-        elif cmd == "js":
-            js(folder, filename, g)
-        elif cmd == "php":
-            php(folder, filename, g)
-        elif cmd == "fdir":
-            url = "file:///"+str(os.getcwd())+"/"+path
-            webbrowser.open(url, new=0)
-        elif cmd == "e":
-            if(g == False):
-                if sys.platform == "win32":
-                    try:
-                        subprocess.Popen([sys.exec_prefix+r"\Lib\idlelib\idle.bat", path+filename+".py"])
-                    except Exception as exc:
-                        print(exc)
-                        print('opening notepad.exe as subtitute...')
-                        subprocess.Popen(["notepad.exe", path+filename+".py"])
-                elif sys.platform == "darwin":
-                    try:
-                        subprocess.call(['open', '-a', 'IDLE 3', path+filename+".py"])
-                    except Exception as exc:
-                        print(exc)
-                        print('opening TextEdit as subtitute...')
-                        subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
-            else:
-                if sys.platform == "win32":
-                    try:
-                        subprocess.Popen([sys.exec_prefix+r"\Lib\idlelib\idle.bat", "files/"+folder+"/"+filename+".py"])
-                    except Exception as exc:
-                        print(exc)
-                        print('opening notepad.exe as subtitute...')
-                        subprocess.Popen(["notepad.exe", "files/"+folder+"/"+filename+".py"])
-                elif sys.platform == "darwin":
-                    try:
-                        subprocess.call(['open', '-a', 'IDLE 3', "files/"+folder+"/"+filename+".py"])
-                    except Exception as exc:
-                        print(exc)
-                        print('opening TextEdit as subtitute...')
-                        subprocess.call(['open', '-a', 'TextEdit', "files/"+folder+"/"+filename+".py"])
-        elif cmd == "images":
-            if g == False:
-                if not os.path.exists("files/"+folder+"/"+filename+"/images"):
-                    os.makedirs("files/"+folder+"/"+filename+"/images")
-                url = "file:///"+str(os.getcwd())+"/files/"+folder+"/"+filename+"/images"
+        try:
+            cmd = input(">> ")
+            if cmd == "help":
+                print("\tlm -> list modules\n\tmod m -> print the properties of mod m\n\tlgf -> list global files\n\te -> open file editor\n\tcss - > open a CSS document\n\tjs -> open a JavaScript document\n\tphp -> open a PHP document (for global files only)\n\tfdir -> open file directory\n\timages -> open images directory\n\tr -> refresh\n\texport(directory_name) -> export compiled file\n\tkill -> delete file\n\texit -> exit file\n\trestart -> restart program\n")
+            elif cmd == "lm":
+                for m in descriptions:
+                    print("\t"+m)
+            elif re.search("mod .+", cmd):
+                props = modules[cmd[4:]]
+                for p in props:
+                    print("\t"+p)
+            elif cmd == "lgf":
+                p = "files/"+folder+"/"
+                if os.path.exists(p+"gf.txt"):
+                    gftxt = open(p+"gf.txt",'r')
+                    print([x for x in gftxt.read().split("\n") if x != ''])
+                    gftxt.close()
+            elif cmd == "r":
+                if g == True:
+                    print("[!!!] global file cannot be executed.")
+                else:
+                    c(folder, filename)
+            elif cmd == "css":
+                css(folder, filename, g)
+            elif cmd == "js":
+                js(folder, filename, g)
+            elif cmd == "php":
+                php(folder, filename, g)
+            elif cmd == "fdir":
+                url = "file:///"+str(os.getcwd())+"/"+path
                 webbrowser.open(url, new=0)
-        elif cmd == "kill":
-            print('Are you sure you want to delete '+filename+'? Type [y] or [n].')
-            sure = input('>> ')
-            if sure == 'y':
+            elif cmd == "e":
+                if(g == False):
+                    if sys.platform == "win32":
+                        try:
+                            subprocess.Popen([sys.exec_prefix+r"\Lib\idlelib\idle.bat", path+filename+".py"])
+                        except Exception as exc:
+                            print(exc)
+                            print('opening notepad.exe as subtitute...')
+                            subprocess.Popen(["notepad.exe", path+filename+".py"])
+                    elif sys.platform == "darwin":
+                        try:
+                            subprocess.call(['open', '-a', 'IDLE 3', path+filename+".py"])
+                        except Exception as exc:
+                            print(exc)
+                            print('opening TextEdit as subtitute...')
+                            subprocess.call(['open', '-a', 'TextEdit', path+filename+".py"])
+                else:
+                    if sys.platform == "win32":
+                        try:
+                            subprocess.Popen([sys.exec_prefix+r"\Lib\idlelib\idle.bat", "files/"+folder+"/"+filename+".py"])
+                        except Exception as exc:
+                            print(exc)
+                            print('opening notepad.exe as subtitute...')
+                            subprocess.Popen(["notepad.exe", "files/"+folder+"/"+filename+".py"])
+                    elif sys.platform == "darwin":
+                        try:
+                            subprocess.call(['open', '-a', 'IDLE 3', "files/"+folder+"/"+filename+".py"])
+                        except Exception as exc:
+                            print(exc)
+                            print('opening TextEdit as subtitute...')
+                            subprocess.call(['open', '-a', 'TextEdit', "files/"+folder+"/"+filename+".py"])
+            elif cmd == "images":
                 if g == False:
-                    shutil.rmtree(path)
-                    if len(os.listdir("files/"+folder+"/")) == 0 or len(os.listdir("files/"+folder+"/")) == 1 and os.listdir("files/"+folder+"/")[0] == '.DS_Store':
-                        shutil.rmtree("files/"+folder+"/")
-                elif g == True and os.path.exists("files/"+folder+"/"+filename+".py"):
-                    os.remove("files/"+folder+"/"+filename+".py")
-                    if os.path.exists("files/"+folder+"/"+filename+".css"):
-                        os.remove("files/"+folder+"/"+filename+".css")
-                    if os.path.exists("files/"+folder+"/"+filename+".js"):
-                        os.remove("files/"+folder+"/"+filename+".js")
-                print('Files terminated.')
-                cmd = "exit"
-            elif sure == 'n':
-                print('Files saved.')
+                    if not os.path.exists("files/"+folder+"/"+filename+"/images"):
+                        os.makedirs("files/"+folder+"/"+filename+"/images")
+                    url = "file:///"+str(os.getcwd())+"/files/"+folder+"/"+filename+"/images"
+                    webbrowser.open(url, new=0)
+            elif cmd == "kill":
+                print('Are you sure you want to delete '+filename+'? Type [y] or [n].')
+                sure = input('>> ')
+                if sure == 'y':
+                    if g == False:
+                        shutil.rmtree(path)
+                        if len(os.listdir("files/"+folder+"/")) == 0 or len(os.listdir("files/"+folder+"/")) == 1 and os.listdir("files/"+folder+"/")[0] == '.DS_Store':
+                            shutil.rmtree("files/"+folder+"/")
+                    elif g == True and os.path.exists("files/"+folder+"/"+filename+".py"):
+                        os.remove("files/"+folder+"/"+filename+".py")
+                        if os.path.exists("files/"+folder+"/"+filename+".css"):
+                            os.remove("files/"+folder+"/"+filename+".css")
+                        if os.path.exists("files/"+folder+"/"+filename+".js"):
+                            os.remove("files/"+folder+"/"+filename+".js")
+                    print('Files terminated.')
+                    cmd = "exit"
+                elif sure == 'n':
+                    print('Files saved.')
+                else:
+                    print('Informal response. Files saved.')
+            elif cmd == "restart":
+                os.execv(sys.executable, ['python'] + sys.argv)
+            elif re.search("export(.+)", cmd):
+                dest = cmd.replace('export("','').replace('")','')
+                export(dest,folder,filename)
+            elif cmd == "exit":
+                continue
             else:
-                print('Informal response. Files saved.')
-        elif cmd == "restart":
-            os.execv(sys.executable, ['python'] + sys.argv)
-        elif re.search("export(.+)", cmd):
-            dest = cmd.replace('export("','').replace('")','')
-            export(dest,folder,filename)
-        elif cmd == "exit":
-            continue
-        else:
-            print('Unrecognized command. Type "help" for list of commands.')
+                print('Unrecognized command. Type "help" for list of commands.')
+        except Exception as exc:
+            print('[!!!] {err}'.format(err=exc))
 
 def export(home,folder,filename):
     path = "files/"+folder+"/"+filename+"/"
