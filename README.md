@@ -9,6 +9,163 @@ All that is necessary to get started is to download this repository! No imported
 <li><code>comp.py</code> - This file contains the code used to compile the Python files created in the WebGen interface into HTML. Using the <code>c()</code> functions defined in <code>modules.py</code>, the head and body of the HTML document is created, including external JavaScript, CSS, and PHP scripts.</li>
 </ul>
 
+<h2>Quick Start Guide to WebGen</h2>
+<ol>
+  <li>Download the WebGen Repository. Run main.py with the IDE of your choice. The WebGen interface should appear in your console.</li>
+  <li>Use the <code>f(folder, filename)</code> command to create a new project named <code>folder</code> with the webpage named <code>filename</code>.</li>
+  <li>Use the <code>e</code> command to start editing your webpage. This command should create a new Python file and open it for editing.</li>
+  <li>Create HTML objects by assigning Python variables to class objects with the format <code>html_element = mx.C()</code>, where <code>C()</code> is the div container class and <code>mx.</code> refers to the imported modules file. For a list of classes available, use the <code>lm</code> command in the WebGen console interface.</li>
+  <li>Assign content to your HTML objects with nested lists and strings. For more information on content assignment, see the Modular Commands section below.</li>
+  <li>Edit style properties of your HTML content by using the syntax <code>html_element.property = "value"</code>. For a list of default properties applied to a class, use the <code>mod m</code> command, where <code>m</code> is the class in reference. For more information on property assignment and property defaults, see the Modular Commands section below.</li>
+  <li>Use the <code>r</code> command to compile and load your webpage your browser.</li>
+  <li>Use the <code>css</code> and <code>js</code> commands to create CSS and JavaScript files to be compiled with your HTML webpage.</li>
+  <li>Use the <code>exit</code> command to return to the main WebGen interface. From here, you can change to another project, webpage file, or create a global file.</li>
+  <li>When ready to export your webpages, use the <code>exportf(filename, destination)</code> or <code>export(destination)</code> explained in detail in the programming with WebGen section below.</li>
+</ol>
+<h3>Example Webpage with WebGen: See the <a href="https://drebarrera.github.io/webgen-example/index.html">Compiled HTML Page</a></h3>
+<h5>With <code>e</code> File Command: (Python)</h5>
+<p>This code is available in [files > example > example_page] of this repository as <code>example_page.py</code>.</p>
+
+```
+import modules as mx
+import sys
+import os
+homedir = os.getcwd() + r'/files/Portfolio/'
+sys.path.append(homedir)
+data = mx.Data()
+body = mx.Body()
+
+### OBJECTS ###
+nav = mx.Nav()
+nav_title = mx.T()
+nav_space = mx.X() # Custom HTML space
+page_content = mx.C()
+heading = mx.T()
+subheading = mx.T()
+paragraph = mx.T()
+gitHub_link = mx.Link()
+gitHub_linkText = mx.T()
+
+### CONTENT ###
+body.content = [nav, page_content] # Assign containers to body content
+nav.content = [[nav_title, nav_space]]
+nav_title.content = "WebGen Example"
+
+# Create three nav option links named "nav_option_i"
+text_content = ["WebGen Github","Creator's Portfolio","Contact Creator"]
+src_content = ["https://github.com/drebarrera/WebGen/","https://www.drebarrera.com","https://www.drebarrera.com/contact"]
+for i in range(1,4):
+    objName = "nav_option_"+str(i)
+    exec(objName + ' = mx.Link()')                                  # 1. Create link object
+    exec(objName + 'Text = mx.T()')                                 # 2. Create text object
+    exec(objName + 'Text.content = "' + text_content[i - 1] + '"')  # 3. Assign text_content[i - 1] to text object
+    exec(objName + '.content = [' + objName + 'Text]')              # 4. Assign text object to link object content
+    exec(objName + '.cl = "button buttonRed"')                      # 5. Assign button classes to link object
+    exec(objName + '.src = "' + src_content[i - 1] + '"')           # 6. Assign source to link object
+    exec('nav.content[0].append('+ objName +')')                    # 7. Append link object to nav content
+    
+page_content.content = [heading, subheading, paragraph, gitHub_link] # Assign objects to page content
+heading.content = "Hello World"
+subheading.content = "Webpage Made With WebGen"
+paragraph.content = "This webpage was made with WebGen - a custom Python to User Interface compiler with the goal of making website and app design cleaner and more efficient.\nFor more information about WebGen, visit the link below."
+gitHub_link.content = [gitHub_linkText]
+gitHub_linkText.content = "WebGen GitHub"
+
+### PROPERTIES ###
+# Nav Components
+nav.id = "nav"
+nav.background_color = ""
+nav.tableid = "navTable"
+nav_title.type = "h1"
+
+# Page Components
+page_content.id = "pageContent"
+page_content.background_color = ""
+heading.type = "h2"
+subheading.type = "h3"
+subheading.color = "#005580"
+subheading.font_weight = "500"
+paragraph.padding = "10px"
+paragraph.line_height = "1.2"
+gitHub_link.cl = "button buttonBlue"
+gitHub_link.src = "https://github.com/drebarrera/WebGen/"
+```
+
+<h5>With <code>css</code> File Command: (CSS)</h5>
+<p>This code is available in [files > example > example_page] of this repository as <code>example_page.css</code>.</p>
+
+```
+body {
+	display: flex;
+	justify-content: center;
+}
+
+p, h1, h2, h3 {
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+}
+
+.button {
+	position: relative;
+	display: inline-block;
+	padding: 1.25vh;
+	border-radius: 1vh;
+	cursor: pointer;
+	color: white;
+	text-decoration: none;
+	font-size: 1.75vh;
+	margin: 1vh;
+	margin-left: 1.5vh;
+	margin-right: 1.5vh;
+	filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.25));
+}
+
+.buttonRed {
+	background-color: #ff5938;
+	border: 2px solid #ff5938;
+}
+
+.buttonRed:hover {
+	background-color: white;
+	color: #ff5938;
+}
+
+.buttonBlue{
+	background-color: #005580;
+	border: 2px solid #005580;
+}
+
+.buttonBlue:hover{
+	background-color: white;
+	color: #005580;
+}
+
+#nav {
+	display: flex;
+	justify-content: center;
+	width: 100vw;
+	background-color: #fafafa;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+#navTable_0_0{
+	text-align: center;
+}
+
+#navTable_0_1 {
+	width: 6vw; /* Adjust the nav_space size */
+}
+
+#pageContent {
+	border: 2px solid #005580;
+	padding: 25px;
+	margin-top: 100px;
+	max-width: 700px;
+	width: 90vw;
+	position: absolute;
+}
+```
+
 <h2>Programming With WebGen</h2>
 There are three different components to WebGen:
 <ol>
@@ -59,7 +216,7 @@ Modular commands refer the Python commands used to define objects and their prop
 <ol>
 <li><code>container_elem = mx.C()</code> - Object assignment is done by assigning a variable to a class (in this example the container class, <code>C()</code>, is used). Remember to prepend the class with <code>mx.</code> to declare the object as an imported module class.</li>
 <li><code>container_elem.content = [text_elem]</code> - Content assignment is done by two different methods: For container classes such as <code>C()</code> and <code>Table()</code>, the objects stored within the containers are stored within lists and are in object form (in this example, text_elem is an object within container_elem). For text-based elements, such as <code>T()</code>, the content refers to text (ie. <code> text_elem.content = "This is text"</code>).</li>
-<li><code>container_elem.text_align = "center"</code> - Property assignment is done by assigning values to the style properties desired. Note that properties using hyphenation, such as <code>text-align</code> replace the hyphen with an underscore in Python scripts (ie. <code>text_align</code>). Some properties have defaults which may be overriden by reassignment. Properties such as <code>margin</code>, <code>padding</code>, and <code>width</code> are considered Dynamic Properites because they typically vary by viewport dimensions. Because style properties are fixed and cannot be adjusted with CSS after being set, Dynamic Properties are restricted from being set with style properties, but instead must be adjusted with CSS or JavaScript code.</li>
+<li><code>container_elem.text_align = "center"</code> - Property assignment is done by assigning values to the style properties desired. Note that properties using hyphenation, such as <code>text-align</code> replace the hyphen with an underscore in Python scripts (ie. <code>text_align</code>). Some properties have defaults which may be overriden by reassignment. Properties such as <code>margin</code>, <code>height</code>, and <code>width</code> are considered Dynamic Properites because they typically vary by viewport dimensions. Because style properties are fixed and cannot be adjusted with CSS after being set, Dynamic Properties are restricted from being set with style properties, but instead must be adjusted with CSS or JavaScript code.</li>
 </ol>
 
 <h5>Featured Classes</h5>
@@ -103,6 +260,7 @@ Modular commands refer the Python commands used to define objects and their prop
   <li><code>link_elem.src</code> - The href source of the link. Assign a URL to this property.</li>
   <li><code>link_elem.id</code> - The ID HTML attribute.</li>
   <li><code>link_elem.cl</code> - The Class HTML attribute.</li>
+  <li><code>link_elem.target</code> - The Target HTML attribute. Default is "_self".</li>
   <li><code>link_elem.content</code> - The content of the link element. Link element content is a list of objects wrapped by the link like so: <code>link_elem.content = [element1, element2]</code>.</li>
 </ul>
   
@@ -196,7 +354,7 @@ Modular commands refer the Python commands used to define objects and their prop
 <h2>FAQs</h2>
 <ul>
   <li>Why won't WebGen let me define the margin property?</li>
-  <p>Properties such as <code>margin</code>, <code>padding</code>, and <code>width</code> are considered Dynamic Properites because they typically vary by viewport dimensions. Because style properties are fixed and cannot be adjusted with CSS after being set, Dynamic Properties are restricted from being set with style properties, but instead must be adjusted with CSS or JavaScript code.</p>
+  <p>Properties such as <code>margin</code>, <code>height</code>, and <code>width</code> are considered Dynamic Properites because they typically vary by viewport dimensions. Because style properties are fixed and cannot be adjusted with CSS after being set, Dynamic Properties are restricted from being set with style properties, but instead must be adjusted with CSS or JavaScript code.</p>
 <li>Why is my content not showing on my compiled webpage?</li>
 <p>If you are having a hard time seeing your content appear on your compiled webpage after using the <code>r</code> command, make sure that the desired elements have been added as content within the <code>body</code> element of the webpage or another embedded container element. Elements must be embedded in order to be properly compiled: <code>container_elem.content = [element]</code>.</p>
 <li>How do I create a PHP webpage?</li>
