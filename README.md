@@ -9,6 +9,36 @@ All that is necessary to get started is to download this repository! No imported
 <li><code>comp.py</code> - This file contains the code used to compile the Python files created in the WebGen interface into HTML. Using the <code>c()</code> functions defined in <code>modules.py</code>, the head and body of the HTML document is created, including external JavaScript, CSS, and PHP scripts.</li>
 </ul>
 
+<h2>Quick Start Guide to WebGen</h2>
+<ol>
+  <li>Download the WebGen Repository. Run main.py with the IDE of your choice. The WebGen interface should appear in your console.</li>
+  <li>Use the <code>f(folder, filename)</code> command to create a new project named <code>folder</code> with the webpage named <code>filename</code>.</li>
+  <li>Use the <code>e</code> command to start editing your webpage. This command should create a new Python file and open it for editing.</li>
+  <li>Create HTML objects by assigning Python variables to class objects with the format <code>html_element = mx.C()</code>, where <code>C()</code> is the div container class and <code>mx.</code> refers to the imported modules file. For a list of classes available, use the <code>lm</code> command in the WebGen console interface.</li>
+  <li>Assign content to your HTML objects with nested lists and strings. For more information on content assignment, see the Modular Commands section below.</li>
+  <li>Edit style properties of your HTML content by using the syntax <code>html_element.property = "value"</code>. For a list of default properties applied to a class, use the <code>mod m</code> command, where <code>m</code> is the class in reference. For more information on property assignment and property defaults, see the Modular Commands section below.</li>
+  <li>Use the <code>r</code> command to compile and load your webpage your browser.</li>
+  <li>Use the <code>css</code> and <code>js</code> commands to create CSS and JavaScript files to be compiled with your HTML webpage.</li>
+  <li>Use the <code>exit</code> command to return to the main WebGen interface. From here, you can change to another project, webpage file, or create a global file.</li>
+  <li>When ready to export your webpages, use the <code>exportf(filename, destination)</code> or <code>export(destination)</code> explained in detail in the programming with WebGen section below.</li>
+</ol>
+<h3>Example Webpage with WebGen</h3>
+<code>
+  import modules as mx  # Imports modules.py
+  import sys
+  import os
+  homedir = os.getcwd() + r'/files/Portfolio/'
+  sys.path.append(homedir)
+  data = mx.Data()  # Creates the data object for head content
+  body = mx.Body()  # Creates the body object for body content
+  
+  ### OBJECTS ###
+
+  ### CONTENT ###
+
+  ### PROPERTIES ###
+</code>
+
 <h2>Programming With WebGen</h2>
 There are three different components to WebGen:
 <ol>
