@@ -195,6 +195,8 @@ Modular commands refer the Python commands used to define objects and their prop
 
 <h2>FAQs</h2>
 <ul>
+  <li>Why won't WebGen let me define the margin property?</li>
+  <p>Properties such as <code>margin</code>, <code>padding</code>, and <code>width</code> are considered Dynamic Properites because they typically vary by viewport dimensions. Because style properties are fixed and cannot be adjusted with CSS after being set, Dynamic Properties are restricted from being set with style properties, but instead must be adjusted with CSS or JavaScript code.</p>
 <li>Why is my content not showing on my compiled webpage?</li>
 <p>If you are having a hard time seeing your content appear on your compiled webpage after using the <code>r</code> command, make sure that the desired elements have been added as content within the <code>body</code> element of the webpage or another embedded container element. Elements must be embedded in order to be properly compiled: <code>container_elem.content = [element]</code>.</p>
 <li>How do I create a PHP webpage?</li>
