@@ -8,7 +8,7 @@ def main(folder, filename):
     php = False
 
     jquery = False
-    head = "<head>"+x.data.c()+'<meta name="viewport" content="width=device-width, initial-scale=1">'
+    head = "<head>"+x.data.c()
     phpcode = ""
     if os.path.exists(path+filename+".js"):
         head += '<script src="..\JQuery.js"></script>' if x.data.jquery_script else ''

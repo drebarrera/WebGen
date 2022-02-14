@@ -12,6 +12,7 @@ class Data:
         self.description = "Default WebGen Page"
         self.keywords = []
         self.author = "Andres Barrera"
+        self.viewport = "width=device-width, initial-scale=1"
         self.jquery_script = True
         self.jquery_ui_script = True
         self.scripts = []
@@ -22,7 +23,8 @@ class Data:
         description = '<meta name="description" content="'+self.description+'">'
         keywords = '<meta name="keywords" content="'+','.join(self.keywords)+'">'
         author = '<meta name="author" content="'+self.author+'">'
-        return "".join([title,charset,description,keywords,author])
+        viewport = '<meta name="viewport" content="'+self.viewport+'">'
+        return "".join([title,charset,description,keywords,author,viewport])
         
 # Body -> Body Properties
 class Body:
@@ -100,7 +102,7 @@ class C:
 class Table:
     def __init__(self):
         self.name = "table"
-        self.id = ""
+        self.id = "table"
         self.cl = "table"
         self.background_color = "coral"
         self.content = [[]]
@@ -114,7 +116,7 @@ class Table:
     def c(self, inadmissible, dynamic):
         i = ' id="'+self.id+'"' if self.id != "" else ""
         c = ' class="'+self.cl+'"' if self.cl != "" else ""
-        content = [['<td id="'+self.id+"_"+str(self.content.index(i))+"_"+str(i.index(j))+'">'+j.c(inadmissible, dynamic)+'</td>' for j in i] for i in self.content]
+        content = [['<td id="'+self.id+"_"+str(i)+"_"+str(j)+'">'+self.content[i][j].c(inadmissible, dynamic)+'</td>' for j in range(len(self.content[i]))] for i in range(len(self.content))]
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
         return '<table'+i+c+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(['<tr id="'+self.id+"_"+str(content.index(i))+'">'+"".join(i)+"</tr>" for i in content])+'</table>'
 
@@ -124,7 +126,7 @@ class Nav:
         self.name = "nav_bar"
         self.id = "nav"
         self.cl = ""
-        self.tableid = ""
+        self.tableid = "navtable"
         self.background_color = "orange"
         self.position = "fixed"
         self.z_index = ""
@@ -157,7 +159,7 @@ class Menu:
         
     def c(self, inadmissible, dynamic):
         if(float(self.spacing) > 1 or float(self.spacing) < 0):
-            print("spacing should be a decimal between 0-1\nERROR: "+self.name)
+            print("menu spacing should be a decimal between 0-1\nERROR: "+self.name)
         dy1 = float(self.length)/2 - float(self.width)/2
         dy0 = dy1 * (1 - float(self.spacing))
         dy2 = dy1 * (1 + float(self.spacing))
@@ -173,16 +175,17 @@ class Icon:
         self.type = ""
         self.id = "icon"
         self.cl = ""
-        self.size = "35"
+        self.height = "35"
+        self.width = "35"
         self.color = "black"
         self.path = ""
-        self.width = "3"
+        self.stroke = "3"
 
     def c(self, inadmissible, dynamic):
-        svg = '<svg id="'+self.id+'" class="'+self.cl+'" height="'+self.size+'" width="'+self.size+'" style="cursor:pointer;">'
+        svg = '<svg id="'+self.id+'" class="'+self.cl+'" height="'+self.height+'" width="'+self.width+'" style="cursor:pointer;">'
         if self.type == "x":
-            path = '<line x1="0" y1="0" x2="'+self.size+'" y2="'+self.size+'" style="stroke:'+self.color+';stroke-width:'+self.width+'" />'
-            path += '<line x1="0" y1="'+self.size+'" x2="'+self.size+'" y2="0" style="stroke:'+self.color+';stroke-width:'+self.width+'" />'
+            path = '<line x1="0" y1="0" x2="'+self.width+'" y2="'+self.height+'" style="stroke:'+self.color+';stroke-width:'+self.stroke+'" />'
+            path += '<line x1="0" y1="'+self.height+'" x2="'+self.width+'" y2="0" style="stroke:'+self.color+';stroke-width:'+self.stroke+'" />'
         return svg+path+'</svg>'
     
 # Image - Image
@@ -205,10 +208,10 @@ class Video:
         self.name = "video"
         self.id = "video"
         self.cl = ""
-        self.autoplay = ""
-        self.muted = ""
-        self.controls = ""
-        self.loop = ""
+        self.autoplay = False
+        self.muted = False
+        self.controls = True
+        self.loop = False
         self.src = ""
 
     def c(self, inadmissible, dynamic):
@@ -222,13 +225,13 @@ class Video:
         i = ' id="'+self.id+'"' if self.id != "" else ""
         c = ' class="'+self.cl+'"' if self.cl != "" else ""
         props = []
-        if self.autoplay == "True":
+        if self.autoplay == True:
             props.append("autoplay")
-        if self.muted == "True":
+        if self.muted == True:
             props.append("muted")
-        if self.controls == "True":
+        if self.controls == True:
             props.append("controls")
-        if self.loop == "True":
+        if self.loop == True:
             props.append("loop")
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
         return '<video '+i+c+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'" '+" ".join(props)+'><source src="'+self.src+'" type="video/'+ext+'"></video>'
@@ -236,6 +239,7 @@ class Video:
 # X -> Custom Element
 class X:
     def __init__(self):
+        self.name = ""
         self.content = ""
 
     def c(self, inadmissible, dynamic):
