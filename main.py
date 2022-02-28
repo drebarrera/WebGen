@@ -68,7 +68,7 @@ def f(folder, filename):
     if not os.path.exists(path+filename+".py"):
         ftxt = open(path+filename+".py", 'a')
         if g == False:
-            ftxt.write("import modules as mx\nimport sys\nimport os\nhomedir = os.getcwd() + r'/files/Portfolio/'\nsys.path.append(homedir)\ndata = mx.Data()\nbody = mx.Body()\n\n### OBJECTS ###\n\n### CONTENT ###\n\n### PROPERTIES ###")
+            ftxt.write("import modules as mx\nimport sys\nimport os\nhomedir = os.getcwd() + r'/files/"+folder+"/'\nsys.path.append(homedir)\ndata = mx.Data()\nbody = mx.Body()\n\n### OBJECTS ###\n\n### CONTENT ###\n\n### PROPERTIES ###")
         else:
             ftxt.write("import modules as mx\n\n### OBJECTS ###\n\n### CONTENT ###\n\n### PROPERTIES ###")
     else:
