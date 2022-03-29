@@ -77,14 +77,14 @@ class Link:
 
 # C -> Container
 class C:
-    def __init__(self):
+    def __init__(self, background=False):
         self.name = "container"
         self.id = ""
         self.cl = ""
         self.onclick = ""
         self.onhover = ""
         self.attr = ""
-        self.background_color = "lightblue"
+        self.background_color = "lightblue" if background == True else ""
         self.overflow_x = "visible"
         self.overflow_y = "visible"
         self.content = []
@@ -100,11 +100,11 @@ class C:
         
 # Table -> Table
 class Table:
-    def __init__(self):
+    def __init__(self, background=False):
         self.name = "table"
         self.id = "table"
         self.cl = "table"
-        self.background_color = "coral"
+        self.background_color = "coral" if background == True else ""
         self.content = [[]]
 
     def rows(self):
@@ -122,12 +122,12 @@ class Table:
 
 # Nav -> Navigational Bar
 class Nav:
-    def __init__(self):
+    def __init__(self, background=False):
         self.name = "nav_bar"
         self.id = "nav"
         self.cl = ""
         self.tableid = "navtable"
-        self.background_color = "orange"
+        self.background_color = "orange" if background == True else ""
         self.position = "fixed"
         self.z_index = ""
         self.content = [[]]
