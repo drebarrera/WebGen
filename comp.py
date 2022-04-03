@@ -1,10 +1,12 @@
 import sys
 import os
+import importlib
 
 def main(folder, filename):
     path = "files/"+folder+"/"+filename+"/"
     sys.path.insert(1, path)
     x = __import__(filename)
+    importlib.reload(x)
     php = False
 
     jquery = False
