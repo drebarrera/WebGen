@@ -293,6 +293,7 @@ Modular commands refer the Python commands used to define objects and their prop
   <li><code>nav.id</code> - The ID HTML attribute of the Container. The default ID is "nav".</li>
   <li><code>nav.cl</code> - The Class HTML attribute of the Container.</li>
   <li><code>nav.tableid</code> - The ID HTML attribute of the Table. When assigned an ID, the cells of the Table will also assume the same ID with the appended "_rowNumber_columnNumber". The default ID is "navtable". Thus, row 2, column 4 will have the ID "navtable_2_4" unless the ID is adjusted.</li>
+  <li><code>nav.tablecl</code> - The Class HTML attribute of the Table.</li>
   <li><code>nav.background_color</code> - The background color of the Container. Default is "orange" for visibility and identification. To override for CSS adjustment, reassign to <code>nav.background_color = ""</code>.</li>
   <li><code>nav.position</code> - The position style property of the Container. Default is "fixed". To override for CSS adjustment, reassign to <code>nav.position = ""</code>.</li>
   <li><code>nav.z_index</code> - The z-index style property of the Container.</li>
