@@ -6,6 +6,7 @@ import re
 import comp
 import sys
 import shutil
+import importlib
 
 def main():
     for i in "--------------- W E B G E N ---------------":
@@ -362,6 +363,7 @@ def getModules():
 
 def c(folder, filename):
     path = "files/"+folder+"/"+filename+"/"
+    importlib.reload(comp)
     comp.main(folder,filename)
     url = "file:///"+str(os.getcwd())+"/"+path+"index.html"
     webbrowser.get().open(url, new=0)

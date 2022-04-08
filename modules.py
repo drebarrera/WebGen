@@ -1,5 +1,4 @@
 import sys
-import importlib
 inadmissible = ["type", "id", "cl", "onclick", "onhover", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop"]
 dynamic = ["font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom"]
 
@@ -39,7 +38,7 @@ class Body:
     def c(self,inadmissible, dynamic):
         content = [i.c(inadmissible, dynamic) for i in self.content]
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<body style="margin:0;'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(content)+'</body>'
+        return '<body style="margin:0;'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(content)+'</body>'
 
 # T -> Text
 class T:
@@ -55,7 +54,7 @@ class T:
         c = ' class="'+self.cl+'"' if self.cl != "" else ""
         content = self.content
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<'+self.type+i+c+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+content+'</'+self.type+'>'
+        return '<'+self.type+i+c+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+content+'</'+self.type+'>'
 
 # Link -> Link
 class Link:
@@ -73,7 +72,7 @@ class Link:
         t = ' target="'+self.target+'"' if self.target != "" else ""
         content = [i.c(inadmissible, dynamic) for i in self.content]
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<a'+i+c+' href="'+self.src+'"'+t+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(content)+'</a>'
+        return '<a'+i+c+' href="'+self.src+'"'+t+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(content)+'</a>'
 
 # C -> Container
 class C:
@@ -96,7 +95,7 @@ class C:
         hover = ' onclick="'+self.onhover+'"' if self.onhover != "" else ""
         content = [i.c(inadmissible, dynamic) for i in self.content]
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<div'+i+c+click+hover+self.attr+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(content)+'</div>'
+        return '<div'+i+c+click+hover+self.attr+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(content)+'</div>'
         
 # Table -> Table
 class Table:
@@ -118,7 +117,31 @@ class Table:
         c = ' class="'+self.cl+'"' if self.cl != "" else ""
         content = [['<td id="'+self.id+"_"+str(i)+"_"+str(j)+'">'+self.content[i][j].c(inadmissible, dynamic)+'</td>' for j in range(len(self.content[i]))] for i in range(len(self.content))]
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<table'+i+c+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(['<tr id="'+self.id+"_"+str(content.index(i))+'">'+"".join(i)+"</tr>" for i in content])+'</table>'
+        return '<table'+i+c+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(['<tr id="'+self.id+"_"+str(content.index(i))+'">'+"".join(i)+"</tr>" for i in content])+'</table>'
+
+# NavTable -> Navigational Bar Inner Table
+class NavTable:
+    def __init__(self, background=False):
+        self.name = "navtable"
+        self.id = "navtable"
+        self.cl = "navtable"
+        self.background_color = "coral" if background == True else ""
+        self.content = [[]]
+        self.display = "table"
+
+    def rows(self):
+        return len(self.content)
+
+    def cols(self):
+        return max([len(i) for i in self.content])
+    
+    def c(self, inadmissible, dynamic):
+        i = ' id="'+self.id+'"' if self.id != "" else ""
+        c = ' class="'+self.cl+'"' if self.cl != "" else ""
+        content = [['<div id="'+self.id+"_"+str(i)+"_"+str(j)+'" style="display:table-cell;">'+self.content[i][j].c(inadmissible, dynamic)+'</div>' for j in range(len(self.content[i]))] for i in range(len(self.content))]
+        [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
+        return '<section'+i+c+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(['<header id="'+self.id+"_"+str(content.index(i))+'" style="display:table-row;">'+"".join(i)+"</header>" for i in content])+'</section>'
+
 
 # Nav -> Navigational Bar
 class Nav:
@@ -127,6 +150,7 @@ class Nav:
         self.id = "nav"
         self.cl = ""
         self.tableid = "navtable"
+        self.tablecl = ""
         self.background_color = "orange" if background == True else ""
         self.position = "fixed"
         self.z_index = ""
@@ -134,14 +158,16 @@ class Nav:
         
     def c(self, inadmissible, dynamic):
         nav = C()
-        navT = Table()
+        navT = NavTable()
         nav.id = self.id
         nav.cl = self.cl
         nav.background_color = self.background_color
         nav.position = self.position
         nav.z_index = self.z_index
+        navT.display = "table"
         navT.content = self.content
         navT.id = self.tableid
+        navT.cl = self.tablecl
         navT.background_color = ""
         nav.content = [navT]
         return nav.c(inadmissible, dynamic)
@@ -200,7 +226,7 @@ class Image:
         i = ' id="'+self.id+'"' if self.id != "" else ""
         c = ' class="'+self.cl+'"' if self.cl != "" else ""
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<img '+i+c+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'" src="'+self.src+'"/>'
+        return '<img '+i+c+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'" src="'+self.src+'"/>'
 
 # Video - Video
 class Video:
@@ -234,7 +260,7 @@ class Video:
         if self.loop == True:
             props.append("loop")
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<video '+i+c+' style="'+"".join([(p.replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'" '+" ".join(props)+'><source src="'+self.src+'" type="video/'+ext+'"></video>'
+        return '<video '+i+c+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'" '+" ".join(props)+'><source src="'+self.src+'" type="video/'+ext+'"></video>'
 
 # X -> Custom Element
 class X:
