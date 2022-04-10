@@ -182,6 +182,7 @@ class Menu:
         self.spacing = "0.85"
         self.radius = "1.75"
         self.color = "black"
+        self.custom = ""
         
     def c(self, inadmissible, dynamic):
         if(float(self.spacing) > 1 or float(self.spacing) < 0):
@@ -192,7 +193,7 @@ class Menu:
         dy = [dy0, dy1, dy2]
         svg = '<svg id="'+self.id+'" height="'+self.length+'" width="'+self.length+'" style="cursor:pointer;">'
         path = ['<rect x="0" y="'+str(y)+'" rx="'+self.radius+'" ry="'+self.radius+'" width="'+self.length+'" height="'+self.width+'" style="fill:'+self.color+';"/>' for y in dy]
-        return svg+"".join(path)+'</svg>'
+        return svg+"".join(path)+self.custom+'</svg>'
 
 # Icon -> Icon
 class Icon:
