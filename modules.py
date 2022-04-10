@@ -1,5 +1,5 @@
 import sys
-inadmissible = ["type", "id", "cl", "onclick", "onhover", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop"]
+inadmissible = ["type", "id", "cl", "onclick", "onhover", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop","custom"]
 dynamic = ["font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom"]
 
 # Data -> Webpage Header Data
