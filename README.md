@@ -319,6 +319,7 @@ Modular commands refer the Python commands used to define objects and their prop
   <li><code>menu_icon.spacing</code> - The spacing property determines the height of the Menu as a percentage of the length property. Spacing is a number on a scale of 0 to 1. Default is "0.85".</li>
   <li><code>menu_icon.radius</code> - The radius property determines the border radius of the Menu bars in pixels. Default is "1.75".</li>
   <li><code>menu_icon.color</code> - The color of the Menu. The default is "black".</li>
+	<li><code>menu_icon.custom</code> - Custom code for the menu svg icon. This property can be used to implement custom animations.</li>
 </ul>
 
   <p></p>
