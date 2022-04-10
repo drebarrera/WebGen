@@ -164,6 +164,8 @@ class Nav:
         nav.background_color = self.background_color
         nav.position = self.position
         nav.z_index = self.z_index
+        nav.overflow_x = ''
+        nav.overflow_y = ''
         navT.display = "table"
         navT.content = self.content
         navT.id = self.tableid
