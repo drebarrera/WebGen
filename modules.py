@@ -1,5 +1,5 @@
 import sys
-inadmissible = ["type", "id", "cl", "onclick", "onhover", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop","custom"]
+inadmissible = ["type", "id", "cl", "onclick", "onhover", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop","custom", "colspan", "rowspan"]
 dynamic = ["font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom"]
 
 # Data -> Webpage Header Data
@@ -105,6 +105,8 @@ class Table:
         self.cl = "table"
         self.background_color = "coral" if background == True else ""
         self.content = [[]]
+        self.colspan = {}
+        self.rowspan = {}
 
     def rows(self):
         return len(self.content)
@@ -115,7 +117,9 @@ class Table:
     def c(self, inadmissible, dynamic):
         i = ' id="'+self.id+'"' if self.id != "" else ""
         c = ' class="'+self.cl+'"' if self.cl != "" else ""
-        content = [['<td id="'+self.id+"_"+str(i)+"_"+str(j)+'">'+self.content[i][j].c(inadmissible, dynamic)+'</td>' for j in range(len(self.content[i]))] for i in range(len(self.content))]
+        self.colspan = {(a,b): 1 if (a,b) not in self.colspan else self.colspan[(a,b)] for a in range(len(self.content)) for b in range(len(self.content[a]))}
+        self.rowspan = {(a,b): 1 if (a,b) not in self.rowspan else self.rowspan[(a,b)] for a in range(len(self.content)) for b in range(len(self.content[a]))}
+        content = [['<td id="'+self.id+"_"+str(i)+"_"+str(j)+'" colspan="'+str(self.colspan[(i,j)])+'" rowspan="'+str(self.rowspan[(i,j)])+'">'+self.content[i][j].c(inadmissible, dynamic)+'</td>' for j in range(len(self.content[i]))] for i in range(len(self.content))]
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
         return '<table'+i+c+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(['<tr id="'+self.id+"_"+str(content.index(i))+'">'+"".join(i)+"</tr>" for i in content])+'</table>'
 
@@ -128,7 +132,9 @@ class NavTable:
         self.background_color = "coral" if background == True else ""
         self.content = [[]]
         self.display = "table"
-
+        self.colspan = {}
+        self.rowspan = {}
+        
     def rows(self):
         return len(self.content)
 
@@ -138,10 +144,12 @@ class NavTable:
     def c(self, inadmissible, dynamic):
         i = ' id="'+self.id+'"' if self.id != "" else ""
         c = ' class="'+self.cl+'"' if self.cl != "" else ""
-        content = [['<div id="'+self.id+"_"+str(i)+"_"+str(j)+'" style="display:table-cell;">'+self.content[i][j].c(inadmissible, dynamic)+'</div>' for j in range(len(self.content[i]))] for i in range(len(self.content))]
+        self.colspan = {(a,b): 1 if (a,b) not in self.colspan else self.colspan[(a,b)] for a in range(len(self.content)) for b in range(len(self.content[a]))}
+        self.rowspan = {(a,b): 1 if (a,b) not in self.rowspan else self.rowspan[(a,b)] for a in range(len(self.content)) for b in range(len(self.content[a]))}
+        content = [['<div id="'+self.id+"_"+str(i)+"_"+str(j)+'" style="display:table-cell;" colspan="'+str(self.colspan[(i,j)])+'" rowspan="'+str(self.rowspan[(i,j)])+'">'+self.content[i][j].c(inadmissible, dynamic)+'</div>' for j in range(len(self.content[i]))] for i in range(len(self.content))]
         [print("Dynamic elements should be written in css. Enter css to fix.\nERROR: "+self.name+":"+p) for p, v in vars(self).items() if p in dynamic]
-        return '<section'+i+c+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(['<header id="'+self.id+"_"+str(content.index(i))+'" style="display:table-row;">'+"".join(i)+"</header>" for i in content])+'</section>'
-
+        x = '<section'+i+c+' style="'+"".join([(p.replace("var__","--").replace("_","-")+":"+getattr(self, p))+";" for p, v in vars(self).items() if (p not in inadmissible and getattr(self, p) != "")])+'">'+"".join(['<header id="'+self.id+"_"+str(content.index(i))+'" style="display:table-row;">'+"".join(i)+"</header>" for i in content])+'</section>'
+        return x
 
 # Nav -> Navigational Bar
 class Nav:
