@@ -14,6 +14,8 @@ class Data:
         self.viewport = "width=device-width, initial-scale=1"
         self.jquery_script = True
         self.jquery_ui_script = True
+        self.jquery_file = "..\JQuery.js"
+        self.jquery_ui_file = "..\JQuery-UI.js"
         self.scripts = []
             
     def c(self):

@@ -3,7 +3,8 @@ import os
 import importlib
 
 def main(folder, filename):
-    path = "files/"+folder+"/"+filename+"/"
+    currdir = os.path.dirname(os.path.realpath(__file__))
+    path = currdir + "/files/"+folder+"/"+filename+"/"
     sys.path.insert(1, path)
     x = __import__(filename)
     importlib.reload(x)
@@ -13,8 +14,8 @@ def main(folder, filename):
     head = "<head>"+x.data.c()
     phpcode = ""
     if os.path.exists(path+filename+".js"):
-        head += '<script src="..\JQuery.js"></script>' if x.data.jquery_script else ''
-        head += '<script src="..\JQuery-UI.js"></script>' if x.data.jquery_ui_script else ''
+        head += '<script src="' + x.data.jquery_file + '"></script>' if x.data.jquery_script else ''
+        head += '<script src="' + x.data.jquery_ui_file + '"></script>' if x.data.jquery_ui_script else ''
         for script in x.data.scripts:
             head += '<script src="'+script+'"></script>'
         jquery = True
@@ -31,8 +32,8 @@ def main(folder, filename):
         for g in gf:
             if os.path.exists("files/"+folder+"/"+g.replace('.py','.js')) and (g.replace('.py','') in sys.modules):
                 if jquery == False:
-                    head += '<script src="..\JQuery.js"></script>' if x.data.jquery_script else ''
-                    head += '<script src="..\JQuery-UI.js"></script>' if x.data.jquery_ui_script else ''
+                    head += '<script src="' + x.data.jquery_file + '"></script>' if x.data.jquery_script else ''
+                    head += '<script src="' + x.data.jquery_ui_file + '"></script>' if x.data.jquery_ui_script else ''
                     jquery = True
                 f = open("files/"+folder+"/"+g.replace('.py','.js'), 'r')
                 head += "<script>" + f.read() + "</script>"

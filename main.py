@@ -126,7 +126,8 @@ def exportf(folder, destination):
             continue
         if not os.path.exists("files/"+folder+"/"+filename+"/index.html"):
             continue
-        path = "files/"+folder+"/"+filename+"/"
+        currdir = os.path.dirname(os.path.realpath(__file__))
+        path = currdir + "/files/"+folder+"/"+filename+"/"
         newhome = home + "/" + folder + "/"
         os.makedirs(newhome+"/"+filename)
         comp.main(folder,filename)
@@ -266,7 +267,8 @@ def fedit(folder,filename,g):
             print('[!!!] {err}'.format(err=exc))
 
 def export(home,folder,filename):
-    path = "files/"+folder+"/"+filename+"/"
+    currdir = os.path.dirname(os.path.realpath(__file__))
+    path = currdir + "/files/"+folder+"/"+filename+"/"
     os.makedirs(home+"/"+filename)
     comp.main(folder,filename)
     if os.path.exists(path+"/index.php"):
