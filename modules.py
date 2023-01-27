@@ -1,5 +1,5 @@
 import sys
-inadmissible = ["type", "id", "cl", "onclick", "onhover", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop","custom", "colspan", "rowspan"]
+inadmissible = ["type", "id", "cl", "attr", "onclick", "onhover", "target", "content", "name", "rows", "cols", "font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom", "src", "autoplay", "muted", "controls", "loop","custom", "colspan", "rowspan"]
 dynamic = ["font_size", "height", "width", "margin", "margin_left", "margin_right", "margin_top", "margin_bottom"]
 
 # Data -> Webpage Header Data
@@ -17,6 +17,7 @@ class Data:
         self.jquery_file = "..\JQuery.js"
         self.jquery_ui_file = "..\JQuery-UI.js"
         self.scripts = []
+        self.content = []
             
     def c(self):
         title = '<title>'+self.title+'</title>'
@@ -225,6 +226,7 @@ class Icon:
         if self.type == "x":
             path = '<line x1="0" y1="0" x2="'+self.width+'" y2="'+self.height+'" style="stroke:'+self.color+';stroke-width:'+self.stroke+'" />'
             path += '<line x1="0" y1="'+self.height+'" x2="'+self.width+'" y2="0" style="stroke:'+self.color+';stroke-width:'+self.stroke+'" />'
+        else: path = self.path
         return svg+path+'</svg>'
     
 # Image - Image
